@@ -107,14 +107,17 @@ const HappyStaff = () => {
           viewport={{ once: true }}
           className="text-center"
         >
-          <motion.button
+          <motion.a
+            href="https://uk.indeed.com/cmp/Parachutes-Childcare-Limited/jobs"
+            target="_blank"
+            rel="noopener noreferrer"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="px-8 py-4 bg-gradient-to-r from-yellow-400 to-orange-400 text-white 
+            className="inline-block px-8 py-4 bg-gradient-to-r from-yellow-400 to-orange-400 text-white 
                      rounded-xl font-bold shadow-lg hover:shadow-xl transition-all duration-300"
           >
             Join Our Team
-          </motion.button>
+          </motion.a>
         </motion.div>
       </motion.div>
     </section>

@@ -108,7 +108,7 @@ const NotFound = () => {
               repeat: Infinity,
               ease: "easeInOut"
             }}
-            className="absolute left-1/2 -translate-x-1/2 flex gap-4"
+            className="absolute left-1/2 -translate-x-1/2 flex gap-6"
           >
             {['4', '0', '4'].map((num, index) => (
               <motion.span
@@ -193,7 +193,7 @@ const NotFound = () => {
                 boxShadow: "0 10px 20px rgba(0,0,0,0.1)"
               }}
               whileTap={{ scale: 0.95 }}
-              className="bg-primary-500 hover:bg-primary-600 text-white font-display text-body-lg px-8 py-3 rounded-full shadow-lg transition-colors duration-200 relative overflow-hidden group"
+              className="bg-primary-500 hover:bg-primary-600 text-white font-display text-body-lg px-6 py-3 rounded-lg2 shadow-lg transition-colors duration-200 relative overflow-hidden group"
             >
               <motion.span
                 className="absolute inset-0 bg-white opacity-25"

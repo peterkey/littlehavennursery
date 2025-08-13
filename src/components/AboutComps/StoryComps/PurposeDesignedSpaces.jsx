@@ -61,7 +61,7 @@ const PurposeDesignedSpaces = () => {
   ];
 
   return (
-    <section className="relative py-24 overflow-hidden">
+    <section className="relative py-16 sm:py-24 overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary-50 to-blue-50">
         <div className="absolute inset-0" style={{
@@ -82,7 +82,7 @@ const PurposeDesignedSpaces = () => {
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
         viewport={{ once: true }}
-        className="container mx-auto px-6 relative z-10"
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
       >
         {/* Header Content */}
         <div className="text-center max-w-3xl mx-auto mb-16">
@@ -100,7 +100,7 @@ const PurposeDesignedSpaces = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
             viewport={{ once: true }}
-            className="text-lg text-gray-600 leading-relaxed"
+            className="text-lg text-gray-600 leading-relaxed max-w-content mx-auto"
           >
             Our nurseries are carefully designed to create safe, engaging, and inspiring environments where children feel
             comfortable and eager to learn. Every space is tailored to encourage creativity, exploration, and growth.

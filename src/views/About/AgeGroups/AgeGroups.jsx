@@ -1,14 +1,27 @@
 import { motion } from 'framer-motion';
 import { FaBaby, FaChild, FaUserGraduate } from 'react-icons/fa';
+import SleepRoom from "../../../assets/SleepRoom.jpg";
+import ChairRoom from "../../../assets/ChairRoom.jpg";
+import Room from "../../../assets/Room.jpg";
+import Building from "../../../assets/Building.jpg";
 
-const AgeGroupCard = ({ icon: Icon, title, ageRange, description, features, delay }) => (
+const AgeGroupCard = ({ icon: Icon, title, ageRange, description, image, alt, features, delay }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5, delay }}
     viewport={{ once: true }}
-    className="bg-white rounded-2xl shadow-lg overflow-hidden"
+    className="bg-white rounded-2xl shadow-lg overflow-hidden group"
   >
+    <div className="relative h-48 overflow-hidden">
+      <img 
+        src={image} 
+        alt={alt}
+        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+    </div>
+    
     <div className="p-8">
       <div className="flex items-center gap-4 mb-6">
         <div className="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center">
@@ -43,6 +56,8 @@ const AgeGroups = () => {
       title: "Baby Room",
       ageRange: "6 weeks - 2 years",
       description: "Our dedicated baby room provides a safe, nurturing environment where your little ones can explore, learn, and grow at their own pace.",
+      image: SleepRoom,
+      alt: "Baby Room with Sleep Area",
       features: [
         "Stand-alone room with dedicated milk kitchen",
         "Free play exploration opportunities",
@@ -56,6 +71,8 @@ const AgeGroups = () => {
       title: "Toddler Room",
       ageRange: "2-3 years",
       description: "A stimulating environment designed to encourage independence, social skills, and early learning through play.",
+      image: ChairRoom,
+      alt: "Toddler Activity Room",
       features: [
         "Age-appropriate activities and toys",
         "Structured learning through play",
@@ -69,6 +86,8 @@ const AgeGroups = () => {
       title: "Kindergarten",
       ageRange: "3-5 years",
       description: "Our kindergarten space is designed to prepare children for school while maintaining the joy of learning through play.",
+      image: Room,
+      alt: "Kindergarten Learning Environment",
       features: [
         "Custom-designed learning environment",
         "Quiet 'Cwtch' area for rest",
@@ -80,29 +99,63 @@ const AgeGroups = () => {
   ];
 
   return (
-    <section className="py-24 bg-gray-50">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-          className="text-center max-w-3xl mx-auto mb-16"
-        >
-          <h2 className="text-4xl font-bold text-gray-900 mb-6">Age Groups</h2>
-          <p className="text-lg text-gray-600">
-            From tiny babies to confident kindergarteners, we provide age-appropriate care and education 
-            for every stage of your child's early development.
-          </p>
-        </motion.div>
+    <>
+      {/* Hero Section */}
+      <section className="relative h-[400px] bg-primary-600 overflow-hidden">
+        <div className="absolute inset-0">
+          <img 
+            src={Building} 
+            alt="Little Haven Nursery Building" 
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-primary-600/60" />
+        </div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center">
+          <div className="max-w-3xl text-white">
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="text-4xl sm:text-5xl font-bold mb-6"
+            >
+              Age Groups
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="text-xl text-primary-100"
+            >
+              From tiny babies to confident kindergarteners, we provide age-appropriate care and education
+            </motion.p>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-24 bg-gray-50">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="text-center max-w-3xl mx-auto mb-16"
+          >
+            <h2 className="text-4xl font-bold text-gray-900 mb-6">Age Groups</h2>
+            <p className="text-lg text-gray-600">
+              From tiny babies to confident kindergarteners, we provide age-appropriate care and education 
+              for every stage of your child's early development.
+            </p>
+          </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {ageGroups.map((group, index) => (
             <AgeGroupCard key={index} {...group} delay={index * 0.1} />
           ))}
         </div>
-      </div>
-    </section>
+        </div>
+      </section>
+    </>
   );
 };
 

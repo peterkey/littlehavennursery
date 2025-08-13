@@ -2,9 +2,9 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 // https://vite.dev/config/
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   plugins: [react()],
-  base: '/littlehavennursery/',
+  base: mode === 'production' ? '/littlehavennursery/' : '/',
   server: {
     proxy: {
       '/api': {
@@ -13,4 +13,26 @@ export default defineConfig({
       },
     },
   },
-})
+  build: {
+    // Disable sourcemaps in production for security
+    sourcemap: false,
+    // Enable minification
+    minify: 'terser',
+    // Optimize chunk splitting
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom', 'react-router-dom'],
+          animations: ['framer-motion'],
+          ui: ['react-icons', 'swiper'],
+        },
+      },
+    },
+    // Set chunk size warning limit
+    chunkSizeWarningLimit: 1000,
+  },
+  // Performance optimizations
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'react-router-dom', 'framer-motion'],
+  },
+}))

@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { IoCallOutline, IoLocationOutline, IoTimeOutline } from 'react-icons/io5';
 
 const NurseryPage = ({ 
@@ -7,11 +8,15 @@ const NurseryPage = ({
   type, 
   address, 
   phone, 
+  location,
+  service,
   openingHours,
   description,
-  features,
-  images
+  features
 }) => {
+  // Debug logging to identify duplicate rendering
+  console.log('NurseryPage rendered with data:', { title, type, address, phone, location, service });
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
@@ -39,7 +44,7 @@ const NurseryPage = ({
       </div>
 
       {/* Main Content */}
-      <div className="container mx-auto px-4 py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Left Column - Main Content */}
           <div className="lg:col-span-2">
@@ -48,7 +53,7 @@ const NurseryPage = ({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="bg-white rounded-xl shadow-sm p-6 mb-8"
+              className="bg-white rounded-lg2 shadow-sm p-8 sm:p-12 mb-8"
             >
               <h2 className="text-2xl font-bold text-gray-900 mb-4">About Our {type}</h2>
               <p className="text-gray-600 leading-relaxed">{description}</p>
@@ -59,7 +64,7 @@ const NurseryPage = ({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="bg-white rounded-xl shadow-sm p-6 mb-8"
+              className="bg-white rounded-lg2 shadow-sm p-8 sm:p-12 mb-8"
             >
               <h2 className="text-2xl font-bold text-gray-900 mb-4">What We Offer</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -76,26 +81,7 @@ const NurseryPage = ({
               </div>
             </motion.div>
 
-            {/* Image Gallery */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-              className="bg-white rounded-xl shadow-sm p-6"
-            >
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">Our Facilities</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {images.map((image, index) => (
-                  <div key={index} className="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden">
-                    <img 
-                      src={image} 
-                      alt={`${title} facility ${index + 1}`}
-                      className="object-cover w-full h-full"
-                    />
-                  </div>
-                ))}
-              </div>
-            </motion.div>
+
           </div>
 
           {/* Right Column - Contact Info */}
@@ -105,7 +91,7 @@ const NurseryPage = ({
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.6 }}
-              className="bg-white rounded-xl shadow-sm p-6 mb-8 sticky top-8"
+              className="bg-white rounded-lg2 shadow-sm p-8 sm:p-12 mb-8 sticky top-8"
             >
               <h2 className="text-2xl font-bold text-gray-900 mb-6">Contact Information</h2>
               
@@ -138,6 +124,24 @@ const NurseryPage = ({
                       ))}
                     </div>
                   </div>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="pt-6 border-t border-gray-200">
+                <div className="space-y-3">
+                  <Link
+                    to={`/contact?service=${service}&location=${location}&source=${location}-page`}
+                    className="w-full inline-flex justify-center items-center px-4 py-3 bg-primary-600 text-white font-medium rounded-lg hover:bg-primary-700 transition-colors duration-200"
+                  >
+                    Enquire Now
+                  </Link>
+                  <Link
+                    to="/booking"
+                    className="w-full inline-flex justify-center items-center px-4 py-3 border border-primary-600 text-primary-600 font-medium rounded-lg hover:bg-primary-50 transition-colors duration-200"
+                  >
+                    Book a Visit
+                  </Link>
                 </div>
               </div>
             </motion.div>

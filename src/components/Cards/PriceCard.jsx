@@ -11,7 +11,7 @@ const PriceCard = ({
   return (
     <motion.div
       whileHover={{ y: -8 }}
-      className={`bg-white rounded-2xl shadow-medium transition-shadow hover:shadow-strong relative ${
+      className={`bg-white rounded-lg2 shadow-medium transition-shadow hover:shadow-strong relative ${
         featured ? 'ring-2 ring-primary-600 ring-offset-4' : ''
       }`}
     >
@@ -21,7 +21,7 @@ const PriceCard = ({
         </span>
       )}
       
-      <div className='px-8 py-8 border-b border-neutral-200'>
+      <div className='px-8 sm:px-12 py-8 sm:py-12 border-b border-neutral-200'>
         <h3 className='text-2xl font-semibold text-center mb-6 text-neutral-900'>{name}</h3>
         
         {/* Full Day Price */}
@@ -45,7 +45,7 @@ const PriceCard = ({
         )}
       </div>
 
-      <div className='p-8 bg-neutral-50 rounded-b-2xl'>
+      <div className='p-8 sm:p-12 bg-neutral-50 rounded-b-lg2'>
         <ul className='space-y-4'>
           {features.map((feature, index) => (
             <li key={index} className='flex items-start gap-4'>
@@ -59,7 +59,7 @@ const PriceCard = ({
           href="/contact"
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
-          className={`mt-8 w-full inline-block text-center py-3 rounded-lg transition-colors ${
+          className={`mt-8 w-full inline-block text-center py-3 rounded-lg2 transition-colors ${
             featured
               ? 'bg-primary-600 text-white hover:bg-primary-700'
               : 'bg-white text-primary-600 border-2 border-primary-200 hover:border-primary-300 hover:bg-primary-50'

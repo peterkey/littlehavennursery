@@ -1,5 +1,9 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import Building from "../assets/Building.jpg";
+import RoomPanorama from "../assets/RoomPanorama.jpg";
+import Room from "../assets/Room.jpg";
+import ChairRoom from "../assets/ChairRoom.jpg";
 
 const OurNurseries = () => {
   const nurseries = [
@@ -9,7 +13,7 @@ const OurNurseries = () => {
       location: "Rhydlafar Dr, Rhydlafar, Cardiff CF5 6HU",
       description: "Our flagship day nursery providing exceptional care and education for children aged 0-5 years.",
       path: "/nurseries/rhydlafar",
-      streetView: "https://maps.googleapis.com/maps/api/streetview?size=600x400&location=51.4885,-3.2675&heading=45&pitch=10&key=YOUR_API_KEY"
+      mapSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2285.8924142478295!2d-3.284121823817714!3d51.51102651043905!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x486e1b79105870cb%3A0x5ca53d8a4961a49f!2sLittle%20Haven%20Nursery!5e1!3m2!1sen!2suk!4v1738684609327!5m2!1sen!2suk"
     },
     {
       title: "Little Haven - Pentyrch",
@@ -17,7 +21,7 @@ const OurNurseries = () => {
       location: "Pentyrch Primary School, Bronllwyn, Pentyrch, Cardiff CF15 9QL",
       description: "A welcoming wrap around club offering before and after school care for primary school children.",
       path: "/nurseries/pentyrch",
-      streetView: "https://maps.googleapis.com/maps/api/streetview?size=600x400&location=51.5289,-3.2956&heading=45&pitch=10&key=YOUR_API_KEY"
+      mapSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2285.008082588355!2d-3.3031652238166194!3d51.528648809151406!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x486e1a7563f9468b%3A0x3ca446636a2a0a8b!2sPentyrch%20Primary%20School!5e1!3m2!1sen!2suk!4v1738684802334!5m2!1sen!2suk"
     },
     {
       title: "Little Haven - Radyr",
@@ -25,15 +29,22 @@ const OurNurseries = () => {
       location: "Old Church Rooms Hen Ysgoldy'r Eglwys, Radyr, Cardiff CF15 8DF",
       description: "A nurturing wrap around club providing quality care for primary school children.",
       path: "/nurseries/radyr",
-      streetView: "https://maps.googleapis.com/maps/api/streetview?size=600x400&location=51.5186,-3.2583&heading=45&pitch=10&key=YOUR_API_KEY"
+      mapSrc: "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d455.63759593358543!2d-3.2565677116744!3d51.519258281439825!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNTHCsDMxJzA4LjYiTiAzwrAxNScyNC4wIlc!5e1!3m2!1sen!2suk!4v1738685113908!5m2!1sen!2suk"
     }
   ];
 
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <div className="relative h-[400px] bg-primary-600">
-        <div className="absolute inset-0 bg-black/40" />
+      <div className="relative h-[500px] bg-primary-600 overflow-hidden">
+        <div className="absolute inset-0">
+          <img 
+            src={Building} 
+            alt="Little Haven Nursery Building" 
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-primary-600/60" />
+        </div>
         <div className="container mx-auto px-4 h-full flex items-center relative z-10">
           <div className="max-w-3xl">
             <motion.h1 
@@ -68,12 +79,18 @@ const OurNurseries = () => {
             >
               <Link to={nursery.path} className="block">
                 <div className="relative h-48 bg-gray-200">
-                  <img
-                    src={nursery.streetView}
-                    alt={`Street view of ${nursery.title}`}
-                    className="w-full h-full object-cover"
+                  <iframe
+                    title={`Map of ${nursery.title}`}
+                    src={nursery.mapSrc}
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="w-full h-full"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
                 </div>
                 <div className="p-6">
                   <h2 className="text-xl font-bold text-gray-900 mb-2">{nursery.title}</h2>

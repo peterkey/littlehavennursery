@@ -11,7 +11,7 @@ const OpenTimes = () => {
         }} />
       </div>
 
-      <div className='relative container mx-auto px-4 sm:px-6 lg:px-8'>
+      <div className='relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -35,18 +35,14 @@ const OpenTimes = () => {
           </p>
 
           {/* Additional Information */}
-          <div className='mt-8 grid grid-cols-1 sm:grid-cols-3 gap-6 text-center'>
+          <div className='mt-8 grid grid-cols-1 sm:grid-cols-2 gap-6 text-center'>
             <div className='p-4 rounded-lg bg-white/10 backdrop-blur-sm'>
-              <p className='text-primary-100 text-sm uppercase tracking-wider'>Early Drop-off</p>
+              <p className='text-primary-100 text-sm uppercase tracking-wider'>Holiday Club</p>
               <p className='text-white font-medium mt-1'>Available</p>
             </div>
             <div className='p-4 rounded-lg bg-white/10 backdrop-blur-sm'>
-              <p className='text-primary-100 text-sm uppercase tracking-wider'>Flexible Hours</p>
-              <p className='text-white font-medium mt-1'>Customizable</p>
-            </div>
-            <div className='p-4 rounded-lg bg-white/10 backdrop-blur-sm'>
-              <p className='text-primary-100 text-sm uppercase tracking-wider'>Late Pick-up</p>
-              <p className='text-white font-medium mt-1'>By Arrangement</p>
+              <p className='text-primary-100 text-sm uppercase tracking-wider'>Childcare Offer</p>
+              <p className='text-white font-medium mt-1'>Accepted</p>
             </div>
           </div>
         </motion.div>

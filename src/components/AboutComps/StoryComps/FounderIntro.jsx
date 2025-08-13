@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { FaBuilding, FaUserClock } from "react-icons/fa";
-import Fiona from "../../../assets/react.svg";
+import Fiona from "../../../assets/Fiona.jpeg";
 
 const HighlightCard = ({ icon: Icon, title, description }) => (
   <motion.div
@@ -79,7 +79,7 @@ const FounderIntro = () => {
             <motion.img
               src={Fiona}
               alt="Founder Fiona Williams"
-              className="relative w-48 h-48 mx-auto rounded-full shadow-xl border-4 border-white/20"
+              className="relative w-48 h-48 mx-auto rounded-full shadow-xl border-4 border-white/20 object-cover object-center"
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.3 }}
             />

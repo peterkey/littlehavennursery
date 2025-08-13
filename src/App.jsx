@@ -1,5 +1,4 @@
 import { BrowserRouter as Router } from 'react-router-dom';
-import { AnimatePresence } from 'framer-motion';
 import { Suspense } from 'react';
 import Layout from './components/Layout/Layout';
 import AnimatedRoutes from './components/Routes/AnimatedRoutes';
@@ -8,9 +7,12 @@ import { HelmetProvider } from 'react-helmet-async';
 import { Helmet } from 'react-helmet-async';
 
 function App() {
+  // Use basename for production deployment on GitHub Pages
+  const basename = import.meta.env.PROD ? '/littlehavennursery' : '';
+  
   return (
     <HelmetProvider>
-      <Router>
+      <Router basename={basename}>
         <Helmet>
           {/* Structured Data for Organization */}
           <script type="application/ld+json">
@@ -44,9 +46,7 @@ function App() {
         </Helmet>
         <Layout>
           <Suspense fallback={<LoadingSpinner />}>
-            <AnimatePresence mode="wait">
-              <AnimatedRoutes />
-            </AnimatePresence>
+            <AnimatedRoutes />
           </Suspense>
         </Layout>
       </Router>

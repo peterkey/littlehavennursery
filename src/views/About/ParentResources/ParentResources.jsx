@@ -37,7 +37,7 @@ const PolicyCard = ({ icon: Icon, title, description, link }) => (
     whileInView={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5 }}
     viewport={{ once: true }}
-    className="bg-white rounded-xl p-6 shadow-md"
+    className="bg-white rounded-lg2 p-8 sm:p-12 shadow-md"
   >
     <div className="flex items-start gap-4">
       <div className="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center flex-shrink-0">
@@ -66,7 +66,7 @@ const ParentResources = () => {
   const faqs = [
     {
       question: "What are your opening hours?",
-      answer: "We're open Monday to Friday from 7:30 AM to 5:30 PM. We offer flexible drop-off and pick-up times to accommodate working parents."
+      answer: "We're open Monday to Friday from 7:30 AM to 5:30 PM with consistent opening hours to provide reliable childcare for working parents."
     },
     {
       question: "What age groups do you accept?",
@@ -74,7 +74,7 @@ const ParentResources = () => {
     },
     {
       question: "Do you provide meals?",
-      answer: "Yes, we provide healthy, nutritious meals throughout the day, including breakfast, lunch, and afternoon snacks. We cater to all dietary requirements."
+      answer: "Yes, we provide healthy, nutritious meals throughout the day, including breakfast, morning snack, lunch, afternoon snack and dinner. We cater to all dietary requirements."
     },
     {
       question: "What is your staff-to-child ratio?",

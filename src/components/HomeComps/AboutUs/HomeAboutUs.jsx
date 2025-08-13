@@ -1,9 +1,10 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import building from "../../../assets/Building.jpg"
 
 const HomeAboutUs = () => {
   return (
-    <section className='relative py-24 bg-gradient-to-b from-white to-neutral-50 overflow-hidden'>
+    <section className='relative py-16 sm:py-24 bg-gradient-to-b from-white to-neutral-50 overflow-hidden'>
       {/* Background Pattern */}
       <div className='absolute inset-0 opacity-[0.03]'>
         <div className='absolute inset-0' style={{
@@ -12,7 +13,7 @@ const HomeAboutUs = () => {
         }} />
       </div>
 
-      <div className='container mx-auto px-4 sm:px-6 lg:px-8'>
+      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         <div className='flex flex-col lg:flex-row items-center gap-16'>
           {/* Image Section */}
           <motion.div 
@@ -26,7 +27,7 @@ const HomeAboutUs = () => {
               <div className='absolute -inset-4 bg-primary-100 rounded-xl transform -rotate-6' />
               <div className='relative aspect-[4/3] rounded-lg overflow-hidden bg-primary-200'>
                 <img 
-                  src='/images/about-us-hero.jpg' 
+                  src={building} 
                   alt='Children playing and learning'
                   className='w-full h-full object-cover'
                 />
@@ -48,7 +49,7 @@ const HomeAboutUs = () => {
             <h1 className='text-4xl md:text-5xl font-bold text-primary-600 mb-6'>
               About Us
             </h1>
-            <p className='text-lg text-neutral-700 leading-relaxed mb-8'>
+            <p className='text-lg text-neutral-700 leading-relaxed mb-8 max-w-content'>
               At Little Haven, we believe in more than just childcare. We're dedicated to giving every child the best
               start in life through an environment where fun and learning go hand in hand. Each day here is an exciting
               adventure, designed to inspire curiosity and spark creativity. From future scientists to artists and
@@ -74,7 +75,7 @@ const HomeAboutUs = () => {
 
             <Link 
               to="/about"
-              className='inline-flex items-center px-6 py-3 text-lg font-medium text-white bg-primary-600 rounded-lg shadow-lg hover:bg-primary-700 transform hover:translate-y-[-2px] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500'
+              className='inline-flex items-center px-6 py-3 text-base font-medium text-white bg-primary-600 rounded-lg2 shadow-lg hover:bg-primary-700 transform hover:translate-y-[-2px] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500'
             >
               Find out more
               <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

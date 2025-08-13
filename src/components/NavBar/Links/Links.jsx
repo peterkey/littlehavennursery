@@ -21,7 +21,7 @@ const Links = () => {
     : { transform: "scaleX(0)", opacity: 0 };
 
   return (
-    <div className='flex items-center gap-8'>
+    <div className='flex items-center gap-6'>
       <div className='relative flex items-center'>
         <Link
           to='/'
@@ -38,21 +38,21 @@ const Links = () => {
       
       <Flyoutlink href='/ournurseries' FlyoutContent={OurNurseriesContent}>
         <span className={`${isActive("/ournurseries")} group flex items-center gap-1 transition-colors duration-200`}>
-          Our Nurseries
+          Nurseries
           <i className='bx bx-chevron-down text-lg text-neutral-400 group-hover:text-neutral-600 transition-colors'></i>
         </span>
       </Flyoutlink>
 
       <Flyoutlink href='/about' FlyoutContent={AboutUsContent}>
         <span className={`${isActive("/about")} group flex items-center gap-1 transition-colors duration-200`}>
-          About Us
+          About
           <i className='bx bx-chevron-down text-lg text-neutral-400 group-hover:text-neutral-600 transition-colors'></i>
         </span>
       </Flyoutlink>
 
       <Flyoutlink href='/fees' FlyoutContent={FeesContent}>
         <span className={`${isActive("/fees")} group flex items-center gap-1 transition-colors duration-200`}>
-          Fees and Funding
+          Funding
           <i className='bx bx-chevron-down text-lg text-neutral-400 group-hover:text-neutral-600 transition-colors'></i>
         </span>
       </Flyoutlink>

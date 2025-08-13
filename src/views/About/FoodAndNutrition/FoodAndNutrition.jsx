@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { FaUtensils, FaLeaf, FaAward } from "react-icons/fa";
 import HygieneRating from "../../../assets/Version 1 Badges 5.png";
 import HealthySnackAward from "../../../assets/SNACK-AWARD-LOGO.jpg";
+import Food from "../../../assets/Food.jpg";
 
 const sectionVariants = {
   initial: {
@@ -26,16 +27,16 @@ const AwardCard = ({ icon: Icon, image, title, description }) => (
     viewport={{ once: true }}
     className="relative group"
   >
-    <div className="bg-white/90 backdrop-blur-sm p-8 rounded-2xl shadow-lg border border-primary-100 
+    <div className="bg-white/90 backdrop-blur-sm p-8 sm:p-12 rounded-lg2 shadow-lg border border-primary-100 
                     transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
       <div className="absolute inset-0 bg-gradient-to-br from-primary-50 to-blue-50 opacity-0 
-                    group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
+                    group-hover:opacity-100 transition-opacity duration-300 rounded-lg2" />
       <div className="relative z-10">
         {image ? (
           <img src={image} alt={title} className="w-auto h-32 mx-auto mb-6 object-contain" />
         ) : (
           <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-br from-primary-400 to-blue-500 
-                        rounded-xl flex items-center justify-center shadow-lg transform 
+                        rounded-lg2 flex items-center justify-center shadow-lg transform 
                         group-hover:scale-110 transition-transform duration-300">
             <Icon className="text-white text-2xl" />
           </div>
@@ -54,10 +55,10 @@ const MenuCard = ({ day, breakfast, lunch, tea, snack, drinks }) => (
     viewport={{ once: true }}
     className="relative group"
   >
-    <div className="bg-white/90 backdrop-blur-sm p-8 rounded-2xl shadow-lg border border-primary-100 
+    <div className="bg-white/90 backdrop-blur-sm p-8 sm:p-12 rounded-lg2 shadow-lg border border-primary-100 
                     transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
       <div className="absolute inset-0 bg-gradient-to-br from-primary-50 to-blue-50 opacity-0 
-                    group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
+                    group-hover:opacity-100 transition-opacity duration-300 rounded-lg2" />
       <div className="relative z-10">
         <h4 className="text-2xl font-bold text-primary-900 mb-4">{day}</h4>
         <div className="space-y-3">
@@ -188,31 +189,64 @@ const FoodAndNutrition = () => {
   };
 
   return (
-    <motion.section variants={sectionVariants} className="py-24">
-      <div className="container mx-auto px-6">
-        {/* Header Content */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="text-4xl font-bold text-primary-600 mb-6"
-          >
-            Our Menu & Nutrition
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            viewport={{ once: true }}
-            className="text-lg text-gray-600 leading-relaxed"
-          >
-            At Little Haven, we believe in healthy, balanced, and delicious meals for every child. We follow The
-            Welsh Government's Healthy Food for Childcare guidelines, have achieved the Gold Standard Healthy Snack
-            Award, and maintain a 5 food hygiene rating.
-          </motion.p>
+    <>
+      {/* Hero Section */}
+      <section className="relative h-[400px] bg-primary-600 overflow-hidden">
+        <div className="absolute inset-0">
+          <img 
+            src={Food} 
+            alt="Healthy Food at Little Haven Nursery" 
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-primary-600/60" />
         </div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center">
+          <div className="max-w-3xl text-white">
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="text-4xl sm:text-5xl font-bold mb-6"
+            >
+              Food & Nutrition
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="text-xl text-primary-100"
+            >
+              Nourishing minds and bodies with healthy, balanced meals
+            </motion.p>
+          </div>
+        </div>
+      </section>
+
+      <motion.section variants={sectionVariants} className="py-16 sm:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Header Content */}
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+              className="text-4xl font-bold text-primary-600 mb-6"
+            >
+              Our Menu & Nutrition
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              viewport={{ once: true }}
+              className="text-lg text-gray-600 leading-relaxed"
+            >
+              At Little Haven, we believe in healthy, balanced, and delicious meals for every child. We follow The
+              Welsh Government's Healthy Food for Childcare guidelines, have achieved the Gold Standard Healthy Snack
+              Award, and maintain a 5 food hygiene rating.
+            </motion.p>
+          </div>
 
         {/* Awards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-16">
@@ -225,7 +259,7 @@ const FoodAndNutrition = () => {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
             <h3 className="text-3xl font-bold text-primary-600 mb-8">Example Menus</h3>
-            <div className="inline-flex gap-4 p-1 bg-white/50 backdrop-blur-sm rounded-xl">
+            <div className="inline-flex gap-6 p-1 bg-white/50 backdrop-blur-sm rounded-lg2">
               <button
                 onClick={() => setActiveTab("Nursery")}
                 className={`px-6 py-3 rounded-lg text-lg font-semibold transition-all duration-300 ${
@@ -257,6 +291,7 @@ const FoodAndNutrition = () => {
         </div>
       </div>
     </motion.section>
+    </>
   );
 };
 

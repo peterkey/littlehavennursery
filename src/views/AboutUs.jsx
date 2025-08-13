@@ -1,11 +1,12 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import RoomPanorama from "../assets/RoomPanorama.jpg";
 
 const AboutUs = () => {
   const sections = [
     {
       title: "Our Mission",
-      path: "/about/ourmission",
+      path: "/about/mission",
       description: "Learn about our core values and commitment to providing exceptional childcare.",
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -86,48 +87,56 @@ const AboutUs = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-neutral-50">
       {/* Hero Section */}
-      <div className="relative h-[400px] bg-primary-600">
-        <div className="absolute inset-0 bg-black/40" />
-        <div className="container mx-auto px-4 h-full flex items-center relative z-10">
-          <div className="max-w-3xl">
-            <motion.h1 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-4xl md:text-5xl font-bold text-white mb-4"
-            >
-              About Us
-            </motion.h1>
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="text-xl text-white/90"
-            >
-              Discover what makes Little Haven Nursery special
-            </motion.p>
+      <div className="relative h-[500px] bg-primary-600 overflow-hidden">
+        <div className="absolute inset-0">
+          <img 
+            src={RoomPanorama} 
+            alt="Little Haven Nursery Room" 
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-primary-600/60" />
+        </div>
+        
+        <div className="relative h-full flex items-center justify-center">
+          <div className="text-center text-white px-4 sm:px-6 lg:px-8">
+            <h1 className="text-display-sm md:text-display-md lg:text-display-lg font-bold mb-6">
+              About Little Haven Nursery
+            </h1>
+            <p className="text-body-lg md:text-body-xl text-primary-100 max-w-content mx-auto">
+              Discover our story, mission, and the values that make us the trusted choice for early years education.
+            </p>
           </div>
         </div>
       </div>
 
-      {/* Main Content */}
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {/* Content Sections */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {sections.map((section, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              className="bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-md transition-shadow"
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className="card group"
             >
-              <Link to={section.path} className="block p-6">
-                <div className="text-primary-600 mb-4">
-                  {section.icon}
+              <Link to={section.path} className="block h-full">
+                <div className="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary-200 transition-colors">
+                  <div className="text-primary-600 group-hover:text-primary-700 transition-colors">
+                    {section.icon}
+                  </div>
                 </div>
-                <h2 className="text-xl font-bold text-gray-900 mb-2">{section.title}</h2>
-                <p className="text-gray-600">{section.description}</p>
+                
+                <h3 className="text-xl font-semibold text-neutral-900 mb-4 group-hover:text-primary-600 transition-colors">
+                  {section.title}
+                </h3>
+                
+                <p className="text-neutral-600 leading-relaxed">
+                  {section.description}
+                </p>
               </Link>
             </motion.div>
           ))}

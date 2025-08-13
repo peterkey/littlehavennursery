@@ -17,7 +17,7 @@ const AboutUsContent = () => {
   const links = [
     {
       title: "Our Mission",
-      path: "/about/ourmission",
+      path: "/about/mission",
       description: "Discover our commitment to providing the best start in life for every child.",
       icon: FaHeart
     },

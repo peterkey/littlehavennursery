@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import Building from "../../../assets/Building.jpg";
 
 const FeatureCard = ({ icon, title, description, index }) => (
   <motion.div
@@ -97,13 +98,13 @@ const Facilities = () => {
             <h3 className='text-2xl font-bold text-white mb-8'>
               Custom-Designed Nursery
             </h3>
-            <div className='space-y-6 text-primary-100'>
-              <p>
+            <div className='space-y-6 text-white'>
+              <p className='text-primary-100'>
                 The nursery's layout is spacious and modern, designed with every child's needs in mind. Our 2018
                 refit included a full redesign of the space, creating a safe and inspiring environment for children to
                 explore.
               </p>
-              <p>
+              <p className='text-primary-100'>
                 Community Playthings, leaders in creating educational environments, played a key role in this process.
                 They helped us select the best furnishings and play areas to stimulate creativity, curiosity, and
                 learning.
@@ -123,8 +124,8 @@ const Facilities = () => {
               <div className='absolute -inset-4 bg-primary-100/20 rounded-2xl transform -rotate-6' />
               <div className='relative aspect-[4/3] rounded-xl overflow-hidden bg-primary-200'>
                 <img
-                  src='/images/nursery-facility.jpg'
-                  alt='Modern nursery facility with high-quality furnishings'
+                  src={Building}
+                  alt='Little Haven Nursery Building - Modern facilities with high-quality furnishings'
                   className='w-full h-full object-cover'
                 />
               </div>

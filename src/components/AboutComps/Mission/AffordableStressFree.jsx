@@ -30,8 +30,8 @@ const AffordableStressFree = () => {
   const features = [
     {
       icon: FaClock,
-      title: "Flexible and Convenient",
-      description: "Our flexible hours are designed to fit around your schedule, allowing for early drop-offs and late pickups to suit busy parents."
+      title: "Convenient and Reliable",
+      description: "Our opening hours from 7:30 AM to 5:30 PM are designed to provide consistent, reliable childcare that supports working families."
     },
     {
       icon: FaWallet,
@@ -82,7 +82,7 @@ const AffordableStressFree = () => {
             viewport={{ once: true }}
             className="text-lg text-teal-100 leading-relaxed"
           >
-            We understand the challenges of balancing work and family life. That's why we offer flexible childcare options
+            We understand the challenges of balancing work and family life. That's why we offer reliable childcare options
             designed to make your life easier while ensuring great value for your family.
           </motion.p>
         </div>
@@ -94,21 +94,7 @@ const AffordableStressFree = () => {
           ))}
         </div>
 
-        {/* Decorative Wave */}
-        <div className="absolute bottom-0 left-0 right-0 h-24 overflow-hidden">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 0.1 }}
-            transition={{ duration: 1 }}
-            viewport={{ once: true }}
-            className="absolute inset-0"
-            style={{
-              backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23fff' fill-opacity='1' d='M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E\")",
-              backgroundSize: 'cover',
-              backgroundPosition: 'center'
-            }}
-          />
-        </div>
+
       </motion.div>
     </section>
   );

@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaCalendarCheck } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const ContactCard = ({ icon: Icon, title, description, action, link, delay }) => (
   <motion.div
@@ -120,17 +121,15 @@ const ContactUs = () => {
           viewport={{ once: true }}
           className="text-center"
         >
-          <motion.a
-            href="/schedule-visit"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+          <Link
+            to="/booking"
             className="inline-flex items-center px-8 py-4 bg-white text-blue-600 rounded-xl 
                      font-bold shadow-lg hover:shadow-xl transition-all duration-300 
                      hover:bg-blue-50"
           >
             <FaCalendarCheck className="mr-2" />
             Schedule a Visit
-          </motion.a>
+          </Link>
         </motion.div>
       </motion.div>
     </section>

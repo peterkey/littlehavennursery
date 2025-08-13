@@ -109,19 +109,11 @@ const Awards = () => {
                     max-w-2xl mx-auto text-center"
         >
           <h3 className="text-2xl font-bold text-gray-800 mb-4">Future Ambitions</h3>
-          <p className="text-gray-600 leading-relaxed mb-6">
+          <p className="text-gray-600 leading-relaxed">
             Our journey doesn't stop here. We continuously aim for excellence, applying for sector-leading awards and
             striving for top inspection results. Your child deserves the best, and that's exactly what we're committed to
             delivering.
           </p>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-gradient-to-r from-yellow-400 to-yellow-500 text-white py-3 px-8 rounded-xl 
-                     font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
-          >
-            Learn More
-          </motion.button>
         </motion.div>
       </motion.div>
     </section>

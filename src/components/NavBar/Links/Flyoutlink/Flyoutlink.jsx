@@ -93,7 +93,7 @@ const Flyoutlink = ({ children, href, FlyoutContent }) => {
 
       <AnimatePresence>
         {showFlyout && (
-          <div className="absolute left-1/2 top-12 -translate-x-1/2">
+          <div className="absolute left-1/2 top-12 -translate-x-1/2 z-50">
             {/* Decorative elements */}
             <motion.div
               variants={decorationVariants}
@@ -108,7 +108,7 @@ const Flyoutlink = ({ children, href, FlyoutContent }) => {
               initial="hidden"
               animate="visible"
               exit="exit"
-              className="relative min-w-[320px] bg-white rounded-2xl border border-neutral-200/60 shadow-lg backdrop-blur-sm"
+              className="relative min-w-[800px] bg-white rounded-2xl border border-neutral-200/60 shadow-lg backdrop-blur-sm"
               style={{
                 background: "linear-gradient(180deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.98) 100%)",
                 boxShadow: "0 4px 24px -1px rgba(0, 0, 0, 0.08), 0 2px 8px -1px rgba(0, 0, 0, 0.06)"

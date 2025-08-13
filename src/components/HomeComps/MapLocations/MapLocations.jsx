@@ -7,7 +7,7 @@ const LocationCard = ({ location, index }) => (
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ duration: 0.5, delay: index * 0.1 }}
-    className='bg-white rounded-2xl shadow-xl overflow-hidden group hover:shadow-2xl transition-all duration-300'
+    className='bg-white rounded-lg2 shadow-xl overflow-hidden group hover:shadow-2xl transition-all duration-300'
   >
     {/* Map Container */}
     <div className='relative h-48 overflow-hidden'>
@@ -26,7 +26,7 @@ const LocationCard = ({ location, index }) => (
     </div>
 
     {/* Content */}
-    <div className='p-6'>
+    <div className='p-8 sm:p-12'>
       <h3 className='text-xl font-bold text-primary-600 mb-3'>{location.name}</h3>
       
       <div className='space-y-3 mb-4'>
@@ -79,7 +79,7 @@ const MapLocations = () => {
   ];
 
   return (
-    <section className='relative py-24 bg-gradient-to-b from-neutral-50 to-white overflow-hidden'>
+    <section className='relative py-16 sm:py-24 bg-gradient-to-b from-neutral-50 to-white overflow-hidden'>
       {/* Background Pattern */}
       <div className='absolute inset-0 opacity-[0.03]'>
         <div className='absolute inset-0' style={{
@@ -88,7 +88,7 @@ const MapLocations = () => {
         }} />
       </div>
 
-      <div className='relative container mx-auto px-4 sm:px-6 lg:px-8'>
+      <div className='relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -100,7 +100,7 @@ const MapLocations = () => {
           <h2 className='text-3xl md:text-4xl font-bold text-primary-600 mb-4'>
             Our Locations
           </h2>
-          <p className='text-lg text-neutral-600'>
+          <p className='text-lg text-neutral-600 max-w-content mx-auto'>
             Find us at any of our convenient nursery sites in the Cardiff area.
           </p>
         </motion.div>

@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
-import { FaUtensils, FaRunning, FaLeaf, FaDownload } from 'react-icons/fa';
+import { FaUtensils, FaRunning, FaLeaf, FaArrowRight } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const FeatureCard = ({ icon: Icon, title, description, delay }) => (
   <motion.div
@@ -107,19 +108,18 @@ const HealthyLifestyles = () => {
           viewport={{ once: true }}
           className="text-center"
         >
-          <motion.a
-            href="/menu.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center px-8 py-4 bg-white text-green-700 rounded-xl 
-                     font-bold shadow-lg hover:shadow-xl transition-all duration-300 
-                     hover:bg-green-50"
-          >
-            <FaDownload className="mr-2" />
-            Check Out Our Menu
-          </motion.a>
+          <Link to="/about/foodandnutrition">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="inline-flex items-center px-8 py-4 bg-white text-green-700 rounded-xl 
+                       font-bold shadow-lg hover:shadow-xl transition-all duration-300 
+                       hover:bg-green-50"
+            >
+              <FaArrowRight className="mr-2" />
+              Check Out Our Menu
+            </motion.button>
+          </Link>
         </motion.div>
       </motion.div>
     </section>

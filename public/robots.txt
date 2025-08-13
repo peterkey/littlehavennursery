@@ -1,16 +1,19 @@
-# Allow all crawlers
 User-agent: *
 Allow: /
 
 # Sitemap location
 Sitemap: https://littlehavennursery.co.uk/sitemap.xml
 
-# Disallow admin and private areas
+# Disallow admin areas (if any exist in the future)
 Disallow: /admin/
 Disallow: /private/
-Disallow: /api/
 
-# Allow all other paths
-Allow: /*.html$
-Allow: /*.js$
-Allow: /*.css$ 
+# Allow all other content
+Allow: /about/
+Allow: /nurseries/
+Allow: /fees/
+Allow: /contact/
+Allow: /booking/
+Allow: /opening-hours/
+Allow: /safeguarding/
+Allow: /privacy-policy/

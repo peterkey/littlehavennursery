@@ -1,19 +1,59 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaClock, FaCalendarAlt } from "react-icons/fa";
+import { useSearchParams } from "react-router-dom";
+import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaClock, FaCalendarAlt, FaInfoCircle } from "react-icons/fa";
 
 const Contact = () => {
+  const [searchParams] = useSearchParams();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
     subject: "General Inquiry",
     message: "",
+    service: "",
+    location: "",
+    source: ""
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState("");
+
+  // Read URL parameters and pre-fill form
+  useEffect(() => {
+    const service = searchParams.get('service');
+    const location = searchParams.get('location');
+    const source = searchParams.get('source');
+    
+    if (service || location || source) {
+      setFormData(prev => ({
+        ...prev,
+        service: service || "",
+        location: location || "",
+        source: source || "",
+        subject: service ? `Enquiry about ${service}` : "General Inquiry",
+        message: generateInitialMessage(service, location)
+      }));
+    }
+  }, [searchParams]);
+
+  const generateInitialMessage = (service, location) => {
+    let message = "I'm interested in learning more about ";
+    
+    if (service && location) {
+      message += `${service} at ${location}. `;
+    } else if (service) {
+      message += `${service}. `;
+    } else if (location) {
+      message += `your services at ${location}. `;
+    } else {
+      message = "I'm interested in learning more about your services. ";
+    }
+    
+    message += "Please provide me with more information about availability, pricing, and next steps.";
+    return message;
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -40,6 +80,11 @@ const Contact = () => {
           phone: formData.phone,
           subject: formData.subject,
           message: formData.message,
+          service: formData.service,
+          location: formData.location,
+          source: formData.source,
+          timestamp: new Date().toISOString(),
+          userAgent: navigator.userAgent
         }),
       });
 
@@ -48,7 +93,16 @@ const Contact = () => {
       }
 
       setSubmitSuccess(true);
-      setFormData({ name: "", email: "", phone: "", subject: "General Inquiry", message: "" });
+      setFormData({ 
+        name: "", 
+        email: "", 
+        phone: "", 
+        subject: "General Inquiry", 
+        message: "",
+        service: "",
+        location: "",
+        source: ""
+      });
     } catch (error) {
       console.error("Error submitting contact form:", error);
       setSubmitError("There was an error sending your message. Please try again.");
@@ -92,7 +146,7 @@ const Contact = () => {
       className="min-h-screen bg-gradient-to-br from-white to-primary-50"
     >
       {/* Header Section */}
-      <section className="relative overflow-hidden bg-primary-600 text-white py-16">
+      <section className="relative overflow-hidden bg-primary-600 text-white py-16 sm:py-24">
         <div className="absolute inset-0 bg-gradient-to-br from-primary-600 to-primary-700">
           <div className="absolute inset-0 opacity-10" style={{
             backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
@@ -101,7 +155,7 @@ const Contact = () => {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl font-bold mb-6">Get in Touch</h1>
-            <p className="text-lg text-primary-100">
+            <p className="text-lg text-primary-100 max-w-content mx-auto">
               We'd love to hear from you. Whether you have questions about our facilities, want to schedule a visit,
               or need help with enrollment, our team is here to help.
             </p>
@@ -110,7 +164,7 @@ const Contact = () => {
       </section>
 
       {/* Main Content */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           {/* Left Column: Contact Info & Map */}
           <div className="space-y-8">
@@ -122,7 +176,7 @@ const Contact = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow"
+                  className="bg-white p-8 sm:p-12 rounded-lg2 shadow-md hover:shadow-lg transition-shadow"
                 >
                   <div className="flex items-start space-x-4">
                     <div className="flex-shrink-0">
@@ -166,7 +220,7 @@ const Contact = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="bg-gradient-to-br from-primary-50 to-primary-100 p-6 rounded-xl border border-primary-200"
+              className="bg-gradient-to-br from-primary-50 to-primary-100 p-8 sm:p-12 rounded-lg2 border border-primary-200"
             >
               <div className="flex items-start space-x-4">
                 <div className="flex-shrink-0">
@@ -180,8 +234,8 @@ const Contact = () => {
                     Want to see our facilities in person? Book a visit and we'll show you around our nursery.
                   </p>
                   <a
-                    href="/bookaviewing"
-                    className="inline-flex items-center px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors"
+                    href="/booking"
+                    className="inline-flex items-center px-4 py-2 bg-primary-600 text-white rounded-lg2 hover:bg-primary-700 transition-colors"
                   >
                     Book a Viewing
                     <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -217,9 +271,41 @@ const Contact = () => {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3 }}
-            className="bg-white shadow-xl rounded-xl p-8"
+            className="bg-white shadow-xl rounded-lg2 p-8 sm:p-12"
           >
             <h2 className="text-2xl font-bold text-gray-900 mb-6">Send Us a Message</h2>
+            
+            {/* Service Information Display */}
+            {(formData.service || formData.location) && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="bg-primary-50 border border-primary-200 rounded-lg p-4 mb-6"
+              >
+                <div className="flex items-start gap-3">
+                  <FaInfoCircle className="w-5 h-5 text-primary-600 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <h3 className="font-semibold text-primary-900 mb-1">Enquiry Details</h3>
+                    {formData.service && (
+                      <p className="text-primary-800 text-sm mb-1">
+                        <strong>Service:</strong> {formData.service}
+                      </p>
+                    )}
+                    {formData.location && (
+                      <p className="text-primary-800 text-sm">
+                        <strong>Location:</strong> {formData.location}
+                      </p>
+                    )}
+                    {formData.source && (
+                      <p className="text-primary-800 text-sm">
+                        <strong>Source:</strong> {formData.source}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              </motion.div>
+            )}
+            
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Name Field */}
               <div>
@@ -287,7 +373,7 @@ const Contact = () => {
                   <option value="General Inquiry">General Inquiry</option>
                   <option value="Book a Visit">Book a Visit</option>
                   <option value="Enrollment">Enrollment</option>
-                  <option value="Fees & Funding">Fees & Funding</option>
+                  <option value="Fees & Welsh Funding">Fees & Welsh Funding</option>
                   <option value="Other">Other</option>
                 </select>
               </div>
@@ -309,6 +395,11 @@ const Contact = () => {
                 />
               </div>
 
+              {/* Hidden Fields for Service Information */}
+              <input type="hidden" name="service" value={formData.service} />
+              <input type="hidden" name="location" value={formData.location} />
+              <input type="hidden" name="source" value={formData.source} />
+
               {/* Error Message */}
               {submitError && (
                 <div className="text-red-600 text-sm">{submitError}</div>
@@ -325,7 +416,7 @@ const Contact = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full px-6 py-3 bg-primary-600 text-white font-semibold rounded-lg
+                className="w-full px-6 py-3 bg-primary-600 text-white font-semibold rounded-lg2
                          hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 
                          focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed
                          transition-colors duration-200"

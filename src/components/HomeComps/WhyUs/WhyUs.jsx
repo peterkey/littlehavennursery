@@ -9,11 +9,11 @@ const FeatureCard = ({ emoji, title, description, index }) => {
       viewport={{ once: true }}
       className='group relative'
     >
-      <div className='absolute inset-0 rounded-2xl bg-gradient-to-b from-primary-100 to-primary-50 transform transition-transform duration-300 group-hover:scale-105' />
-      <div className='relative flex flex-col items-center p-8 rounded-2xl'>
-        <div className='text-4xl mb-4'>{emoji}</div>
-        <h3 className='text-lg font-semibold text-neutral-900 mb-2'>{title}</h3>
-        <p className='text-neutral-600 text-center'>{description}</p>
+      <div className='absolute inset-0 rounded-2xl bg-gradient-to-br from-primary-100 via-primary-50 to-primary-200 transform transition-all duration-300 group-hover:scale-105 group-hover:from-primary-200 group-hover:via-primary-100 group-hover:to-primary-300 shadow-soft group-hover:shadow-medium' />
+      <div className='relative flex flex-col items-center p-8 sm:p-10 rounded-xl'>
+        <div className='text-5xl mb-6'>{emoji}</div>
+        <h3 className='text-xl font-semibold text-primary-800 mb-4 text-center group-hover:text-primary-900 transition-colors'>{title}</h3>
+        <p className='text-neutral-700 text-center text-body-md leading-relaxed group-hover:text-neutral-800 transition-colors'>{description}</p>
       </div>
     </motion.div>
   );
@@ -43,8 +43,8 @@ const WhyUs = () => {
     },
     {
       emoji: "⏳",
-      title: "Flexible Scheduling",
-      description: "Convenient hours designed to fit your family's needs."
+      title: "Reliable Hours",
+      description: "Consistent daily schedule from 7:30 AM to 5:30 PM for working families."
     },
     {
       emoji: "🤝",
@@ -54,7 +54,7 @@ const WhyUs = () => {
   ];
 
   return (
-    <section className='bg-white py-24'>
+    <section className='bg-neutral-50 py-16 sm:py-24'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         {/* Section Header */}
         <div className='text-center max-w-3xl mx-auto mb-16'>
@@ -64,10 +64,10 @@ const WhyUs = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <h2 className='text-3xl md:text-4xl font-bold text-primary-600 mb-4'>
+            <h2 className='text-display-sm md:text-display-md font-bold text-primary-700 mb-6'>
               Why Choose Us?
             </h2>
-            <p className='text-lg text-neutral-600'>
+            <p className='text-body-lg text-neutral-700 max-w-content mx-auto'>
               A nurturing space where your child can play, learn, and grow with confidence.
             </p>
           </motion.div>

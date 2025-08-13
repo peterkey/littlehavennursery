@@ -76,14 +76,14 @@ const WrapAroundPriceSection = () => {
   ];
 
   return (
-    <section className='relative py-24 bg-gradient-to-b from-lavender-900 to-lavender-800 overflow-hidden'>
+    <section className='relative py-16 sm:py-24 bg-gradient-to-b from-lavender-900 to-lavender-800 overflow-hidden'>
       <div className='absolute inset-0 bg-[url("/grid.svg")] opacity-10'></div>
       
       <div className='relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         <div className='text-center mb-16'>
           <h2 className='text-3xl md:text-4xl font-bold text-white mb-4'>Wrap Around Care Pricing</h2>
-          <p className='text-lg text-lavender-100 max-w-2xl mx-auto'>
-            Flexible and affordable care options at our locations
+          <p className='text-lg text-lavender-100 max-w-content mx-auto'>
+            Affordable care options at our locations
           </p>
         </div>
 
@@ -130,14 +130,14 @@ const WrapAroundPriceSection = () => {
         </div>
 
         <div className='mt-16 text-center space-y-6'>
-          <div className='bg-white/10 rounded-xl p-6 max-w-3xl mx-auto'>
+          <div className='bg-white/10 rounded-lg2 p-6 max-w-3xl mx-auto'>
             <h3 className='text-xl font-semibold text-white mb-4'>Additional Information</h3>
             <ul className='text-lavender-100 space-y-2 text-sm md:text-base'>
               <li>• All services operate during term time only</li>
               <li>• Cardiff Childcare Offer registered</li>
               <li>• Childcare vouchers and other schemes accepted</li>
               <li>• Holiday club coming to Pentyrch in Summer 2025</li>
-              <li>• Flexible booking options available</li>
+              <li>• Booking options available</li>
             </ul>
           </div>
           

@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { FaUsers, FaHandHoldingHeart, FaUserFriends, FaGlobeAmericas } from "react-icons/fa";
+import Room from "../../../assets/Room.jpg";
 
 const FeatureCard = ({ icon: Icon, title, description, delay }) => (
   <motion.div
@@ -52,14 +53,8 @@ const RelationshipsMatter = () => {
 
   return (
     <section className="relative py-24 overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary-900 to-blue-900">
-        <div className="absolute inset-0" style={{
-          backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)',
-          backgroundSize: '40px 40px',
-          opacity: 0.1
-        }} />
-      </div>
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary-900 to-blue-900" />
 
       {/* Decorative Elements */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-primary-400 rounded-full mix-blend-multiply 
@@ -115,10 +110,10 @@ const RelationshipsMatter = () => {
             className="relative"
           >
             <div className="absolute -inset-4 bg-primary-100/20 rounded-2xl transform -rotate-6" />
-            <div className="relative aspect-[3/4] rounded-xl overflow-hidden bg-primary-200">
+            <div className="relative h-[40rem] rounded-xl overflow-hidden bg-primary-200">
               <img
-                src="/images/children-playing-together.jpg"
-                alt="Children playing together"
+                src={Room}
+                alt="Nursery room where children build relationships and learn together"
                 className="w-full h-full object-cover"
               />
             </div>
@@ -128,21 +123,7 @@ const RelationshipsMatter = () => {
           </motion.div>
         </div>
 
-        {/* Decorative Wave */}
-        <div className="absolute bottom-0 left-0 right-0 h-24 overflow-hidden">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 0.1 }}
-            transition={{ duration: 1 }}
-            viewport={{ once: true }}
-            className="absolute inset-0"
-            style={{
-              backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23fff' fill-opacity='1' d='M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E\")",
-              backgroundSize: 'cover',
-              backgroundPosition: 'center'
-            }}
-          />
-        </div>
+
       </motion.div>
     </section>
   );

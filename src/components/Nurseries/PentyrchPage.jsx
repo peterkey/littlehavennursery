@@ -2,11 +2,15 @@ import React from 'react';
 import NurseryPage from './NurseryPage';
 
 const PentyrchPage = () => {
+  console.log('PentyrchPage component rendered');
+  
   const nurseryData = {
     title: "Little Haven - Pentyrch",
     type: "Wrap Around Club",
     address: "Pentyrch Primary School, Bronllwyn, Pentyrch, Cardiff CF15 9QL",
     phone: "02922781919",
+    location: "pentyrch",
+    service: "wrap-around-club",
     openingHours: [
       "Before School: 7:30 AM - 9:00 AM",
       "After School: 3:15 PM - 6:00 PM",
@@ -22,12 +26,6 @@ const PentyrchPage = () => {
       "Experienced and caring staff team",
       "Safe and secure environment",
       "Regular communication with parents"
-    ],
-    images: [
-      "/images/nurseries/pentyrch/playground.jpg",
-      "/images/nurseries/pentyrch/indoor.jpg",
-      "/images/nurseries/pentyrch/activities.jpg",
-      "/images/nurseries/pentyrch/outdoor.jpg"
     ]
   };
 

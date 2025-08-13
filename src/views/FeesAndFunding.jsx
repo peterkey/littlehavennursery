@@ -5,7 +5,7 @@ const FeesAndFunding = () => {
   const sections = [
     {
       title: "Our Fees",
-      path: "/fees",
+      path: "/fees/our-fees",
       description: "View our transparent fee structure and understand what's included.",
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -14,9 +14,9 @@ const FeesAndFunding = () => {
       )
     },
     {
-      title: "Government Funding",
-      path: "/fees",
-      description: "Learn about the government funding options available for your child's early education.",
+      title: "Welsh Government Funding",
+      path: "/fees/government-funding",
+      description: "Learn about Welsh Government funding options including Foundation Phase and Childcare Offer for Wales.",
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
@@ -25,8 +25,8 @@ const FeesAndFunding = () => {
     },
     {
       title: "Tax-Free Childcare",
-      path: "/fees",
-      description: "Find out how to save money on childcare costs through the Tax-Free Childcare scheme.",
+      path: "/fees/tax-free-childcare",
+      description: "Find out how to save money on childcare costs through the UK-wide Tax-Free Childcare scheme.",
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
@@ -35,31 +35,11 @@ const FeesAndFunding = () => {
     },
     {
       title: "Universal Credit",
-      path: "/fees",
-      description: "Information about claiming childcare costs through Universal Credit.",
+      path: "/fees/universal-credit",
+      description: "Information about claiming childcare costs through Universal Credit in Wales.",
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-        </svg>
-      )
-    },
-    {
-      title: "Sibling Discounts",
-      path: "/fees/siblingdiscounts",
-      description: "Learn about our special discounts for families with multiple children.",
-      icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-        </svg>
-      )
-    },
-    {
-      title: "Payment Options",
-      path: "/fees/paymentoptions",
-      description: "Flexible payment options to suit your family's needs.",
-      icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
         </svg>
       )
     }
@@ -77,7 +57,7 @@ const FeesAndFunding = () => {
               animate={{ opacity: 1, y: 0 }}
               className="text-4xl md:text-5xl font-bold text-white mb-4"
             >
-              Fees & Funding
+              Fees & Welsh Government Funding
             </motion.h1>
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
@@ -85,7 +65,7 @@ const FeesAndFunding = () => {
               transition={{ delay: 0.2 }}
               className="text-xl text-white/90"
             >
-              Making quality childcare accessible and affordable
+              Making quality childcare accessible and affordable through Welsh Government schemes
             </motion.p>
           </div>
         </div>
@@ -112,6 +92,62 @@ const FeesAndFunding = () => {
             </motion.div>
           ))}
         </div>
+
+        {/* Welsh Funding Summary */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-16 bg-blue-50 rounded-xl p-8 border border-blue-200"
+        >
+          <div className="text-center max-w-4xl mx-auto">
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">Welsh Government Childcare Funding</h2>
+            <p className="text-lg text-gray-600 mb-8">
+              Wales offers unique childcare funding schemes that can significantly reduce your costs:
+            </p>
+            
+            <div className="grid gap-6 md:grid-cols-3 mb-8">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+                  10
+                </div>
+                <h3 className="font-semibold text-gray-900 mb-2">Foundation Phase Hours</h3>
+                <p className="text-sm text-gray-600">Free early education for all 3-4 year olds</p>
+              </div>
+              
+              <div className="text-center">
+                <div className="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+                  30
+                </div>
+                <h3 className="font-semibold text-gray-900 mb-2">Total Hours Available</h3>
+                <p className="text-sm text-gray-600">For working families (10 + 20 additional)</p>
+              </div>
+              
+              <div className="text-center">
+                <div className="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+                  39
+                </div>
+                <h3 className="font-semibold text-gray-900 mb-2">Weeks Per Year</h3>
+                <p className="text-sm text-gray-600">During term time</p>
+              </div>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                to="/fees/government-funding"
+                className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg2 shadow-lg hover:bg-blue-700 transition-colors duration-200"
+              >
+                Learn More About Welsh Funding
+              </Link>
+              <Link
+                to="/contact?service=welsh-funding&source=fees-page"
+                className="inline-flex items-center px-6 py-3 bg-white text-blue-600 font-semibold rounded-lg2 shadow-lg hover:bg-gray-50 transition-colors duration-200"
+              >
+                Get Help with Funding
+              </Link>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </div>
   );
