@@ -2,62 +2,146 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://littlehavennursery.co.uk/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-08-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://littlehavennursery.co.uk/about</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-08-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://littlehavennursery.co.uk/about/approach</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-08-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://littlehavennursery.co.uk/about/story</loc>
+    <lastmod>2024-08-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://littlehavennursery.co.uk/about/mission</loc>
+    <lastmod>2024-08-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://littlehavennursery.co.uk/about/community</loc>
+    <lastmod>2024-08-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://littlehavennursery.co.uk/about/foodandnutrition</loc>
+    <lastmod>2024-08-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://littlehavennursery.co.uk/about/agegroups</loc>
+    <lastmod>2024-08-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://littlehavennursery.co.uk/about/staff</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-08-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://littlehavennursery.co.uk/fees</loc>
-    <lastmod>2024-03-20</lastmod>
+    <loc>https://littlehavennursery.co.uk/about/parentresources</loc>
+    <lastmod>2024-08-10</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://littlehavennursery.co.uk/contact</loc>
-    <lastmod>2024-03-20</lastmod>
+    <loc>https://littlehavennursery.co.uk/ournurseries</loc>
+    <lastmod>2024-08-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://littlehavennursery.co.uk/bookaviewing</loc>
-    <lastmod>2024-03-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://littlehavennursery.co.uk/nurseries/rhydlafar</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-08-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://littlehavennursery.co.uk/nurseries/pentyrch</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-08-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://littlehavennursery.co.uk/nurseries/radyr</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-08-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-</urlset> 
+  <url>
+    <loc>https://littlehavennursery.co.uk/fees</loc>
+    <lastmod>2024-08-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://littlehavennursery.co.uk/fees/our-fees</loc>
+    <lastmod>2024-08-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://littlehavennursery.co.uk/fees/government-funding</loc>
+    <lastmod>2024-08-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://littlehavennursery.co.uk/fees/tax-free-childcare</loc>
+    <lastmod>2024-08-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://littlehavennursery.co.uk/fees/universal-credit</loc>
+    <lastmod>2024-08-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://littlehavennursery.co.uk/opening-hours</loc>
+    <lastmod>2024-08-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://littlehavennursery.co.uk/safeguarding</loc>
+    <lastmod>2024-08-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://littlehavennursery.co.uk/privacy-policy</loc>
+    <lastmod>2024-08-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://littlehavennursery.co.uk/contact</loc>
+    <lastmod>2024-08-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://littlehavennursery.co.uk/booking</loc>
+    <lastmod>2024-08-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+</urlset>
