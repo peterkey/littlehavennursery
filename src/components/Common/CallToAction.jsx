@@ -1,8 +1,9 @@
 import { memo } from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { FaPhone, FaCalendarAlt, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
 
-const CTAButton = ({ href, icon: Icon, children, variant = 'primary', ariaLabel }) => {
+const CTAButton = ({ href, to, icon: Icon, children, variant = 'primary', ariaLabel }) => {
   const baseClasses = "inline-flex items-center gap-3 px-6 py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2";
   
   const variants = {
@@ -11,6 +12,26 @@ const CTAButton = ({ href, icon: Icon, children, variant = 'primary', ariaLabel 
     accent: "bg-teal-600 text-white hover:bg-teal-700 focus:ring-teal-500 shadow-soft hover:shadow-medium"
   };
 
+  // If it's an internal route (has 'to' prop), use Link
+  if (to) {
+    return (
+      <motion.div
+        whileHover={{ y: -2 }}
+        whileTap={{ scale: 0.98 }}
+      >
+        <Link
+          to={to}
+          className={`${baseClasses} ${variants[variant]}`}
+          aria-label={ariaLabel}
+        >
+          <Icon className="w-5 h-5" aria-hidden="true" />
+          <span>{children}</span>
+        </Link>
+      </motion.div>
+    );
+  }
+
+  // If it's an external link (has 'href' prop), use anchor tag
   return (
     <motion.a
       href={href}
@@ -36,7 +57,7 @@ const CallToAction = memo(({ className = "", compact = false }) => {
     },
     {
       icon: FaCalendarAlt,
-      href: "/booking",
+      to: "/booking",
       text: "Book a Viewing",
       variant: "primary",
       ariaLabel: "Book a viewing of our nursery"

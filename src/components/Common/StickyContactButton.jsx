@@ -1,6 +1,7 @@
 import { memo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaPhone, FaEnvelope, FaCalendarAlt, FaTimes } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const StickyContactButton = memo(() => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -11,21 +12,24 @@ const StickyContactButton = memo(() => {
       label: 'Call Now',
       href: 'tel:02920891825',
       color: 'bg-teal-600 hover:bg-teal-700',
-      ariaLabel: 'Call Little Haven Nursery'
+      ariaLabel: 'Call Little Haven Nursery',
+      isExternal: true
     },
     {
       icon: FaCalendarAlt,
       label: 'Book a Viewing',
-      href: '/booking',
+      to: '/booking',
       color: 'bg-primary-600 hover:bg-primary-700',
-      ariaLabel: 'Book a viewing of our nursery'
+      ariaLabel: 'Book a viewing of our nursery',
+      isExternal: false
     },
     {
       icon: FaEnvelope,
       label: 'Email Us',
       href: 'mailto:learn@littlehavennursery.co.uk',
       color: 'bg-lavender-600 hover:bg-lavender-700',
-      ariaLabel: 'Send us an email'
+      ariaLabel: 'Send us an email',
+      isExternal: true
     }
   ];
 
@@ -40,23 +44,46 @@ const StickyContactButton = memo(() => {
             className="mb-4 space-y-3"
           >
             {contactOptions.map((option, index) => (
-              <motion.a
-                key={option.label}
-                href={option.href}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 20 }}
-                transition={{ delay: index * 0.1 }}
-                className={`${option.color} text-white p-3 rounded-lg2 shadow-soft 
-                          flex items-center gap-3 min-w-[140px] transition-all duration-200
-                          hover:shadow-medium transform hover:scale-105 
-                          focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2`}
-                aria-label={option.ariaLabel}
-                onClick={() => setIsExpanded(false)}
-              >
-                <option.icon className="w-5 h-5" aria-hidden="true" />
-                <span className="font-medium">{option.label}</span>
-              </motion.a>
+              option.isExternal ? (
+                <motion.a
+                  key={option.label}
+                  href={option.href}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 20 }}
+                  transition={{ delay: index * 0.1 }}
+                  className={`${option.color} text-white p-3 rounded-lg2 shadow-soft 
+                            flex items-center gap-3 min-w-[140px] transition-all duration-200
+                            hover:shadow-medium transform hover:scale-105 
+                            focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2`}
+                  aria-label={option.ariaLabel}
+                  onClick={() => setIsExpanded(false)}
+                >
+                  <option.icon className="w-5 h-5" aria-hidden="true" />
+                  <span className="font-medium">{option.label}</span>
+                </motion.a>
+              ) : (
+                <motion.div
+                  key={option.label}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 20 }}
+                  transition={{ delay: index * 0.1 }}
+                >
+                  <Link
+                    to={option.to}
+                    className={`${option.color} text-white p-3 rounded-lg2 shadow-soft 
+                              flex items-center gap-3 min-w-[140px] transition-all duration-200
+                              hover:shadow-medium transform hover:scale-105 
+                              focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2`}
+                    aria-label={option.ariaLabel}
+                    onClick={() => setIsExpanded(false)}
+                  >
+                    <option.icon className="w-5 h-5" aria-hidden="true" />
+                    <span className="font-medium">{option.label}</span>
+                  </Link>
+                </motion.div>
+              )
             ))}
           </motion.div>
         )}
