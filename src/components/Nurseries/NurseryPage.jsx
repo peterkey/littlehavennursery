@@ -138,9 +138,9 @@ const NurseryPage = ({
                   </Link>
                   <Link
                     to="/booking"
-                    className="w-full inline-flex justify-center items-center px-4 py-3 border border-primary-600 text-primary-600 font-medium rounded-lg hover:bg-primary-50 transition-colors duration-200"
+                    className="inline-flex items-center px-6 py-3 bg-primary-600 text-white font-semibold rounded-xl shadow-soft hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-all duration-200"
                   >
-                    Book a Visit
+                    Book a Viewing
                   </Link>
                 </div>
               </div>

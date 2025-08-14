@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { useSearchParams } from "react-router-dom";
-import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaClock, FaCalendarAlt, FaInfoCircle } from "react-icons/fa";
+import { memo, useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaInfoCircle } from 'react-icons/fa';
+import { Link, useSearchParams } from 'react-router-dom';
 
 const Contact = () => {
   const [searchParams] = useSearchParams();
@@ -131,7 +131,7 @@ const Contact = () => {
       link: "https://maps.google.com/?q=Little+Haven+Nursery+Cardiff"
     },
     {
-      icon: FaClock,
+      icon: FaInfoCircle,
       title: "Opening Hours",
       content: "Monday - Friday: 07:30 - 17:30",
       subContent: "Closed on Bank Holidays"
@@ -225,7 +225,7 @@ const Contact = () => {
               <div className="flex items-start space-x-4">
                 <div className="flex-shrink-0">
                   <div className="w-12 h-12 bg-primary-500 rounded-lg flex items-center justify-center">
-                    <FaCalendarAlt className="w-6 h-6 text-white" />
+                    <FaInfoCircle className="w-6 h-6 text-white" />
                   </div>
                 </div>
                 <div>
@@ -233,15 +233,15 @@ const Contact = () => {
                   <p className="text-gray-600 mb-4">
                     Want to see our facilities in person? Book a visit and we'll show you around our nursery.
                   </p>
-                  <a
-                    href="/booking"
+                  <Link
+                    to="/booking"
                     className="inline-flex items-center px-4 py-2 bg-primary-600 text-white rounded-lg2 hover:bg-primary-700 transition-colors"
                   >
                     Book a Viewing
                     <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
                     </svg>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </motion.div>
@@ -371,7 +371,7 @@ const Contact = () => {
                   onChange={handleChange}
                 >
                   <option value="General Inquiry">General Inquiry</option>
-                  <option value="Book a Visit">Book a Visit</option>
+                  <option value="Book a Viewing">Book a Viewing</option>
                   <option value="Enrollment">Enrollment</option>
                   <option value="Fees & Welsh Funding">Fees & Welsh Funding</option>
                   <option value="Other">Other</option>
@@ -408,7 +408,7 @@ const Contact = () => {
               {/* Success Message */}
               {submitSuccess && (
                 <div className="bg-green-50 text-green-800 rounded-lg p-4">
-                  Thank you! Your message has been sent. We'll get back to you soon.
+                  Thank you! Your message has been sent. We'll get back to you within 24 hours on the next working day.
                 </div>
               )}
 

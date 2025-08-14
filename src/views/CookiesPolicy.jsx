@@ -427,7 +427,7 @@ const CookiesPolicy = () => {
                   <span className="text-gray-700">02920891825</span>
                 </div>
                 <p className="text-sm text-gray-500 mt-4">
-                  We aim to respond to all cookie-related inquiries within 24 hours.
+                  We aim to respond to all cookie-related inquiries within 24 hours on working days.
                 </p>
               </div>
             </div>

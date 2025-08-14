@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { FaBuilding, FaUserClock } from "react-icons/fa";
 import Fiona from "../../../assets/Fiona.jpeg";
+import { Link } from "react-router-dom";
 
 const HighlightCard = ({ icon: Icon, title, description }) => (
   <motion.div
@@ -124,16 +125,12 @@ const FounderIntro = () => {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="text-center mt-12"
         >
-          <motion.a
-            href="/about"
-            className="inline-flex items-center px-8 py-3 text-lg font-semibold text-white bg-gradient-to-r 
-                     from-primary-500 to-blue-600 rounded-full shadow-lg hover:shadow-xl 
-                     transform hover:-translate-y-1 transition-all duration-300"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+          <Link 
+            to="/about"
+            className="inline-flex items-center px-6 py-3 bg-primary-600 text-white font-semibold rounded-lg2 shadow-lg hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-all duration-200"
           >
             Learn More About Us
-          </motion.a>
+          </Link>
         </motion.div>
       </motion.div>
     </section>

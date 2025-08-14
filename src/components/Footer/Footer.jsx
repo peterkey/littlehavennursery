@@ -92,7 +92,7 @@ const Footer = () => {
             </p>
             <div className="flex items-center space-x-2 text-sm text-neutral-500">
               <FaHeart className="text-red-400" />
-              <span>Nurturing young minds since 2010</span>
+              <span>Nurturing young minds since 2018</span>
             </div>
           </div>
 
@@ -210,7 +210,7 @@ const Footer = () => {
                 to="/booking"
                 className="btn-primary inline-flex items-center px-4 py-2 text-sm font-medium"
               >
-                Book a Visit
+                Book a Viewing
               </Link>
             </div>
           </div>
@@ -346,6 +346,7 @@ const Footer = () => {
               <p className="text-sm text-neutral-500">
                 © {currentYear} <span className="font-medium text-neutral-600">Parachutes ChildCare Ltd.</span> All Rights Reserved.
               </p>
+            
             </div>
             
             <div className="flex items-center space-x-2 text-xs text-neutral-400">

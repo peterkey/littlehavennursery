@@ -15,10 +15,10 @@ const StickyContactButton = memo(() => {
     },
     {
       icon: FaCalendarAlt,
-      label: 'Book Visit',
+      label: 'Book a Viewing',
       href: '/booking',
       color: 'bg-primary-600 hover:bg-primary-700',
-      ariaLabel: 'Book a nursery visit'
+      ariaLabel: 'Book a viewing of our nursery'
     },
     {
       icon: FaEnvelope,

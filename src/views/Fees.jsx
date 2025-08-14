@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import PriceSection from "../components/Cards/PriceSection";
 import WrapAroundPriceSection from "../components/Cards/WrapAroundPriceSection";
 import SEO from "../components/SEO/SEO";
@@ -78,18 +79,18 @@ const Fees = () => {
               We're here to help you make the best decision for your family.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a 
-                href="/contact"
+              <Link 
+                to="/contact"
                 className="inline-flex items-center px-6 py-3 bg-primary-600 text-white font-semibold rounded-lg2 shadow-lg hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-all duration-200"
               >
                 Contact Us
-              </a>
-              <a 
-                href="/booking"
+              </Link>
+              <Link 
+                to="/booking"
                 className="inline-flex items-center px-6 py-3 bg-white text-primary-600 font-semibold rounded-lg2 shadow-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-all duration-200"
               >
                 Book a Viewing
-              </a>
+              </Link>
             </div>
           </motion.div>
         </div>

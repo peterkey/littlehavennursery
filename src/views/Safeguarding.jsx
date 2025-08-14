@@ -40,7 +40,7 @@ const Safeguarding = () => {
     {
       step: "3",
       title: "Report",
-      description: "Report to Designated Safeguarding Lead (DSL) within 24 hours"
+      description: "Report to Designated Safeguarding Lead (DSL) within 24 hours on working days"
     },
     {
       step: "4",

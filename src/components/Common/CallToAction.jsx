@@ -37,9 +37,9 @@ const CallToAction = memo(({ className = "", compact = false }) => {
     {
       icon: FaCalendarAlt,
       href: "/booking",
-      text: "Book a Visit",
+      text: "Book a Viewing",
       variant: "primary",
-      ariaLabel: "Book a visit to our nursery"
+      ariaLabel: "Book a viewing of our nursery"
     },
     {
       icon: FaEnvelope,

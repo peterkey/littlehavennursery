@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const PriceCard = ({
   name = "",
@@ -55,10 +56,8 @@ const PriceCard = ({
           ))}
         </ul>
 
-        <motion.a
-          href="/contact"
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
+        <Link
+          to="/contact"
           className={`mt-8 w-full inline-block text-center py-3 rounded-lg2 transition-colors ${
             featured
               ? 'bg-primary-600 text-white hover:bg-primary-700'
@@ -66,7 +65,7 @@ const PriceCard = ({
           }`}
         >
           Enquire Now
-        </motion.a>
+        </Link>
       </div>
     </motion.div>
   );

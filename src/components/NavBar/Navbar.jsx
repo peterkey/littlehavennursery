@@ -289,15 +289,11 @@ const Navbar = () => {
 
               {/* Bottom Actions */}
               <div className="p-4 border-t">
-                <Link
+                <Link 
                   to="/booking"
-                  className="flex items-center justify-center w-full px-6 py-3 text-base font-medium text-white bg-primary-600 hover:bg-primary-700 rounded-lg2 shadow-sm transition-colors"
-                  onClick={toggleMenu}
+                  className="inline-flex items-center px-6 py-3 bg-primary-600 text-white font-semibold rounded-xl shadow-soft hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-all duration-200"
                 >
-                  <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                  </svg>
-                  Book a Visit
+                  Book a Viewing
                 </Link>
               </div>
             </motion.nav>

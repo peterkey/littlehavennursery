@@ -22,9 +22,16 @@ const Booking = () => {
               </svg>
             </div>
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Thank You!</h2>
-            <p className="text-lg text-gray-600 mb-6">
-              Your viewing request has been submitted successfully. We'll be in touch within 24 hours to confirm your appointment.
-            </p>
+            <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
+              <div className="flex items-center">
+                <svg className="w-5 h-5 text-green-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <p className="text-green-800">
+                  Your viewing request has been submitted successfully. We'll be in touch within 24 hours on the next working day to confirm your appointment.
+                </p>
+              </div>
+            </div>
             <Link
               to="/"
               className="inline-flex items-center px-6 py-3 text-base font-medium text-white bg-primary-600 hover:bg-primary-700 rounded-lg2 shadow-sm transition-colors"
@@ -144,8 +151,8 @@ const Booking = () => {
           {/* Right Column: Booking Form */}
           <div className="bg-white shadow-xl rounded-lg2 p-8 sm:p-12">
             <h2 className="text-2xl font-bold text-gray-900 mb-6">Schedule Your Visit</h2>
-            <p className="text-gray-600 mb-8">
-              Fill out the form below and we'll get back to you within 24 hours to arrange your nursery viewing.
+            <p className="text-lg text-gray-600 mb-8 max-w-content mx-auto">
+              Fill out the form below and we'll get back to you within 24 hours on the next working day to arrange your nursery viewing.
             </p>
             
             {/* Formspree Form */}

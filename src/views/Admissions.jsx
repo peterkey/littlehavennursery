@@ -67,7 +67,7 @@ const Admissions = () => {
     // Simulate API call
     setTimeout(() => {
       setIsSubmitting(false);
-      alert('Thank you for your enquiry! We will be in touch within 24 hours.');
+      alert('Thank you for your enquiry! We will be in touch within 24 hours on the next working day.');
       setFormData({
         firstName: '', lastName: '', email: '', phone: '', childName: '',
         childAge: '', preferredStartDate: '', message: '', howDidYouHear: ''
@@ -228,8 +228,8 @@ const Admissions = () => {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Get Started Today</h2>
-            <p className="text-lg text-gray-600 max-w-content mx-auto">
-              Ready to begin your child's journey with us? Fill out the form below and we'll be in touch within 24 hours.
+            <p className="text-lg text-gray-600 mb-8 max-w-content mx-auto">
+              Ready to begin your child's journey with us? Fill out the form below and we'll be in touch within 24 hours on the next working day.
             </p>
           </div>
 
@@ -470,7 +470,7 @@ const Admissions = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold mb-6">Ready to Take the Next Step?</h2>
           <p className="text-xl text-primary-100 mb-8 max-w-content mx-auto">
-            Book a visit to see our facilities in person and meet our wonderful team.
+            Book a viewing to see our facilities in person and meet our wonderful team.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <Link
@@ -478,7 +478,7 @@ const Admissions = () => {
               className="inline-flex items-center px-8 py-4 bg-white text-primary-700 font-semibold rounded-lg2 shadow-lg hover:bg-primary-50 transition-all duration-200"
             >
               <FaCalendarAlt className="mr-2" />
-              Book a Visit
+              Book a Viewing
             </Link>
             <Link
               to="/contact"

@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion';
 import { FaShieldAlt, FaEye, FaDatabase, FaUserCheck, FaEnvelope, FaPhone } from 'react-icons/fa';
 import SEO from '../components/SEO/SEO';
+import { Link } from 'react-router-dom';
+import { FaPhone, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
 
 const PrivacyPolicy = () => {
   const lastUpdated = "2024-08-10"; // Last updated: August 10, 2024
@@ -369,7 +371,7 @@ const PrivacyPolicy = () => {
                   <span className="text-gray-700">02920891825</span>
                 </div>
                 <p className="text-sm text-gray-500 mt-4">
-                  We aim to respond to all privacy-related inquiries within 30 days.
+                  We aim to respond to all privacy-related inquiries within 30 days on working days.
                 </p>
               </div>
             </div>
@@ -433,12 +435,12 @@ const PrivacyPolicy = () => {
                 <FaEnvelope className="mr-2" />
                 Contact Privacy Officer
               </a>
-              <a 
-                href="/contact"
+              <Link 
+                to="/contact"
                 className="inline-flex items-center px-6 py-3 bg-primary-700 text-white font-semibold rounded-lg2 shadow-lg hover:bg-primary-800 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-primary-600 transition-all duration-200"
               >
                 General Contact
-              </a>
+              </Link>
             </div>
           </motion.div>
         </div>
