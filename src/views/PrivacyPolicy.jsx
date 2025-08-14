@@ -1,8 +1,7 @@
 import { motion } from 'framer-motion';
-import { FaShieldAlt, FaEye, FaDatabase, FaUserCheck, FaEnvelope, FaPhone } from 'react-icons/fa';
+import { FaShieldAlt, FaEye, FaDatabase, FaUserCheck, FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
 import SEO from '../components/SEO/SEO';
 import { Link } from 'react-router-dom';
-import { FaPhone, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
 
 const PrivacyPolicy = () => {
   const lastUpdated = "2024-08-10"; // Last updated: August 10, 2024

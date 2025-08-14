@@ -1,8 +1,7 @@
 import { motion } from 'framer-motion';
-import { FaFileContract, FaExclamationTriangle, FaCheckCircle, FaTimesCircle, FaEnvelope, FaPhone } from 'react-icons/fa';
+import { FaFileContract, FaExclamationTriangle, FaCheckCircle, FaTimesCircle, FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
 import SEO from '../components/SEO/SEO';
 import { Link } from 'react-router-dom';
-import { FaPhone, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
 
 const TermsOfService = () => {
   const lastUpdated = "2024-01-15"; // TODO: Update with actual last update date
