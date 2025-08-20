@@ -52,7 +52,7 @@ const Hero = () => {
               transition={{ duration: 0.5, delay: 0.3 }}
               className='font-display text-display-xs md:text-display-sm lg:text-display-md font-medium text-primary-100 mb-10 tracking-tight'
             >
-              Nursery & Wrap Around Care
+              Day Nursery & Wrap Around Care
             </motion.h2>
             
             <motion.p
