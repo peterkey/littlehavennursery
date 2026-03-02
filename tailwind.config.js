@@ -83,9 +83,9 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        display: ['Outfit', 'Inter', 'system-ui', 'sans-serif'],
-        serif: ['New York', 'Georgia', 'serif'],
+        sans: ['Nunito', 'system-ui', 'sans-serif'],
+        display: ['Fraunces', 'Georgia', 'serif'],
+        serif: ['Fraunces', 'Georgia', 'serif'],
       },
       fontSize: {
         'display-2xl': ['4.5rem', { lineHeight: '1.1', letterSpacing: '-0.02em' }],
@@ -103,9 +103,11 @@ export default {
       letterSpacing: {
         'tighter': '-0.02em',
         'tight': '-0.01em',
+        'snug': '-0.005em',
         'normal': '0',
         'wide': '0.01em',
         'wider': '0.02em',
+        'widest': '0.08em',
       },
       spacing: {
         '0': '0px',

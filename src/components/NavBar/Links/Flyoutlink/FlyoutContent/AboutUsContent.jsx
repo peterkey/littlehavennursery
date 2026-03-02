@@ -1,112 +1,104 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { FaBaby, FaUsers, FaBook, FaUtensils, FaHeart, FaHistory, FaLightbulb, FaFileAlt } from "react-icons/fa";
+import {
+  FaBaby, FaUsers, FaUtensils, FaHeart,
+  FaHistory, FaLightbulb, FaFileAlt, FaLeaf,
+} from "react-icons/fa";
 
-const itemVariants = {
-  hidden: { opacity: 0, x: -10 },
-  visible: { 
-    opacity: 1, 
-    x: 0,
-    transition: {
-      duration: 0.3
-    }
-  }
+const containerVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.04, delayChildren: 0.05 } },
 };
 
-const AboutUsContent = () => {
-  const links = [
-    {
-      title: "Our Mission",
-      path: "/about/mission",
-      description: "Discover our commitment to providing the best start in life for every child.",
-      icon: FaHeart
-    },
-    {
-      title: "Our Story",
-      path: "/about/story",
-      description: "Learn about our journey and the values that drive us forward.",
-      icon: FaHistory
-    },
-    {
-      title: "Our Approach",
-      path: "/about/approach",
-      description: "Explore our unique approach to early years education and care.",
-      icon: FaLightbulb
-    },
-    {
-      title: "Age Groups",
-      path: "/about/agegroups",
-      description: "Find out about our age-specific rooms and activities.",
-      icon: FaBaby
-    },
-    {
-      title: "Our Team",
-      path: "/about/staff",
-      description: "Meet our experienced and dedicated team of early years professionals.",
-      icon: FaUsers
-    },
-    {
-      title: "Parent Resources",
-      path: "/about/parentresources",
-      description: "Access FAQs, policies, and important information for parents.",
-      icon: FaFileAlt
-    },
-    {
-      title: "Food & Nutrition",
-      path: "/about/foodandnutrition",
-      description: "Learn about our healthy meal plans and dietary accommodations.",
-      icon: FaUtensils
-    },
-    {
-      title: "Our Community",
-      path: "/about/community",
-      description: "See how we engage with and support our local community.",
-      icon: FaUsers
-    }
-  ];
+const itemVariants = {
+  hidden: { opacity: 0, y: 6 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.25, ease: "easeOut" } },
+};
 
-  return (
-    <div className="w-[800px] p-6">
-      <div className="mb-6">
-        <h3 className="text-xl font-bold mb-2 text-primary-500">About Us</h3>
-        <p className="text-sm text-neutral-600">Learn more about our nursery, our values, and our approach to early years education</p>
+const sections = [
+  { icon: FaHeart,      title: "Our Mission",        path: "/about/mission",          color: "text-rose-400" },
+  { icon: FaHistory,    title: "Our Story",           path: "/about/story",            color: "text-amber-500" },
+  { icon: FaLightbulb,  title: "Our Approach",        path: "/about/approach",         color: "text-yellow-500" },
+  { icon: FaBaby,       title: "Age Groups",          path: "/about/agegroups",        color: "text-primary-400" },
+  { icon: FaUsers,      title: "Our Team",            path: "/about/staff",            color: "text-teal-500" },
+  { icon: FaFileAlt,    title: "Parent Resources",    path: "/about/parentresources",  color: "text-brand-400" },
+  { icon: FaUtensils,   title: "Food & Nutrition",    path: "/about/foodandnutrition", color: "text-mint-500" },
+  { icon: FaLeaf,       title: "Our Community",       path: "/about/community",        color: "text-emerald-500" },
+];
+
+const AboutUsContent = () => (
+  <div className="flex w-[740px]">
+    {/* ── Left editorial panel ── */}
+    <div
+      className="w-56 flex-shrink-0 flex flex-col justify-between p-7 rounded-l-2xl"
+      style={{ background: "linear-gradient(160deg, #2b78c7 0%, #254762 100%)" }}
+    >
+      {/* Decorative circles */}
+      <div className="absolute top-4 left-4 w-20 h-20 bg-white/5 rounded-full pointer-events-none" />
+      <div className="absolute bottom-8 left-8 w-12 h-12 bg-primary-300/10 rounded-full pointer-events-none" />
+
+      <div className="relative">
+        <span className="inline-block text-[10px] font-semibold tracking-widest uppercase text-primary-200/80 mb-4">
+          About Us
+        </span>
+        <h3 className="font-display text-[1.55rem] font-semibold text-white leading-snug mb-4">
+          More Than Childcare
+        </h3>
+        <p className="text-primary-100/80 text-xs leading-relaxed">
+          Rooted in Froebelian principles and the Curiosity Approach — nurturing the whole child through play, relationship, and wonder.
+        </p>
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
-        {links.map((link, index) => (
-          <motion.div
-            key={index}
-            variants={itemVariants}
-            initial="hidden"
-            animate="visible"
-            custom={index}
-            className="group relative"
-          >
+      <Link
+        to="/about"
+        className="relative mt-6 inline-flex items-center gap-2 text-xs font-semibold text-white bg-white/10 hover:bg-white/20 rounded-full px-4 py-2 transition-all duration-200 w-fit"
+      >
+        Our story
+        <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+        </svg>
+      </Link>
+    </div>
+
+    {/* ── Right links grid ── */}
+    <div className="flex-1 p-6">
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="grid grid-cols-2 gap-1"
+      >
+        {sections.map((section) => (
+          <motion.div key={section.path} variants={itemVariants}>
             <Link
-              to={link.path}
-              className="block p-4 rounded-xl hover:bg-primary-50 transition-all duration-300"
+              to={section.path}
+              className="group flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-primary-50/70 transition-all duration-200"
             >
-              <div className="flex items-start space-x-4">
-                <div className="flex-shrink-0">
-                  <div className="w-12 h-12 flex items-center justify-center rounded-lg bg-primary-500 text-white shadow-lg shadow-primary-300/30 transition-all duration-300">
-                    <link.icon className="w-6 h-6" />
-                  </div>
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-base font-medium text-neutral-800 group-hover:text-primary-600 transition-colors">
-                    {link.title}
-                  </p>
-                  <p className="mt-1 text-sm text-neutral-600 group-hover:text-neutral-700">
-                    {link.description}
-                  </p>
-                </div>
-              </div>
+              <span className={`${section.color} flex-shrink-0 w-4 h-4`}>
+                <section.icon className="w-full h-full" />
+              </span>
+              <span className="text-sm font-medium text-neutral-700 group-hover:text-primary-700 transition-colors">
+                {section.title}
+              </span>
+              <svg
+                className="w-3 h-3 ml-auto text-neutral-300 group-hover:text-primary-400 group-hover:translate-x-0.5 transition-all duration-200 flex-shrink-0"
+                fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
             </Link>
           </motion.div>
         ))}
+      </motion.div>
+
+      {/* Bottom tagline */}
+      <div className="mt-4 pt-4 border-t border-neutral-100">
+        <p className="text-xs text-neutral-400 italic font-display">
+          "learning to play, playing to learn"
+        </p>
       </div>
     </div>
-  );
-};
+  </div>
+);
 
 export default AboutUsContent;

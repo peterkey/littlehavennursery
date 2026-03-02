@@ -1,121 +1,117 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
+const containerVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.06, delayChildren: 0.05 } },
+};
+
 const itemVariants = {
-  hidden: { opacity: 0, x: -10 },
-  visible: { 
-    opacity: 1, 
-    x: 0,
-    transition: {
-      duration: 0.3
-    }
-  }
+  hidden: { opacity: 0, y: 8 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.25, ease: "easeOut" } },
 };
 
-const FeesContent = () => {
-  const feeItems = [
-    {
-      title: "Our Fees",
-      path: "/fees/our-fees",
-      description: "View our transparent pricing and payment options",
-      icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 3H18C19.1046 3 20 3.89543 20 5V19C20 20.1046 19.1046 21 18 21H6C4.89543 21 4 20.1046 4 19V5C4 3.89543 4.89543 3 6 3Z" />
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 3V21" />
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7H16" />
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 11H16" />
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 15H16" />
-        </svg>
-      )
-    },
-    {
-      title: "Welsh Government Funding",
-      path: "/fees/government-funding",
-      description: "Foundation Phase (10 hours) + Childcare Offer (20 hours) = 30 hours free",
-      icon: (
-        <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M21 16V8C20.9996 7.64927 20.9071 7.30481 20.7315 7.00116C20.556 6.69751 20.3037 6.44536 20 6.27L13 2.27C12.696 2.09446 12.3511 2.00205 12 2.00205C11.6489 2.00205 11.304 2.09446 11 2.27L4 6.27C3.69626 6.44536 3.44398 6.69751 3.26846 7.00116C3.09294 7.30481 3.00036 7.64927 3 8V16C3.00036 16.3507 3.09294 16.6952 3.26846 16.9988C3.44398 17.3025 3.69626 17.5546 4 17.73L11 21.73C11.304 21.9055 11.6489 21.9979 12 21.9979C12.3511 21.9979 12.696 21.9055 13 21.73L20 17.73C20.3037 17.5546 20.556 17.3025 20.7315 16.9988C20.9071 16.6952 20.9996 16.3507 21 16Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          <path d="M3.27002 6.96L12 12.01L20.73 6.96" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          <path d="M12 22.08V12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
-      )
-    },
-    {
-      title: "Tax-Free Childcare",
-      path: "/fees/tax-free-childcare",
-      description: "UK-wide scheme: Save up to £2,000 per year on childcare costs",
-      icon: (
-        <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M20 7H4C2.89543 7 2 7.89543 2 9V19C2 20.1046 2.89543 21 4 21H20C21.1046 21 22 20.1046 22 19V9C22 7.89543 21.1046 7 20 7Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          <path d="M16 21V5C16 4.46957 15.7893 3.96086 15.4142 3.58579C15.0391 3.21071 14.5304 3 14 3H10C9.46957 3 8.96086 3.21071 8.58579 3.58579C8.21071 3.96086 8 4.46957 8 5V21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
-      )
-    },
-    {
-      title: "Universal Credit",
-      path: "/fees/universal-credit",
-      description: "Claim up to 85% of childcare costs when working",
-      icon: (
-        <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          <path d="M2 17L12 22L22 17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          <path d="M2 12L12 17L22 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
-      )
-    }
-  ];
+const stats = [
+  {
+    number: "30",
+    unit: "hrs",
+    label: "Free per week",
+    detail: "Foundation Phase (10hrs) + Childcare Offer (20hrs)",
+    path: "/fees/government-funding",
+    bg: "from-primary-50 to-primary-100/50",
+    border: "border-primary-100 hover:border-primary-200",
+    numColor: "text-primary-700",
+    hover: "hover:from-primary-100/80 hover:to-primary-200/40",
+  },
+  {
+    number: "£2k",
+    unit: "",
+    label: "Saved per year",
+    detail: "Tax-Free Childcare scheme — get 20p for every 80p you spend",
+    path: "/fees/tax-free-childcare",
+    bg: "from-teal-50 to-teal-100/40",
+    border: "border-teal-100 hover:border-teal-200",
+    numColor: "text-teal-700",
+    hover: "hover:from-teal-100/80 hover:to-teal-200/40",
+  },
+  {
+    number: "85%",
+    unit: "",
+    label: "Costs covered",
+    detail: "Universal Credit support for eligible working parents",
+    path: "/fees/universal-credit",
+    bg: "from-mint-50 to-mint-100/40",
+    border: "border-mint-100 hover:border-mint-200",
+    numColor: "text-mint-700",
+    hover: "hover:from-mint-100/80 hover:to-mint-200/40",
+  },
+];
 
-  return (
-    <div className="w-[800px] p-6">
-      <div className="mb-6">
-        <h3 className="text-xl font-bold mb-2 text-primary-500">Fees & Welsh Government Funding</h3>
-        <p className="text-sm text-neutral-600">Explore our fees and Welsh Government funding schemes</p>
+const FeesContent = () => (
+  <div className="w-[640px] p-6">
+    {/* Header */}
+    <div className="flex items-baseline justify-between mb-5">
+      <div>
+        <h3 className="font-display text-2xl font-semibold text-neutral-900 tracking-tight leading-none">
+          Fees & Funding
+        </h3>
+        <p className="text-xs text-neutral-400 mt-1">Welsh Government schemes & UK support options</p>
       </div>
-
-      <div className="grid grid-cols-2 gap-4">
-        {feeItems.map((item, index) => (
-          <motion.div
-            key={item.path}
-            variants={itemVariants}
-            initial="hidden"
-            animate="visible"
-            custom={index}
-            className="group relative"
-          >
-            <Link
-              to={item.path}
-              className="block p-4 rounded-xl hover:bg-primary-50 transition-all duration-300"
-            >
-              <div className="flex items-start space-x-4">
-                <div className="flex-shrink-0">
-                  <div className="w-12 h-12 flex items-center justify-center rounded-lg bg-primary-500 text-white shadow-lg shadow-primary-300/30 transition-all duration-300">
-                    {item.icon}
-                  </div>
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-base font-medium text-neutral-800 group-hover:text-primary-600 transition-colors">
-                    {item.title}
-                  </p>
-                  <p className="mt-1 text-sm text-neutral-600 group-hover:text-neutral-700">
-                    {item.description}
-                  </p>
-                </div>
-              </div>
-            </Link>
-          </motion.div>
-        ))}
-      </div>
-
-      <div className="mt-6 pt-6 border-t border-gray-200">
-        <div className="bg-blue-50 rounded-lg p-4">
-          <h4 className="text-sm font-semibold text-blue-900 mb-2">Welsh Government Schemes</h4>
-          <p className="text-xs text-blue-800 leading-relaxed">
-            Wales offers unique childcare funding including Foundation Phase (10 hours) and Childcare Offer for Wales (additional 20 hours) for working families.
-          </p>
-        </div>
-      </div>
+      <Link
+        to="/fees/our-fees"
+        className="text-xs font-semibold text-primary-600 hover:text-primary-800 flex items-center gap-1 transition-colors"
+      >
+        Our fees
+        <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+        </svg>
+      </Link>
     </div>
-  );
-};
+
+    {/* Funding stat cards */}
+    <motion.div
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+      className="grid grid-cols-3 gap-3 mb-4"
+    >
+      {stats.map((stat) => (
+        <motion.div key={stat.path} variants={itemVariants}>
+          <Link
+            to={stat.path}
+            className={`group block bg-gradient-to-br ${stat.bg} ${stat.hover} border ${stat.border} rounded-2xl p-4 transition-all duration-250 hover:shadow-soft`}
+          >
+            <div className="flex items-baseline gap-0.5 mb-1">
+              <span className={`font-display text-[2rem] font-bold leading-none ${stat.numColor}`}>
+                {stat.number}
+              </span>
+              {stat.unit && (
+                <span className={`text-sm font-semibold ${stat.numColor} opacity-70`}>{stat.unit}</span>
+              )}
+            </div>
+            <p className="text-sm font-semibold text-neutral-800 mb-1.5 leading-tight">{stat.label}</p>
+            <p className="text-[11px] text-neutral-500 leading-snug">{stat.detail}</p>
+          </Link>
+        </motion.div>
+      ))}
+    </motion.div>
+
+    {/* Welsh Government callout */}
+    <motion.div
+      variants={itemVariants}
+      initial="hidden"
+      animate="visible"
+      className="flex items-start gap-3 bg-gradient-to-r from-brand-50/80 to-primary-50/60 border border-primary-100/60 rounded-xl p-3.5"
+    >
+      <span className="text-xl flex-shrink-0 leading-none mt-0.5" aria-hidden="true">🏴󠁧󠁢󠁷󠁬󠁳󠁿</span>
+      <div>
+        <p className="text-xs font-semibold text-brand-800 mb-0.5">Welsh-exclusive childcare support</p>
+        <p className="text-[11px] text-brand-700 leading-relaxed">
+          Wales offers <strong>Foundation Phase (10 hrs)</strong> and the <strong>Childcare Offer for Wales (20 hrs)</strong> — giving eligible working parents up to 30 hours of funded care per week.
+        </p>
+      </div>
+    </motion.div>
+  </div>
+);
 
 export default FeesContent;
