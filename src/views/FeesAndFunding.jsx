@@ -1,156 +1,277 @@
+import { memo } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
-const FeesAndFunding = () => {
-  const sections = [
-    {
-      title: "Our Fees",
-      path: "/fees/our-fees",
-      description: "View our transparent fee structure and understand what's included.",
-      icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 2V22M16 6H8.5C7.11929 6 6 7.11929 6 8.5C6 9.88071 7.11929 11 8.5 11H15.5C16.8807 11 18 12.1193 18 13.5C18 14.8807 16.8807 16 15.5 16H6M12 6H16M12 16H16" />
-        </svg>
-      )
-    },
-    {
-      title: "Welsh Government Funding",
-      path: "/fees/government-funding",
-      description: "Learn about Welsh Government funding options including Foundation Phase and Childcare Offer for Wales.",
-      icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-        </svg>
-      )
-    },
-    {
-      title: "Tax-Free Childcare",
-      path: "/fees/tax-free-childcare",
-      description: "Find out how to save money on childcare costs through the UK-wide Tax-Free Childcare scheme.",
-      icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-        </svg>
-      )
-    },
-    {
-      title: "Universal Credit",
-      path: "/fees/universal-credit",
-      description: "Information about claiming childcare costs through Universal Credit in Wales.",
-      icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-        </svg>
-      )
-    }
-  ];
+const ease = [0.22, 1, 0.36, 1];
 
-  return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Hero Section */}
-      <div className="relative h-[400px] bg-primary-600">
-        <div className="absolute inset-0 bg-black/40" />
-        <div className="container mx-auto px-4 h-full flex items-center relative z-10">
-          <div className="max-w-3xl">
-            <motion.h1 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-4xl md:text-5xl font-bold text-white mb-4"
-            >
-              Fees & Welsh Government Funding
-            </motion.h1>
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="text-xl text-white/90"
-            >
-              Making quality childcare accessible and affordable through Welsh Government schemes
-            </motion.p>
+const sp = { fill: "none", stroke: "currentColor", strokeWidth: "1.75", strokeLinecap: "round", strokeLinejoin: "round" };
+
+const SECTIONS = [
+  {
+    title: "Our Fees",
+    path: "/fees/our-fees",
+    description: "View our transparent fee structure and understand exactly what's included in every session.",
+    iconBg: "bg-primary-50",
+    iconColor: "text-primary-500",
+    icon: (
+      <svg viewBox="0 0 24 24" {...sp}>
+        <path d="M12 2v20M16 6H8.5A2.5 2.5 0 006 8.5 2.5 2.5 0 008.5 11h7a2.5 2.5 0 010 5H6M12 6h4M12 16h4" />
+      </svg>
+    ),
+  },
+  {
+    title: "Welsh Government Funding",
+    path: "/fees/government-funding",
+    description: "Learn about Foundation Phase and Childcare Offer for Wales — funding all eligible families can access.",
+    iconBg: "bg-teal-50",
+    iconColor: "text-teal-600",
+    icon: (
+      <svg viewBox="0 0 24 24" {...sp}>
+        <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+      </svg>
+    ),
+  },
+  {
+    title: "Tax-Free Childcare",
+    path: "/fees/tax-free-childcare",
+    description: "Save up to £2,000 a year through the UK-wide Tax-Free Childcare scheme — we'll show you how.",
+    iconBg: "bg-primary-50",
+    iconColor: "text-primary-500",
+    icon: (
+      <svg viewBox="0 0 24 24" {...sp}>
+        <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+      </svg>
+    ),
+  },
+  {
+    title: "Universal Credit",
+    path: "/fees/universal-credit",
+    description: "Claiming Universal Credit? You may be entitled to support with childcare costs — find out more.",
+    iconBg: "bg-teal-50",
+    iconColor: "text-teal-600",
+    icon: (
+      <svg viewBox="0 0 24 24" {...sp}>
+        <path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8v1m0 8v1m-6-5h2m8 0h2M5.05 5.05A7 7 0 1118.95 18.95 7 7 0 015.05 5.05z" />
+      </svg>
+    ),
+  },
+];
+
+const FUNDING_STATS = [
+  { value: "10", label: "Free hours", sub: "for all 3–4 year olds" },
+  { value: "30", label: "Total hours", sub: "for eligible working families" },
+  { value: "39", label: "Weeks p/yr", sub: "of funded provision" },
+];
+
+/* ── FeesAndFunding ──────────────────────────────────────────────── */
+const FeesAndFunding = () => (
+  <div className="min-h-screen" style={{ background: "#faf8f4" }}>
+
+    {/* ── Hero ─────────────────────────────────────────────── */}
+    <section
+      className="relative overflow-hidden"
+      style={{
+        minHeight: "380px",
+        background: "linear-gradient(135deg, #0c2b5e 0%, #0a2248 60%, #0e2d58 100%)",
+      }}
+    >
+      {/* Dot texture */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 opacity-[0.05]"
+        style={{
+          backgroundImage: "radial-gradient(circle at 2px 2px, white 1px, transparent 0)",
+          backgroundSize: "28px 28px",
+        }}
+      />
+      {/* Ambient glow */}
+      <div
+        aria-hidden="true"
+        className="absolute right-0 top-0 w-[500px] h-[500px] pointer-events-none"
+        style={{
+          background: "radial-gradient(circle, rgba(125,178,255,0.12) 0%, transparent 70%)",
+        }}
+      />
+
+      <div
+        className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-end pb-14"
+        style={{ minHeight: "380px", paddingTop: "7rem" }}
+      >
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease }}
+          className="max-w-2xl"
+        >
+          <div className="flex items-center gap-2.5 mb-4">
+            <span className="w-7 h-px bg-white/35 flex-shrink-0" />
+            <span className="font-sans text-xs font-semibold uppercase tracking-widest text-white/45">
+              Fees &amp; Funding
+            </span>
           </div>
-        </div>
+          <h1
+            className="font-display font-semibold text-white leading-tight mb-4"
+            style={{ fontSize: "clamp(2.2rem, 4vw, 3.5rem)" }}
+          >
+            Quality childcare that&apos;s<br />
+            <span className="text-primary-200">genuinely affordable.</span>
+          </h1>
+          <p className="font-sans text-white/60 text-lg leading-relaxed">
+            Clear fees, Welsh Government funding, and practical guides to help your family access the support you deserve.
+          </p>
+        </motion.div>
       </div>
+    </section>
 
-      {/* Main Content */}
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {sections.map((section, index) => (
+    {/* ── Section cards ─────────────────────────────────────── */}
+    <section className="py-16 sm:py-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease }}
+          className="max-w-2xl mb-12"
+        >
+          <div className="flex items-center gap-3 mb-4">
+            <span className="w-8 h-px bg-primary-300 flex-shrink-0" />
+            <span className="font-sans text-xs font-semibold uppercase tracking-widest text-primary-500">
+              Explore
+            </span>
+          </div>
+          <h2
+            className="font-display font-semibold text-neutral-900 leading-tight mb-3"
+            style={{ fontSize: "clamp(1.8rem, 3vw, 2.5rem)" }}
+          >
+            Everything you need<br />to know about fees.
+          </h2>
+          <p className="font-sans text-neutral-500 text-lg leading-relaxed">
+            We believe every family should be able to make an informed choice. Explore our transparent pricing and all the funding routes available to you.
+          </p>
+        </motion.div>
+
+        {/* Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-16">
+          {SECTIONS.map((section, index) => (
             <motion.div
-              key={index}
+              key={section.path}
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              className="bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-md transition-shadow"
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.07, ease }}
             >
-              <Link to={section.path} className="block p-6">
-                <div className="text-primary-600 mb-4">
-                  {section.icon}
+              <Link to={section.path} className="block h-full group">
+                <div className="bg-white rounded-2xl p-6 shadow-soft hover:shadow-medium transition-all duration-300 h-full flex flex-col">
+                  <div
+                    className={`inline-flex w-10 h-10 rounded-xl items-center justify-center mb-5 flex-shrink-0 ${section.iconBg} ${section.iconColor}`}
+                  >
+                    <div className="w-5 h-5">{section.icon}</div>
+                  </div>
+                  <h3 className="font-display text-lg font-semibold text-neutral-900 mb-2 group-hover:text-primary-600 transition-colors duration-200 leading-tight">
+                    {section.title}
+                  </h3>
+                  <p className="font-sans text-sm text-neutral-600 leading-relaxed flex-1 mb-5">
+                    {section.description}
+                  </p>
+                  <div className="flex items-center gap-1.5 font-sans text-xs font-semibold text-primary-500 group-hover:text-primary-600 transition-colors duration-200">
+                    <span>Learn more</span>
+                    <svg className="w-3 h-3 group-hover:translate-x-0.5 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
                 </div>
-                <h2 className="text-xl font-bold text-gray-900 mb-2">{section.title}</h2>
-                <p className="text-gray-600">{section.description}</p>
               </Link>
             </motion.div>
           ))}
         </div>
 
-        {/* Welsh Funding Summary */}
+        {/* Welsh Funding highlight */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-16 bg-blue-50 rounded-xl p-8 border border-blue-200"
+          transition={{ duration: 0.65, ease }}
+          className="bg-white rounded-2xl shadow-soft overflow-hidden"
         >
-          <div className="text-center max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">Welsh Government Childcare Funding</h2>
-            <p className="text-lg text-gray-600 mb-8">
-              Wales offers unique childcare funding schemes that can significantly reduce your costs:
-            </p>
-            
-            <div className="grid gap-6 md:grid-cols-3 mb-8">
-              <div className="text-center">
-                <div className="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
-                  10
-                </div>
-                <h3 className="font-semibold text-gray-900 mb-2">Foundation Phase Hours</h3>
-                <p className="text-sm text-gray-600">Free early education for all 3-4 year olds</p>
+          <div className="grid grid-cols-1 lg:grid-cols-2">
+            {/* Left: copy */}
+            <div className="p-8 sm:p-12">
+              <div className="flex items-center gap-3 mb-5">
+                <span className="w-7 h-px bg-teal-300 flex-shrink-0" />
+                <span className="font-sans text-xs font-semibold uppercase tracking-widest text-teal-600">
+                  Welsh Government
+                </span>
               </div>
-              
-              <div className="text-center">
-                <div className="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
-                  30
-                </div>
-                <h3 className="font-semibold text-gray-900 mb-2">Total Hours Available</h3>
-                <p className="text-sm text-gray-600">For working families (10 + 20 additional)</p>
-              </div>
-              
-              <div className="text-center">
-                <div className="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
-                  39
-                </div>
-                <h3 className="font-semibold text-gray-900 mb-2">Weeks Per Year</h3>
-                <p className="text-sm text-gray-600">During term time</p>
+              <h2
+                className="font-display font-semibold text-neutral-900 leading-tight mb-4"
+                style={{ fontSize: "clamp(1.6rem, 2.5vw, 2.1rem)" }}
+              >
+                Up to 30 hours of funded<br />
+                <span className="text-teal-600">childcare, free of charge.</span>
+              </h2>
+              <p className="font-sans text-neutral-600 leading-relaxed text-base mb-8">
+                Wales offers some of the most generous childcare funding in the UK. All 3–4 year olds receive 10 free hours per week, and eligible working families can access an additional 20 hours through the Childcare Offer for Wales.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Link
+                  to="/fees/government-funding"
+                  className="inline-flex justify-center items-center gap-2 px-5 py-3 bg-teal-600 text-white font-semibold font-sans text-sm rounded-full hover:bg-teal-700 shadow-soft hover:shadow-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
+                >
+                  Explore Welsh Funding
+                </Link>
+                <Link
+                  to="/contact?service=funding&source=fees-page"
+                  className="inline-flex justify-center items-center gap-2 px-5 py-3 border border-teal-200 text-teal-700 font-semibold font-sans text-sm rounded-full hover:bg-teal-50 hover:border-teal-300 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-teal-300 focus:ring-offset-2"
+                >
+                  Ask Us About Funding
+                </Link>
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                to="/fees/government-funding"
-                className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg2 shadow-lg hover:bg-blue-700 transition-colors duration-200"
-              >
-                Learn More About Welsh Funding
-              </Link>
-              <Link
-                to="/contact?service=welsh-funding&source=fees-page"
-                className="inline-flex items-center px-6 py-3 bg-white text-blue-600 font-semibold rounded-lg2 shadow-lg hover:bg-gray-50 transition-colors duration-200"
-              >
-                Get Help with Funding
-              </Link>
+            {/* Right: stats */}
+            <div
+              className="p-8 sm:p-12 flex items-center"
+              style={{ background: "linear-gradient(135deg, #0c4a9e 0%, #083d87 100%)" }}
+            >
+              <div className="w-full">
+                <p className="font-sans text-xs font-semibold uppercase tracking-widest text-white/40 mb-8">
+                  Funding at a glance
+                </p>
+                <div className="space-y-6">
+                  {FUNDING_STATS.map((stat, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, x: 16 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.1 + i * 0.1, ease }}
+                      className="flex items-center gap-5"
+                    >
+                      <span
+                        className="font-display font-semibold text-white leading-none flex-shrink-0"
+                        style={{ fontSize: "clamp(2.5rem, 4vw, 3.5rem)" }}
+                      >
+                        {stat.value}
+                      </span>
+                      <div>
+                        <p className="font-sans text-white/85 font-semibold text-sm">{stat.label}</p>
+                        <p className="font-sans text-white/45 text-xs mt-0.5">{stat.sub}</p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </motion.div>
-      </div>
-    </div>
-  );
-};
 
-export default FeesAndFunding; 
+      </div>
+    </section>
+
+  </div>
+);
+
+FeesAndFunding.displayName = "FeesAndFunding";
+export default memo(FeesAndFunding);
