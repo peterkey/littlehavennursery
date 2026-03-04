@@ -1,123 +1,143 @@
+import { memo } from "react";
 import { motion } from "framer-motion";
-import { FaChild, FaBrain, FaLeaf } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
-const PrincipleCard = ({ icon: Icon, title, description, index }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.5, delay: index * 0.1 }}
-    className="relative group"
+const ease = [0.22, 1, 0.36, 1];
+
+const sp = { fill: "none", stroke: "currentColor", strokeWidth: "1.75", strokeLinecap: "round", strokeLinejoin: "round" };
+
+const PRINCIPLES = [
+  {
+    title: "Child-Led Learning",
+    description: "Children thrive when they have the freedom to explore and make decisions. We encourage curiosity and independence in every activity, every day.",
+    iconBg: "bg-primary-50",
+    iconColor: "text-primary-500",
+    icon: (
+      <svg viewBox="0 0 24 24" {...sp}>
+        <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+      </svg>
+    ),
+  },
+  {
+    title: "Holistic Development",
+    description: "We focus on cognitive, social, emotional, and physical growth — because a thriving child is so much more than their academic progress.",
+    iconBg: "bg-teal-50",
+    iconColor: "text-teal-600",
+    icon: (
+      <svg viewBox="0 0 24 24" {...sp}>
+        <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+      </svg>
+    ),
+  },
+  {
+    title: "Natural Environments",
+    description: "Using open-ended resources and nature-based play, we create spaces where children can explore, imagine, and discover at their own pace.",
+    iconBg: "bg-primary-50",
+    iconColor: "text-primary-500",
+    icon: (
+      <svg viewBox="0 0 24 24" {...sp}>
+        <path d="M12 22V12m0 0C12 7 7 4 2 4c0 5 3 9 10 8m0 0c0-5 5-8 10-8-1 5-5 9-10 8" />
+      </svg>
+    ),
+  },
+];
+
+/* ── ApproachIntro ────────────────────────────────────────────────── */
+const ApproachIntro = () => (
+  <section
+    className="relative overflow-hidden"
+    style={{
+      minHeight: "440px",
+      background: "linear-gradient(135deg, #0c2b5e 0%, #0a2248 60%, #0e2d58 100%)",
+    }}
   >
-    <div className="bg-white/90 backdrop-blur-sm p-8 rounded-2xl shadow-lg border border-primary-100 
-                    transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-      <div className="absolute inset-0 bg-gradient-to-br from-primary-50 to-blue-50 opacity-0 
-                    group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
-      <div className="relative z-10">
-        <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-br from-primary-400 to-blue-500 
-                      rounded-xl flex items-center justify-center shadow-lg transform 
-                      group-hover:scale-110 transition-transform duration-300">
-          <Icon className="text-white text-2xl" />
-        </div>
-        <h4 className="text-xl font-bold text-primary-900 mb-3">{title}</h4>
-        <p className="text-gray-600 leading-relaxed">{description}</p>
-      </div>
-    </div>
-  </motion.div>
-);
+    {/* Dot texture */}
+    <div
+      aria-hidden="true"
+      className="absolute inset-0 opacity-[0.05]"
+      style={{
+        backgroundImage: "radial-gradient(circle at 2px 2px, white 1px, transparent 0)",
+        backgroundSize: "28px 28px",
+      }}
+    />
+    {/* Ambient glow */}
+    <div
+      aria-hidden="true"
+      className="absolute right-0 top-0 w-[500px] h-[500px] pointer-events-none"
+      style={{
+        background: "radial-gradient(circle, rgba(125,178,255,0.12) 0%, transparent 70%)",
+      }}
+    />
 
-const ApproachIntro = () => {
-  const principles = [
-    {
-      icon: FaChild,
-      title: "Child-Led Learning",
-      description: "Children thrive when they have the freedom to explore and make decisions. We encourage curiosity and independence in every activity."
-    },
-    {
-      icon: FaBrain,
-      title: "Holistic Development",
-      description: "We focus on cognitive, social, emotional, and physical growth to ensure well-rounded development."
-    },
-    {
-      icon: FaLeaf,
-      title: "Natural & Engaging Environments",
-      description: "Using open-ended resources and nature-based learning, we create spaces where children can explore, imagine, and create."
-    }
-  ];
+    <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-end pb-16"
+      style={{ minHeight: "440px", paddingTop: "8rem" }}
+    >
+      <div className="w-full">
+        {/* Hero copy */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease }}
+          className="max-w-2xl mb-14"
+        >
+          {/* Breadcrumb */}
+          <nav className="flex items-center gap-2 mb-6" aria-label="Breadcrumb">
+            <Link
+              to="/about"
+              className="font-sans text-xs font-semibold text-white/45 hover:text-white/70 transition-colors duration-200 uppercase tracking-widest"
+            >
+              About Us
+            </Link>
+            <span className="text-white/25 text-xs">/</span>
+            <span className="font-sans text-xs font-semibold text-white/70 uppercase tracking-widest">
+              Our Approach
+            </span>
+          </nav>
 
-  return (
-    <section className="relative py-24 overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary-50 to-blue-50">
-        <div className="absolute inset-0" style={{
-          backgroundImage: 'radial-gradient(circle at 1px 1px, #2a3d55 1px, transparent 0)',
-          backgroundSize: '40px 40px',
-          opacity: 0.1
-        }} />
-      </div>
-
-      {/* Decorative Elements */}
-      <div className="absolute top-0 right-0 w-64 h-64 bg-primary-200 rounded-full mix-blend-multiply 
-                    filter blur-3xl opacity-20 animate-blob" />
-      <div className="absolute -bottom-8 left-0 w-64 h-64 bg-blue-200 rounded-full mix-blend-multiply 
-                    filter blur-3xl opacity-20 animate-blob animation-delay-2000" />
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-        className="container mx-auto px-6 relative z-10"
-      >
-        {/* Header Content */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="text-4xl font-bold text-primary-600 mb-6"
+          <div className="flex items-center gap-2.5 mb-4">
+            <span className="w-7 h-px bg-white/35 flex-shrink-0" />
+            <span className="font-sans text-xs font-semibold uppercase tracking-widest text-white/45">
+              Our Approach
+            </span>
+          </div>
+          <h1
+            className="font-display font-semibold text-white leading-tight mb-4"
+            style={{ fontSize: "clamp(2.2rem, 4vw, 3.5rem)" }}
           >
-            Our Approach to Childcare
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            viewport={{ once: true }}
-            className="text-lg text-gray-600 leading-relaxed"
-          >
-            Choosing the right nursery is about more than location—it's about finding a place that aligns with your
-            values and supports your child's learning journey. At Little Haven, we base our approach on
-            Froebelian principles and the Curiosity Approach to foster independent, confident, and happy learners.
-          </motion.p>
-        </div>
+            Froebelian principles.<br />
+            <span className="text-primary-200">Curious by nature.</span>
+          </h1>
+          <p className="font-sans text-white/60 text-lg leading-relaxed max-w-xl">
+            Choosing the right nursery is about finding a place that aligns with your values. At Little Haven,
+            we base our approach on Froebelian principles and the Curiosity Approach — fostering independent,
+            confident, and happy learners.
+          </p>
+        </motion.div>
 
-        {/* Principles Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {principles.map((principle, index) => (
-            <PrincipleCard key={index} {...principle} index={index} />
+        {/* Principle cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {PRINCIPLES.map((principle, index) => (
+            <motion.div
+              key={principle.title}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.25 + index * 0.1, ease }}
+              className="bg-white/10 backdrop-blur-sm border border-white/15 rounded-2xl p-6 hover:bg-white/15 transition-colors duration-300"
+            >
+              <div className={`inline-flex w-9 h-9 rounded-xl items-center justify-center mb-4 ${principle.iconBg} ${principle.iconColor}`}>
+                <div className="w-4 h-4">{principle.icon}</div>
+              </div>
+              <h3 className="font-display text-base font-semibold text-white mb-2 leading-tight">
+                {principle.title}
+              </h3>
+              <p className="font-sans text-xs text-white/55 leading-relaxed">{principle.description}</p>
+            </motion.div>
           ))}
         </div>
+      </div>
+    </div>
+  </section>
+);
 
-        {/* Decorative Wave */}
-        <div className="absolute bottom-0 left-0 right-0 h-24 overflow-hidden">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 0.1 }}
-            transition={{ duration: 1 }}
-            viewport={{ once: true }}
-            className="absolute inset-0"
-            style={{
-              backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23fff' fill-opacity='1' d='M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E\")",
-              backgroundSize: 'cover',
-              backgroundPosition: 'center'
-            }}
-          />
-        </div>
-      </motion.div>
-    </section>
-  );
-};
-
-export default ApproachIntro;
+ApproachIntro.displayName = "ApproachIntro";
+export default memo(ApproachIntro);

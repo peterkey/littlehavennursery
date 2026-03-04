@@ -23,16 +23,16 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-  
+
   /* Allow immediate scrolling for programmatic scroll calls */
   html.scroll-immediate {
     scroll-behavior: auto;
   }
-  
+
   body {
     @apply bg-neutral-50 text-neutral-900;
-    font-feature-settings: "ss01", "ss02", "cv01", "cv02";
-    line-height: 1.6; /* Better readability */
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+    line-height: 1.65;
   }
 
   /* Enhanced focus styles for better accessibility */
@@ -66,23 +66,34 @@
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-sans font-semibold tracking-tight;
+    @apply font-display font-semibold;
+    font-optical-sizing: auto;
+    letter-spacing: -0.01em;
   }
-  
+
   h1 {
     @apply text-4xl md:text-5xl lg:text-6xl leading-tight;
   }
-  
+
   h2 {
     @apply text-3xl md:text-4xl lg:text-5xl leading-tight;
   }
-  
+
   h3 {
     @apply text-2xl md:text-3xl lg:text-4xl leading-snug;
   }
-  
+
+  h4 {
+    @apply text-xl md:text-2xl leading-snug;
+  }
+
   p {
     @apply text-base md:text-lg leading-relaxed text-neutral-700;
+  }
+
+  /* Fraunces optical sizing at display scales */
+  .font-display {
+    font-optical-sizing: auto;
   }
 }
 

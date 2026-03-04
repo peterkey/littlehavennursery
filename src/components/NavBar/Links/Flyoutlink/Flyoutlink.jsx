@@ -100,7 +100,7 @@ const Flyoutlink = ({ children, href, FlyoutContent }) => {
               initial="hidden"
               animate="visible"
               exit="hidden"
-              className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-white rotate-45 border-l border-t border-neutral-200/60 shadow-sm z-10"
+              className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-[#fffdf8] rotate-45 border-l border-t border-primary-100/50 shadow-sm z-10"
             />
             
             <motion.div
@@ -108,20 +108,13 @@ const Flyoutlink = ({ children, href, FlyoutContent }) => {
               initial="hidden"
               animate="visible"
               exit="exit"
-              className="relative min-w-[800px] bg-white rounded-2xl border border-neutral-200/60 shadow-lg backdrop-blur-sm"
+              className="relative w-max rounded-2xl border border-primary-100/50 shadow-lg backdrop-blur-sm overflow-hidden"
               style={{
-                background: "linear-gradient(180deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.98) 100%)",
-                boxShadow: "0 4px 24px -1px rgba(0, 0, 0, 0.08), 0 2px 8px -1px rgba(0, 0, 0, 0.06)"
+                background: "linear-gradient(180deg, rgba(255,253,248,0.97) 0%, rgba(255,255,255,0.99) 100%)",
+                boxShadow: "0 4px 24px -1px rgba(68, 140, 195, 0.08), 0 2px 8px -1px rgba(0, 0, 0, 0.05)"
               }}
             >
-              {/* Decorative blobs */}
-              <div className="absolute top-0 right-0 w-32 h-32 bg-primary-100/30 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob" />
-              <div className="absolute bottom-0 left-0 w-32 h-32 bg-blue-100/30 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000" />
-              
-              {/* Content */}
-              <div className="relative overflow-hidden rounded-2xl">
-                <FlyoutContent />
-              </div>
+              <FlyoutContent />
             </motion.div>
           </div>
         )}

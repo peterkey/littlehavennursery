@@ -1,153 +1,258 @@
+import { memo } from "react";
+import PropTypes from "prop-types";
+import { motion } from "framer-motion";
 import PriceCard from "./PriceCard";
 
-const WrapAroundPriceSection = () => {
-  const parkRoadServices = [
-    {
-      name: "Breakfast Club",
-      fullDayPrice: 8,
-      features: [
-        "8am - 9am",
-        "Ages 3+ Only",
-        "Healthy Breakfast",
-        "School Drop-off Service",
-        "Qualified Staff"
-      ]
-    },
-    {
-      name: "Main Session",
-      fullDayPrice: 22,
-      features: [
-        "9am - 12pm",
-        "Ages 3-5 Years",
-        "Structured Learning",
-        "Qualified Staff",
-        "Curriculum Activities"
-      ]
-    },
-    {
-      name: "Lunch Club",
-      fullDayPrice: 10,
-      featured: true,
-      features: [
-        "12pm - 1pm",
-        "Radyr Primary Pupils",
-        "Chaperone Service",
-        "Healthy Lunch Time",
-        "Safe Supervision"
-      ]
-    }
-  ];
+const sp = { fill: "none", stroke: "currentColor", strokeWidth: "1.75", strokeLinecap: "round", strokeLinejoin: "round" };
 
-  const pentyrchServices = [
-    {
-      name: "Nursery Session",
-      fullDayPrice: 20,
-      features: [
-        "9am - 11:30am",
-        "Ages 2-3 Years",
-        "Daily Sessions",
-        "Healthy Snacks",
-        "Term Time Only"
-      ]
-    },
-    {
-      name: "Wraparound Care",
-      fullDayPrice: 26,
-      featured: true,
-      features: [
-        "9am - 3:30pm",
-        "Ages 3-5 Years",
-        "Healthy Snacks",
-        "Qualified Staff",
-        "Curriculum Activities"
-      ]
-    },
-    {
-      name: "The Haven",
-      fullDayPrice: 16,
-      features: [
-        "3:30pm - 5:30pm",
-        "Ages 3-12 Years",
-        "After School Club",
-        "Healthy Snacks",
-        "Fun Activities"
-      ]
-    }
-  ];
+const ease = [0.22, 1, 0.36, 1];
 
-  return (
-    <section className='relative py-16 sm:py-24 bg-gradient-to-b from-lavender-900 to-lavender-800 overflow-hidden'>
-      <div className='absolute inset-0 bg-[url("/grid.svg")] opacity-10'></div>
-      
-      <div className='relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
-        <div className='text-center mb-16'>
-          <h2 className='text-3xl md:text-4xl font-bold text-white mb-4'>Wrap Around Care Pricing</h2>
-          <p className='text-lg text-lavender-100 max-w-content mx-auto'>
-            Affordable care options at our locations
-          </p>
-        </div>
+const RADYR_SERVICES = [
+  {
+    name: "Breakfast Club",
+    fullDayPrice: 8,
+    features: [
+      "8:00 am – 9:00 am",
+      "Ages 3+ Only",
+      "Healthy Breakfast",
+      "School Drop-off Service",
+      "Qualified Staff",
+    ],
+  },
+  {
+    name: "Main Session",
+    fullDayPrice: 22,
+    features: [
+      "9:00 am – 12:00 pm",
+      "Ages 3–5 Years",
+      "Structured Learning",
+      "Qualified Staff",
+      "Curriculum Activities",
+    ],
+  },
+  {
+    name: "Lunch Club",
+    fullDayPrice: 10,
+    featured: true,
+    features: [
+      "12:00 pm – 1:00 pm",
+      "Radyr Primary Pupils",
+      "Chaperone Service",
+      "Healthy Lunch",
+      "Safe Supervision",
+    ],
+  },
+];
 
-        {/* Park Road Location */}
-        <div className='mb-20'>
-          <div className='text-center mb-12'>
-            <h3 className='text-2xl md:text-3xl font-bold text-white mb-3'>Park Road (Radyr)</h3>
-            <p className='text-lavender-200'>Old Church Rooms, Park Road, Radyr</p>
-            <p className='text-lavender-200 text-sm mt-2'>Contact: 07361 214326</p>
-          </div>
+const PENTYRCH_SERVICES = [
+  {
+    name: "Nursery Session",
+    fullDayPrice: 20,
+    features: [
+      "9:00 am – 11:30 am",
+      "Ages 2–3 Years",
+      "Daily Sessions",
+      "Healthy Snacks",
+      "Term Time Only",
+    ],
+  },
+  {
+    name: "Wraparound Care",
+    fullDayPrice: 26,
+    featured: true,
+    features: [
+      "9:00 am – 3:30 pm",
+      "Ages 3–5 Years",
+      "Healthy Snacks",
+      "Qualified Staff",
+      "Curriculum Activities",
+    ],
+  },
+  {
+    name: "The Haven",
+    fullDayPrice: 16,
+    features: [
+      "3:30 pm – 5:30 pm",
+      "Ages 3–12 Years",
+      "After School Club",
+      "Healthy Snacks",
+      "Fun Activities",
+    ],
+  },
+];
 
-          <div className='grid md:grid-cols-3 gap-8 lg:gap-12'>
-            {parkRoadServices.map((service, index) => (
-              <PriceCard 
-                key={index}
-                name={service.name}
-                price={service.fullDayPrice}
-                features={service.features}
-                featured={service.featured}
-              />
-            ))}
-          </div>
-        </div>
+const WRAP_NOTES = [
+  "All services operate during term time only",
+  "Cardiff Childcare Offer registered",
+  "Childcare vouchers and other schemes accepted",
+  "Holiday club coming to Pentyrch in Summer 2025",
+  "Contact your preferred location to book",
+];
 
-        {/* Pentyrch Location */}
-        <div className='mb-16'>
-          <div className='text-center mb-12'>
-            <h3 className='text-2xl md:text-3xl font-bold text-white mb-3'>Pentyrch Primary School</h3>
-            <p className='text-lavender-200'>Bronllwyn, Pentyrch, Cardiff</p>
-            <p className='text-lavender-200 text-sm mt-2'>Contact: 02922 781919</p>
-          </div>
-
-          <div className='grid md:grid-cols-3 gap-8 lg:gap-12'>
-            {pentyrchServices.map((service, index) => (
-              <PriceCard 
-                key={index}
-                name={service.name}
-                price={service.fullDayPrice}
-                features={service.features}
-                featured={service.featured}
-              />
-            ))}
-          </div>
-        </div>
-
-        <div className='mt-16 text-center space-y-6'>
-          <div className='bg-white/10 rounded-lg2 p-6 max-w-3xl mx-auto'>
-            <h3 className='text-xl font-semibold text-white mb-4'>Additional Information</h3>
-            <ul className='text-lavender-100 space-y-2 text-sm md:text-base'>
-              <li>• All services operate during term time only</li>
-              <li>• Cardiff Childcare Offer registered</li>
-              <li>• Childcare vouchers and other schemes accepted</li>
-              <li>• Holiday club coming to Pentyrch in Summer 2025</li>
-              <li>• Booking options available</li>
-            </ul>
-          </div>
-          
-          <p className='text-lavender-200 text-sm'>
-            Please contact your preferred location to discuss your specific requirements and book a visit.
-          </p>
-        </div>
+/* ── LocationHeader ──────────────────────────────────────────────── */
+const LocationHeader = ({ name, address, phone }) => (
+  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-10">
+    <div>
+      <h3 className="font-display text-2xl font-semibold text-neutral-900 mb-1 leading-snug">{name}</h3>
+      <div className="flex items-center gap-2 text-neutral-500">
+        <svg className="w-4 h-4 flex-shrink-0 text-primary-400" viewBox="0 0 24 24" {...sp} aria-hidden="true">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+          <circle cx="12" cy="10" r="3" />
+        </svg>
+        <span className="font-sans text-sm">{address}</span>
       </div>
-    </section>
-  );
+    </div>
+    <a
+      href={`tel:${phone.replace(/\s/g, "")}`}
+      className="inline-flex items-center gap-2 font-sans text-sm font-semibold text-primary-600 hover:text-primary-700 transition-colors duration-200 whitespace-nowrap"
+    >
+      <svg className="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" {...sp} aria-hidden="true">
+        <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.34 12 19.79 19.79 0 011.27 3.45 2 2 0 013.27 1.27h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L7.09 9.4a16 16 0 006.54 6.54l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
+      </svg>
+      {phone}
+    </a>
+  </div>
+);
+
+/* ── WrapAroundPriceSection ──────────────────────────────────────── */
+const WrapAroundPriceSection = () => (
+  <section className="py-20 sm:py-28 bg-white">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      {/* Section header */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, ease }}
+        className="max-w-2xl mb-14"
+      >
+        <div className="flex items-center gap-3 mb-4">
+          <span className="w-8 h-px bg-teal-300 flex-shrink-0" />
+          <span className="font-sans text-xs font-semibold uppercase tracking-widest text-teal-600">
+            Wrap Around Care
+          </span>
+        </div>
+        <h2
+          className="font-display font-semibold text-neutral-900 leading-tight mb-4"
+          style={{ fontSize: "clamp(2rem, 3.5vw, 2.8rem)" }}
+        >
+          Before &amp; after school<br />
+          <span className="text-primary-600 italic">care options.</span>
+        </h2>
+        <p className="font-sans text-neutral-500 text-lg leading-relaxed">
+          Flexible sessions at our Radyr and Pentyrch locations, designed to fit around the school day.
+        </p>
+      </motion.div>
+
+      {/* ── Radyr ───────────────────────────────────────────── */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, ease }}
+        className="mb-16"
+      >
+        <LocationHeader
+          name="Radyr"
+          address="Old Church Rooms, Hen Ysgoldy'r Eglwys, Radyr"
+          phone="07361 214326"
+        />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {RADYR_SERVICES.map((service, index) => (
+            <motion.div
+              key={service.name}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.55, delay: index * 0.1, ease }}
+            >
+              <PriceCard
+                name={service.name}
+                price={service.fullDayPrice}
+                features={service.features}
+                featured={service.featured}
+              />
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
+
+      {/* ── Pentyrch ─────────────────────────────────────────── */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, ease }}
+        className="mb-10"
+      >
+        <div className="border-t border-neutral-100 mb-12 pt-12">
+          <LocationHeader
+            name="Pentyrch"
+            address="Pentyrch Primary School, Bronllwyn, Pentyrch, Cardiff"
+            phone="02922 781919"
+          />
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {PENTYRCH_SERVICES.map((service, index) => (
+            <motion.div
+              key={service.name}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.55, delay: index * 0.1, ease }}
+            >
+              <PriceCard
+                name={service.name}
+                price={service.fullDayPrice}
+                features={service.features}
+                featured={service.featured}
+              />
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
+
+      {/* Additional information */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.55, delay: 0.2, ease }}
+        className="bg-white rounded-2xl shadow-soft p-7 border border-neutral-100"
+      >
+        <div className="flex items-center gap-3 mb-5">
+          <span className="w-7 h-px bg-teal-300 flex-shrink-0" />
+          <span className="font-sans text-xs font-semibold uppercase tracking-widest text-teal-600">
+            Important Notes
+          </span>
+        </div>
+        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {WRAP_NOTES.map((note) => (
+            <li key={note} className="flex items-start gap-2.5">
+              <div className="w-5 h-5 rounded-full bg-teal-50 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg className="w-3 h-3 text-teal-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <span className="font-sans text-sm text-neutral-600 leading-relaxed">{note}</span>
+            </li>
+          ))}
+        </ul>
+        <p className="font-sans text-xs text-neutral-400 mt-5 pt-4 border-t border-neutral-100">
+          Please contact your preferred location to discuss your specific requirements and book a visit.
+        </p>
+      </motion.div>
+
+    </div>
+  </section>
+);
+
+LocationHeader.propTypes = {
+  name: PropTypes.string.isRequired,
+  address: PropTypes.string.isRequired,
+  phone: PropTypes.string.isRequired,
 };
 
-export default WrapAroundPriceSection; 
+WrapAroundPriceSection.displayName = "WrapAroundPriceSection";
+export default memo(WrapAroundPriceSection);

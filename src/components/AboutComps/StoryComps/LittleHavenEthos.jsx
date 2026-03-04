@@ -1,133 +1,146 @@
+import { memo } from "react";
 import { motion } from "framer-motion";
-import { FaBrain, FaChild, FaPalette, FaHome } from "react-icons/fa";
 
-const EthosCard = ({ icon: Icon, title, description, index }) => (
-  <motion.div
-    initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
-    whileInView={{ opacity: 1, x: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.5, delay: index * 0.1 }}
-    className="relative group"
-  >
-    <div className="bg-white/90 backdrop-blur-sm p-8 rounded-2xl shadow-lg border border-primary-100 
-                    transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-      <div className="absolute inset-0 bg-gradient-to-br from-primary-50 to-blue-50 opacity-0 
-                    group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
-      <div className="relative z-10 flex items-start gap-6">
-        <div className="relative">
-          <div className="absolute -inset-2 bg-primary-100 rounded-full opacity-50 group-hover:opacity-100 blur transition-opacity" />
-          <div className="relative w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-600 
-                        rounded-full flex items-center justify-center shadow-lg transform 
-                        group-hover:scale-110 transition-transform duration-300">
-            <Icon className="text-white text-xl" />
-          </div>
-        </div>
-        <div className="flex-1">
-          <h4 className="text-xl font-bold text-primary-700 mb-2 group-hover:text-primary-600 
-                       transition-colors duration-300">{title}</h4>
-          <p className="text-gray-600 leading-relaxed">{description}</p>
-        </div>
-      </div>
-    </div>
-  </motion.div>
-);
+const ease = [0.22, 1, 0.36, 1];
 
-const LittleHavenEthos = () => {
-  const ethosValues = [
-    {
-      icon: FaBrain,
-      title: "Learning Through Play",
-      description: "We follow the philosophy of 'learning to play, playing to learn,' ensuring children develop essential skills in a fun, engaging way."
-    },
-    {
-      icon: FaChild,
-      title: "Child-Led Exploration",
-      description: "Our learning experiences are carefully designed to foster curiosity, independence, and critical thinking in every child."
-    },
-    {
-      icon: FaPalette,
-      title: "Creativity & Imagination",
-      description: "We provide a variety of creative play activities that encourage self-expression, artistic development, and problem-solving."
-    },
-    {
-      icon: FaHome,
-      title: "A Nurturing Environment",
-      description: "We create a warm, safe, and stimulating space where children feel comfortable, valued, and encouraged to explore."
-    }
-  ];
-
-  return (
-    <section className="relative py-24 overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary-50 to-blue-50">
-        <div className="absolute inset-0" style={{
-          backgroundImage: 'radial-gradient(circle at 1px 1px, #2a3d55 1px, transparent 0)',
-          backgroundSize: '40px 40px',
-          opacity: 0.1
-        }} />
-      </div>
-
-      {/* Decorative Elements */}
-      <div className="absolute top-0 right-0 w-64 h-64 bg-primary-200 rounded-full mix-blend-multiply 
-                    filter blur-3xl opacity-20 animate-blob" />
-      <div className="absolute -bottom-8 left-0 w-64 h-64 bg-blue-200 rounded-full mix-blend-multiply 
-                    filter blur-3xl opacity-20 animate-blob animation-delay-2000" />
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-        className="container mx-auto px-6 relative z-10"
-      >
-        {/* Header Content */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="text-4xl font-bold text-primary-600 mb-6"
-          >
-            The Little Haven Ethos
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            viewport={{ once: true }}
-            className="text-lg text-gray-600 leading-relaxed"
-          >
-            At Little Haven, we believe that early childhood education is about much more than keeping children occupied.
-            Our approach nurtures curiosity, creativity, and a lifelong love for learning through meaningful experiences.
-          </motion.p>
-        </div>
-
-        {/* Values Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
-          {ethosValues.map((value, index) => (
-            <EthosCard key={index} {...value} index={index} />
-          ))}
-        </div>
-
-        {/* Decorative Wave */}
-        <div className="absolute bottom-0 left-0 right-0 h-24 overflow-hidden">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 0.1 }}
-            transition={{ duration: 1 }}
-            viewport={{ once: true }}
-            className="absolute inset-0"
-            style={{
-              backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23fff' fill-opacity='1' d='M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E\")",
-              backgroundSize: 'cover',
-              backgroundPosition: 'center'
-            }}
-          />
-        </div>
-      </motion.div>
-    </section>
-  );
+const sp = {
+  fill: "none",
+  stroke: "currentColor",
+  strokeWidth: "1.75",
+  strokeLinecap: "round",
+  strokeLinejoin: "round",
 };
 
-export default LittleHavenEthos;
+const ETHOS = [
+  {
+    title: "Learning Through Play",
+    body: "We follow the philosophy of 'learning to play, playing to learn' — children develop essential skills through meaningful, joyful experiences rather than rote instruction.",
+    iconBg: "bg-primary-50",
+    iconColor: "text-primary-500",
+    icon: (
+      <svg viewBox="0 0 24 24" {...sp}>
+        <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+      </svg>
+    ),
+  },
+  {
+    title: "Child-Led Exploration",
+    body: "Children are naturally curious. Our practitioners facilitate discovery rather than dictate outcomes — giving children space to lead their own learning journey.",
+    iconBg: "bg-teal-50",
+    iconColor: "text-teal-600",
+    icon: (
+      <svg viewBox="0 0 24 24" {...sp}>
+        <circle cx="11" cy="11" r="8" />
+        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+      </svg>
+    ),
+  },
+  {
+    title: "Creativity & Imagination",
+    body: "Art, music, storytelling, and open-ended play give children the freedom to express themselves — building confidence, self-discipline, and problem-solving from the inside out.",
+    iconBg: "bg-primary-50",
+    iconColor: "text-primary-500",
+    icon: (
+      <svg viewBox="0 0 24 24" {...sp}>
+        <circle cx="13.5" cy="6.5" r="0.5" fill="currentColor" />
+        <circle cx="17.5" cy="10.5" r="0.5" fill="currentColor" />
+        <circle cx="8.5" cy="7.5" r="0.5" fill="currentColor" />
+        <circle cx="6.5" cy="12.5" r="0.5" fill="currentColor" />
+        <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2z" />
+        <path d="M17.5 12c0 2.485-2.462 4.5-5.5 4.5S6.5 14.485 6.5 12" />
+      </svg>
+    ),
+  },
+  {
+    title: "A Nurturing Environment",
+    body: "We create warm, safe, and intellectually stimulating spaces where children feel genuinely valued — forming close bonds with practitioners who know and cherish each child.",
+    iconBg: "bg-teal-50",
+    iconColor: "text-teal-600",
+    icon: (
+      <svg viewBox="0 0 24 24" {...sp}>
+        <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
+      </svg>
+    ),
+  },
+];
+
+/* ── LittleHavenEthos ────────────────────────────────────────────── */
+const LittleHavenEthos = () => (
+  <section className="py-20 sm:py-28 bg-white">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      {/* Header */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, ease }}
+        className="max-w-2xl mb-14"
+      >
+        <div className="flex items-center gap-3 mb-4">
+          <span className="w-8 h-px bg-primary-300 flex-shrink-0" />
+          <span className="font-sans text-xs font-semibold uppercase tracking-widest text-primary-500">
+            Our Ethos
+          </span>
+        </div>
+        <h2
+          className="font-display font-semibold text-neutral-900 leading-tight mb-4"
+          style={{ fontSize: "clamp(2rem, 3.5vw, 2.8rem)" }}
+        >
+          More than childcare —<br />
+          <span className="text-primary-600 italic">a way of seeing childhood.</span>
+        </h2>
+        <p className="font-sans text-neutral-500 text-lg leading-relaxed">
+          At Little Haven, we believe early childhood is not preparation for life — it&apos;s a precious
+          part of it. Everything we do flows from that belief.
+        </p>
+      </motion.div>
+
+      {/* Ethos grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-14">
+        {ETHOS.map((item, i) => (
+          <motion.div
+            key={item.title}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.55, delay: i * 0.09, ease }}
+            className="flex gap-5 p-6 bg-white rounded-2xl shadow-soft border border-neutral-100 hover:shadow-medium transition-shadow duration-300"
+          >
+            <div
+              className={`w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 ${item.iconBg} ${item.iconColor}`}
+            >
+              <div className="w-5 h-5">{item.icon}</div>
+            </div>
+            <div>
+              <h3 className="font-display text-lg font-semibold text-neutral-900 mb-2 leading-snug">
+                {item.title}
+              </h3>
+              <p className="font-sans text-sm text-neutral-600 leading-relaxed">{item.body}</p>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Philosophy pull-quote */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.65, ease }}
+        className="border-l-4 border-primary-200 pl-7 py-2 max-w-3xl"
+      >
+        <p className="font-display text-xl text-neutral-700 leading-relaxed italic">
+          &ldquo;Learning to play, playing to learn.&rdquo;
+        </p>
+        <p className="font-sans text-sm text-neutral-400 mt-3 font-semibold uppercase tracking-widest">
+          The Little Haven Motto
+        </p>
+      </motion.div>
+
+    </div>
+  </section>
+);
+
+LittleHavenEthos.displayName = "LittleHavenEthos";
+export default memo(LittleHavenEthos);

@@ -1,38 +1,48 @@
 import { memo, useState } from 'react';
 import { motion } from 'framer-motion';
-import { FaMapMarkerAlt, FaDirections, FaPhone } from 'react-icons/fa';
 
-const LocationCard = ({ name, address, phone, mapUrl, directionsUrl }) => (
-  <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200">
+const sp = { fill: "none", stroke: "currentColor", strokeWidth: "1.75", strokeLinecap: "round", strokeLinejoin: "round" };
+
+const PinIcon = ({ className }) => (
+  <svg className={className} viewBox="0 0 24 24" aria-hidden="true" {...sp}>
+    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+    <circle cx="12" cy="10" r="3" />
+  </svg>
+);
+
+const LocationCard = ({ name, address, phone, directionsUrl }) => (
+  <div className="bg-white rounded-2xl shadow-soft p-6 border border-neutral-100">
     <div className="flex items-start gap-4">
-      <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center flex-shrink-0">
-        <FaMapMarkerAlt className="w-6 h-6 text-primary-600" aria-hidden="true" />
+      <div className="w-12 h-12 bg-primary-50 rounded-xl flex items-center justify-center flex-shrink-0">
+        <PinIcon className="w-6 h-6 text-primary-500" />
       </div>
-      
+
       <div className="flex-1">
-        <h3 className="text-lg font-semibold text-gray-900 mb-2">{name}</h3>
-        <p className="text-gray-600 mb-3 text-sm leading-relaxed">{address}</p>
-        
+        <h3 className="font-display text-lg font-semibold text-neutral-900 mb-2">{name}</h3>
+        <p className="font-sans text-neutral-500 mb-3 text-sm leading-relaxed">{address}</p>
+
         <div className="flex flex-col sm:flex-row gap-2">
           <a
             href={`tel:${phone.replace(/\s/g, '')}`}
-            className="inline-flex items-center gap-2 text-sm text-primary-600 hover:text-primary-700 
-                     font-medium transition-colors duration-200"
+            className="inline-flex items-center gap-2 text-sm text-primary-600 hover:text-primary-700 font-medium transition-colors duration-200"
             aria-label={`Call ${name}`}
           >
-            <FaPhone className="w-4 h-4" aria-hidden="true" />
+            <svg className="w-4 h-4" viewBox="0 0 24 24" aria-hidden="true" {...sp}>
+              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.34 12 19.79 19.79 0 011.27 3.45 2 2 0 013.27 1.27h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L7.09 9.4a16 16 0 006.54 6.54l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
+            </svg>
             {phone}
           </a>
-          
+
           <a
             href={directionsUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-sm text-green-600 hover:text-green-700 
-                     font-medium transition-colors duration-200"
+            className="inline-flex items-center gap-2 text-sm text-teal-600 hover:text-teal-700 font-medium transition-colors duration-200"
             aria-label={`Get directions to ${name}`}
           >
-            <FaDirections className="w-4 h-4" aria-hidden="true" />
+            <svg className="w-4 h-4" viewBox="0 0 24 24" aria-hidden="true" {...sp}>
+              <polygon points="3 11 22 2 13 21 11 13 3 11" />
+            </svg>
             Get Directions
           </a>
         </div>
@@ -44,7 +54,6 @@ const LocationCard = ({ name, address, phone, mapUrl, directionsUrl }) => (
 const MapEmbed = memo(({ className = "" }) => {
   const [selectedLocation, setSelectedLocation] = useState(0);
 
-  // TODO: Replace with actual coordinates and map embed URLs
   const locations = [
     {
       id: 'rhydlafar',
@@ -57,7 +66,7 @@ const MapEmbed = memo(({ className = "" }) => {
     {
       id: 'radyr',
       name: 'Little Haven Radyr',
-      address: 'Old Church Rooms Hen Ysgoldy\'r Eglwys, Radyr, Cardiff CF15 8DF',
+      address: "Old Church Rooms Hen Ysgoldy'r Eglwys, Radyr, Cardiff CF15 8DF",
       phone: '07361 214326',
       mapUrl: 'TODO_GOOGLE_MAPS_EMBED_URL_RADYR',
       directionsUrl: 'https://www.google.com/maps/dir//Old+Church+Rooms,+Radyr,+Cardiff+CF15+8DF'
@@ -73,25 +82,28 @@ const MapEmbed = memo(({ className = "" }) => {
   ];
 
   return (
-    <section className={`py-16 bg-gray-50 ${className}`}>
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <section className={`py-16 bg-neutral-50 ${className}`}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="max-w-2xl mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <div className="flex items-center gap-3 mb-4">
+            <span className="w-8 h-px bg-primary-300 flex-shrink-0" />
+            <span className="font-sans text-xs font-semibold uppercase tracking-widest text-primary-500">Find Us</span>
+          </div>
+          <h2 className="font-display font-semibold text-neutral-900 leading-tight" style={{ fontSize: "clamp(2rem, 3.5vw, 2.75rem)" }}>
             Find Our Locations
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="font-sans text-neutral-500 text-lg leading-relaxed mt-3">
             We have three convenient locations across Cardiff. Choose the one nearest to you.
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Location Cards */}
           <div className="space-y-4">
             {locations.map((location, index) => (
               <motion.div
@@ -100,9 +112,7 @@ const MapEmbed = memo(({ className = "" }) => {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className={`cursor-pointer transition-all duration-200 ${
-                  selectedLocation === index ? 'ring-2 ring-primary-500' : ''
-                }`}
+                className={`cursor-pointer transition-all duration-200 ${selectedLocation === index ? 'ring-2 ring-primary-400 rounded-2xl' : ''}`}
                 onClick={() => setSelectedLocation(index)}
               >
                 <LocationCard {...location} />
@@ -110,77 +120,37 @@ const MapEmbed = memo(({ className = "" }) => {
             ))}
           </div>
 
-          {/* Map Placeholder */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="bg-white rounded-lg shadow-md overflow-hidden"
+            className="bg-white rounded-2xl shadow-soft overflow-hidden border border-neutral-100"
           >
-            <div className="bg-gray-200 h-96 flex items-center justify-center">
+            <div className="bg-neutral-100 h-80 flex items-center justify-center">
               <div className="text-center p-8">
-                <FaMapMarkerAlt className="w-16 h-16 text-gray-400 mx-auto mb-4" aria-hidden="true" />
-                <h3 className="text-lg font-semibold text-gray-700 mb-2">
-                  Interactive Map
-                </h3>
-                <p className="text-gray-500 text-sm mb-4">
-                  TODO: Google Maps embed will be displayed here
-                </p>
-                <p className="text-xs text-gray-400">
-                  Currently showing: {locations[selectedLocation].name}
-                </p>
+                <PinIcon className="w-16 h-16 text-neutral-300 mx-auto mb-4" />
+                <h3 className="font-display text-lg font-semibold text-neutral-500 mb-2">Interactive Map</h3>
+                <p className="font-sans text-neutral-400 text-sm mb-4">Google Maps embed will appear here</p>
+                <p className="font-sans text-xs text-neutral-400">Currently showing: {locations[selectedLocation].name}</p>
               </div>
             </div>
-            
-            {/* Map footer with current location info */}
-            <div className="p-4 bg-primary-50 border-t border-gray-200">
+
+            <div className="p-4 bg-primary-50 border-t border-neutral-100">
               <div className="flex items-center gap-3">
-                <FaMapMarkerAlt className="w-5 h-5 text-primary-600" aria-hidden="true" />
+                <PinIcon className="w-5 h-5 text-primary-500" />
                 <div>
-                  <div className="font-semibold text-gray-900">
-                    {locations[selectedLocation].name}
-                  </div>
-                  <div className="text-sm text-gray-600">
-                    {locations[selectedLocation].address}
-                  </div>
+                  <div className="font-sans font-semibold text-neutral-900 text-sm">{locations[selectedLocation].name}</div>
+                  <div className="font-sans text-sm text-neutral-500">{locations[selectedLocation].address}</div>
                 </div>
               </div>
             </div>
           </motion.div>
         </div>
-
-        {/* Additional Info */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          viewport={{ once: true }}
-          className="mt-12 bg-white rounded-lg shadow-md p-6"
-        >
-          <h3 className="text-xl font-semibold text-gray-900 mb-4 text-center">
-            Need Help Finding Us?
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-            <div>
-              <h4 className="font-medium text-gray-900 mb-2">Public Transport</h4>
-              <p className="text-sm text-gray-600">All locations accessible by local bus routes</p>
-            </div>
-            <div>
-              <h4 className="font-medium text-gray-900 mb-2">Parking</h4>
-              <p className="text-sm text-gray-600">Free parking available at all sites</p>
-            </div>
-            <div>
-              <h4 className="font-medium text-gray-900 mb-2">Accessibility</h4>
-              <p className="text-sm text-gray-600">Wheelchair accessible entrances</p>
-            </div>
-          </div>
-        </motion.div>
       </div>
     </section>
   );
 });
 
 MapEmbed.displayName = 'MapEmbed';
-
 export default MapEmbed;

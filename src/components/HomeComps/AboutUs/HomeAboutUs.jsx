@@ -1,92 +1,110 @@
-import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import building from "../../../assets/Building.jpg"
+import { memo } from "react";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import building from "../../../assets/Building.jpg";
 
-const HomeAboutUs = () => {
-  return (
-    <section className='relative py-16 sm:py-24 bg-gradient-to-b from-white to-neutral-50 overflow-hidden'>
-      {/* Background Pattern */}
-      <div className='absolute inset-0 opacity-[0.03]'>
-        <div className='absolute inset-0' style={{
-          backgroundImage: 'radial-gradient(circle at 2px 2px, #518dbb 1px, transparent 0)',
-          backgroundSize: '48px 48px'
-        }} />
-      </div>
+const ease = [0.22, 1, 0.36, 1];
 
-      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
-        <div className='flex flex-col lg:flex-row items-center gap-16'>
-          {/* Image Section */}
-          <motion.div 
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className='w-full lg:w-1/2'
+const HomeAboutUs = () => (
+  <section className="relative py-20 sm:py-28 bg-white overflow-hidden">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="flex flex-col lg:flex-row items-center gap-14 lg:gap-20">
+
+        {/* ── Left: Image with floating stat card ─────────────── */}
+        <motion.div
+          initial={{ opacity: 0, x: -28 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.75, ease }}
+          className="w-full lg:w-[46%] relative flex-shrink-0"
+        >
+          {/* Rotated accent behind image */}
+          <div className="absolute -inset-3 bg-primary-50 rounded-3xl rotate-2 -z-10" aria-hidden="true" />
+
+          {/* Main image */}
+          <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-strong">
+            <img
+              src={building}
+              alt="Little Haven Nursery — a warm, welcoming setting for children"
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-primary-900/10 to-transparent" />
+          </div>
+
+          {/* Floating stat card */}
+          <div className="absolute -bottom-5 -left-4 bg-white rounded-2xl shadow-strong px-6 py-4 z-10">
+            <p className="font-display text-4xl font-semibold text-primary-600 leading-none">500+</p>
+            <p className="font-sans text-xs text-neutral-500 mt-1 font-medium">Happy Children</p>
+          </div>
+        </motion.div>
+
+        {/* ── Right: Content ───────────────────────────────────── */}
+        <motion.div
+          initial={{ opacity: 0, x: 28 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.75, ease, delay: 0.15 }}
+          className="w-full lg:w-[54%]"
+        >
+          {/* Eyebrow */}
+          <div className="flex items-center gap-3 mb-5">
+            <span className="w-8 h-px bg-primary-300 flex-shrink-0" />
+            <span className="font-sans text-xs font-semibold uppercase tracking-widest text-primary-500">
+              Our Story
+            </span>
+          </div>
+
+          {/* Heading */}
+          <h2
+            className="font-display font-semibold text-neutral-900 leading-[1.06] mb-6"
+            style={{ fontSize: "clamp(2.1rem, 3.5vw, 3.1rem)" }}
           >
-            <div className='relative'>
-              <div className='absolute -inset-4 bg-primary-100 rounded-xl transform -rotate-6' />
-              <div className='relative aspect-[4/3] rounded-lg overflow-hidden bg-primary-200'>
-                <img 
-                  src={building} 
-                  alt='Children playing and learning'
-                  className='w-full h-full object-cover'
-                />
-              </div>
-              {/* Decorative Elements */}
-              <div className='absolute -bottom-6 -right-6 w-24 h-24 bg-primary-500 rounded-full opacity-20 blur-xl' />
-              <div className='absolute -top-4 -left-4 w-16 h-16 bg-primary-300 rounded-full opacity-20 blur-lg' />
-            </div>
-          </motion.div>
+            More than childcare —<br />
+            a place to{" "}
+            <span className="text-primary-600 italic">belong.</span>
+          </h2>
 
-          {/* Content Section */}
-          <motion.div 
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className='w-full lg:w-1/2'
+          {/* Body */}
+          <p className="font-sans text-neutral-600 text-lg leading-relaxed mb-10 max-w-[520px]">
+            At Little Haven, we believe every child carries an innate curiosity waiting to be sparked.
+            Our Froebelian approach creates an environment where children discover, question, and
+            grow — guided by qualified, caring practitioners who treat every family as a true partner.
+          </p>
+
+          {/* Stats row */}
+          <div className="flex items-center gap-7 mb-10 flex-wrap">
+            <div>
+              <p className="font-display text-3xl font-semibold text-neutral-900 leading-none">15+</p>
+              <p className="font-sans text-xs text-neutral-500 mt-1 font-medium">Years Experience</p>
+            </div>
+            <div className="w-px h-10 bg-neutral-200 flex-shrink-0" />
+            <div>
+              <p className="font-display text-3xl font-semibold text-neutral-900 leading-none">100%</p>
+              <p className="font-sans text-xs text-neutral-500 mt-1 font-medium">Qualified Staff</p>
+            </div>
+            <div className="w-px h-10 bg-neutral-200 flex-shrink-0" />
+            <div>
+              <p className="font-display text-3xl font-semibold text-neutral-900 leading-none">3</p>
+              <p className="font-sans text-xs text-neutral-500 mt-1 font-medium">Cardiff Locations</p>
+            </div>
+          </div>
+
+          {/* CTA */}
+          <Link
+            to="/about"
+            className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold font-sans text-white bg-primary-600 hover:bg-primary-700 rounded-full shadow-medium hover:shadow-strong transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
           >
-            <h1 className='text-4xl md:text-5xl font-bold text-primary-600 mb-6'>
-              About Us
-            </h1>
-            <p className='text-lg text-neutral-700 leading-relaxed mb-8 max-w-content'>
-              At Little Haven, we believe in more than just childcare. We're dedicated to giving every child the best
-              start in life through an environment where fun and learning go hand in hand. Each day here is an exciting
-              adventure, designed to inspire curiosity and spark creativity. From future scientists to artists and
-              athletes, we provide a magical space where children can take their first steps toward becoming the heroes of
-              tomorrow.
-            </p>
-            
-            {/* Stats Section */}
-            <div className='grid grid-cols-2 sm:grid-cols-3 gap-6 mb-8'>
-              <div className='text-center'>
-                <p className='text-3xl font-bold text-primary-600'>15+</p>
-                <p className='text-sm text-neutral-600'>Years Experience</p>
-              </div>
-              <div className='text-center'>
-                <p className='text-3xl font-bold text-primary-600'>100%</p>
-                <p className='text-sm text-neutral-600'>Qualified Staff</p>
-              </div>
-              <div className='text-center'>
-                <p className='text-3xl font-bold text-primary-600'>500+</p>
-                <p className='text-sm text-neutral-600'>Happy Children</p>
-              </div>
-            </div>
+            Discover Our Approach
+            <svg className="w-3.5 h-3.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </Link>
+        </motion.div>
 
-            <Link 
-              to="/about"
-              className='inline-flex items-center px-6 py-3 text-base font-medium text-white bg-primary-600 rounded-lg2 shadow-lg hover:bg-primary-700 transform hover:translate-y-[-2px] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500'
-            >
-              Find out more
-              <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
-            </Link>
-          </motion.div>
-        </div>
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);
 
-export default HomeAboutUs;
+HomeAboutUs.displayName = "HomeAboutUs";
+export default memo(HomeAboutUs);

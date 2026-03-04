@@ -1,451 +1,508 @@
+import { memo } from 'react';
 import { motion } from 'framer-motion';
-import { FaShieldAlt, FaEye, FaDatabase, FaUserCheck, FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
-import SEO from '../components/SEO/SEO';
 import { Link } from 'react-router-dom';
+import SEO from '../components/SEO/SEO';
 
-const PrivacyPolicy = () => {
-  const lastUpdated = "2024-08-10"; // Last updated: August 10, 2024
-  
-  const dataCategories = [
-    {
-      title: "Personal Information",
-      description: "Names, contact details, emergency contacts, and family information",
-      examples: ["Child's full name", "Parent/guardian contact details", "Emergency contact information"]
-    },
-    {
-      title: "Health & Medical",
-      description: "Medical conditions, allergies, and health requirements",
-      examples: ["Allergies and dietary restrictions", "Medical conditions", "Medication requirements"]
-    },
-    {
-      title: "Educational Records",
-      description: "Learning progress, observations, and development milestones",
-      examples: ["EYFS progress reports", "Learning observations", "Development assessments"]
-    },
-    {
-      title: "Attendance Records",
-      description: "Daily attendance, arrival and departure times",
-      examples: ["Daily attendance logs", "Arrival and departure times", "Absence records"]
-    }
-  ];
+const sp = { fill: "none", stroke: "currentColor", strokeWidth: "1.75", strokeLinecap: "round", strokeLinejoin: "round" };
 
-  const dataRights = [
-    {
-      title: "Right to Access",
-      description: "Request a copy of your personal data",
-      icon: FaEye
-    },
-    {
-      title: "Right to Rectification",
-      description: "Correct inaccurate or incomplete data",
-      icon: FaUserCheck
-    },
-    {
-      title: "Right to Erasure",
-      description: "Request deletion of your personal data",
-      icon: FaDatabase
-    },
-    {
-      title: "Right to Object",
-      description: "Object to processing of your data",
-      icon: FaShieldAlt
-    }
-  ];
+const ShieldIcon = ({ className }) => <svg className={className} viewBox="0 0 24 24" aria-hidden="true" {...sp}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>;
+const EyeIcon = ({ className }) => <svg className={className} viewBox="0 0 24 24" aria-hidden="true" {...sp}><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" /></svg>;
+const DatabaseIcon = ({ className }) => <svg className={className} viewBox="0 0 24 24" aria-hidden="true" {...sp}><ellipse cx="12" cy="5" rx="9" ry="3" /><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" /><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" /></svg>;
+const UserCheckIcon = ({ className }) => <svg className={className} viewBox="0 0 24 24" aria-hidden="true" {...sp}><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2" /><circle cx="9" cy="7" r="4" /><polyline points="16 11 18 13 22 9" /></svg>;
+const EnvelopeIcon = ({ className }) => <svg className={className} viewBox="0 0 24 24" aria-hidden="true" {...sp}><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" /></svg>;
+const PhoneIcon = ({ className }) => <svg className={className} viewBox="0 0 24 24" aria-hidden="true" {...sp}><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.34 12 19.79 19.79 0 011.27 3.45 2 2 0 013.27 1.27h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L7.09 9.4a16 16 0 006.54 6.54l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" /></svg>;
 
-  return (
-    <>
-      <SEO
-        title="Privacy Policy"
-        description="Learn how Little Haven Nursery protects your privacy and handles personal information. Our comprehensive privacy policy ensures your data is secure and used responsibly."
-        keywords={['privacy policy', 'data protection', 'GDPR', 'personal information', 'nursery privacy']}
-        canonicalUrl="/privacy-policy"
-      />
-      
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-primary-600 to-primary-700 text-white py-16 sm:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto">
-            <motion.h1 
-              initial={{ opacity: 0, y: 20 }} 
-              animate={{ opacity: 1, y: 0 }} 
-              className="text-4xl sm:text-5xl font-bold mb-6"
+const DOT_BG = "radial-gradient(circle at 2px 2px, white 1px, transparent 0)";
+
+const lastUpdated = "2024-08-10";
+
+const dataCategories = [
+  {
+    title: "Personal Information",
+    description: "Names, contact details, emergency contacts, and family information",
+    examples: ["Child's full name", "Parent/guardian contact details", "Emergency contact information"]
+  },
+  {
+    title: "Health & Medical",
+    description: "Medical conditions, allergies, and health requirements",
+    examples: ["Allergies and dietary restrictions", "Medical conditions", "Medication requirements"]
+  },
+  {
+    title: "Educational Records",
+    description: "Learning progress, observations, and development milestones",
+    examples: ["EYFS progress reports", "Learning observations", "Development assessments"]
+  },
+  {
+    title: "Attendance Records",
+    description: "Daily attendance, arrival and departure times",
+    examples: ["Daily attendance logs", "Arrival and departure times", "Absence records"]
+  }
+];
+
+const dataRights = [
+  { title: "Right to Access", description: "Request a copy of your personal data held by us at any time.", icon: EyeIcon, color: "bg-primary-50 text-primary-600" },
+  { title: "Right to Rectification", description: "Ask us to correct inaccurate or incomplete information.", icon: UserCheckIcon, color: "bg-teal-50 text-teal-600" },
+  { title: "Right to Erasure", description: "Request deletion of your personal data where applicable.", icon: DatabaseIcon, color: "bg-primary-50 text-primary-500" },
+  { title: "Right to Object", description: "Object to certain types of processing of your data.", icon: ShieldIcon, color: "bg-teal-50 text-teal-500" }
+];
+
+const useItems = [
+  { label: "Providing childcare services", detail: "To ensure your child receives appropriate care and education tailored to their needs." },
+  { label: "Health and safety", detail: "To maintain a safe environment and respond swiftly to any medical needs." },
+  { label: "Communication", detail: "To keep you informed about your child's progress and nursery activities." },
+  { label: "Legal obligations", detail: "To comply with CIW requirements and other regulatory obligations." },
+  { label: "Emergency situations", detail: "To contact you or emergency services when necessary." }
+];
+
+const sharingItems = [
+  { label: "With your consent", detail: "When you have given us explicit permission to share specific information." },
+  { label: "Legal requirements", detail: "When required by law or regulatory bodies (e.g., CIW, local authorities)." },
+  { label: "Emergency situations", detail: "When necessary to protect your child's health and safety." },
+  { label: "Service providers", detail: "With trusted third parties who help us provide our services (e.g., IT support, insurance)." }
+];
+
+const securityItems = [
+  "Secure storage systems with encryption",
+  "Access controls and authentication procedures",
+  "Regular security assessments and updates",
+  "Staff training on data protection and security",
+  "Incident response procedures"
+];
+
+const retentionItems = [
+  { label: "Child records", detail: "Until the child reaches 25 years of age (CIW requirement)" },
+  { label: "Financial records", detail: "For 7 years (tax and accounting requirements)" },
+  { label: "Incident reports", detail: "For 3 years after the incident" },
+  { label: "Marketing communications", detail: "Until you unsubscribe or withdraw consent" }
+];
+
+const ProseDot = () => (
+  <span className="w-1.5 h-1.5 rounded-full bg-primary-400 mt-2 flex-shrink-0" />
+);
+
+const PrivacyPolicy = memo(() => (
+  <>
+    <SEO
+      title="Privacy Policy"
+      description="Learn how Little Haven Nursery protects your privacy and handles personal information. Our comprehensive privacy policy ensures your data is secure and used responsibly."
+      keywords={['privacy policy', 'data protection', 'GDPR', 'personal information', 'nursery privacy']}
+      canonicalUrl="/privacy-policy"
+    />
+
+    {/* Hero */}
+    <section
+      className="relative overflow-hidden text-white py-20 sm:py-28"
+      style={{ background: "linear-gradient(135deg, #0c2b5e 0%, #0a2248 60%, #0e2d58 100%)" }}
+    >
+      <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: DOT_BG, backgroundSize: "32px 32px", opacity: 0.04 }} />
+      <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-96 h-96 rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, rgba(147,197,253,0.07) 0%, transparent 70%)" }} />
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          className="max-w-3xl"
+        >
+          <div className="flex items-center gap-3 mb-6">
+            <span className="w-8 h-px bg-primary-300/60 flex-shrink-0" />
+            <span className="font-sans text-xs font-semibold uppercase tracking-widest text-primary-300">Legal</span>
+          </div>
+          <h1
+            className="font-display font-semibold leading-tight mb-6"
+            style={{ fontSize: "clamp(2.5rem, 5vw, 3.75rem)" }}
+          >
+            Privacy{" "}
+            <em className="not-italic text-primary-200">Policy</em>
+          </h1>
+          <p className="font-sans text-lg sm:text-xl text-white/70 leading-relaxed max-w-2xl mb-8">
+            Your privacy matters to us. Learn how we collect, use, and protect your personal
+            information in accordance with GDPR and UK data protection law.
+          </p>
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full border border-white/20">
+            <ShieldIcon className="w-4 h-4 text-primary-300" />
+            <span className="font-sans text-sm text-white/80">Last updated: {lastUpdated}</span>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+
+    {/* Introduction */}
+    <section className="py-16 sm:py-24 bg-white">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <div className="flex items-center gap-3 mb-6">
+            <span className="w-8 h-px bg-primary-300 flex-shrink-0" />
+            <span className="font-sans text-xs font-semibold uppercase tracking-widest text-primary-500">Overview</span>
+          </div>
+          <h2 className="font-display font-semibold text-neutral-900 mb-6" style={{ fontSize: "clamp(1.5rem, 2.5vw, 2rem)" }}>
+            Introduction
+          </h2>
+          <div className="space-y-4">
+            <p className="font-sans text-neutral-600 leading-relaxed text-lg">
+              Little Haven Nursery is committed to protecting your privacy and ensuring the security of your
+              personal information. This privacy policy explains how we collect, use, store, and protect your
+              data in accordance with the General Data Protection Regulation (GDPR) and other applicable
+              data protection laws.
+            </p>
+            <p className="font-sans text-neutral-600 leading-relaxed text-lg">
+              We are the data controller for the personal information we collect about you and your child.
+              This means we are responsible for deciding how we use your personal information and ensuring
+              it is handled lawfully and securely.
+            </p>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+
+    {/* Data We Collect */}
+    <section className="py-16 sm:py-24" style={{ background: "#faf8f4" }}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-2xl mb-14"
+        >
+          <div className="flex items-center gap-3 mb-4">
+            <span className="w-8 h-px bg-primary-300 flex-shrink-0" />
+            <span className="font-sans text-xs font-semibold uppercase tracking-widest text-primary-500">What We Hold</span>
+          </div>
+          <h2 className="font-display font-semibold text-neutral-900 leading-tight" style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)" }}>
+            Data We Collect
+          </h2>
+          <p className="font-sans text-neutral-500 text-lg leading-relaxed mt-3">
+            We collect various types of personal information to provide safe and effective childcare services.
+          </p>
+        </motion.div>
+
+        <div className="grid md:grid-cols-2 gap-6">
+          {dataCategories.map((cat, i) => (
+            <motion.div
+              key={cat.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.08 }}
+              className="bg-white rounded-2xl shadow-soft border border-neutral-100 p-6 sm:p-8"
             >
-              Privacy Policy
-            </motion.h1>
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }} 
-              animate={{ opacity: 1, y: 0 }} 
-              transition={{ delay: 0.2 }}
-              className="text-xl text-primary-100 max-w-content mx-auto"
-            >
-              Your privacy is important to us. Learn how we protect and handle your personal information.
-            </motion.p>
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }} 
-              animate={{ opacity: 1, y: 0 }} 
-              transition={{ delay: 0.4 }}
-              className="mt-6 text-primary-200"
-            >
-              <p>Last updated: {lastUpdated}</p>
+              <div className="flex items-center gap-3 mb-1">
+                <span className="w-2 h-2 rounded-full bg-primary-400 flex-shrink-0" />
+                <h3 className="font-display font-semibold text-neutral-900 text-xl">{cat.title}</h3>
+              </div>
+              <p className="font-sans text-neutral-500 text-sm leading-relaxed mb-4 ml-5">{cat.description}</p>
+              <ul className="space-y-2 ml-5">
+                {cat.examples.map((ex, j) => (
+                  <li key={j} className="flex items-start gap-2">
+                    <span className="w-1 h-1 rounded-full bg-neutral-300 mt-2.5 flex-shrink-0" />
+                    <span className="font-sans text-neutral-600 text-sm">{ex}</span>
+                  </li>
+                ))}
+              </ul>
             </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* How We Use / Data Sharing */}
+    <section className="py-16 sm:py-24 bg-white">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid md:grid-cols-2 gap-12 md:gap-16">
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <div className="flex items-center gap-3 mb-5">
+              <span className="w-8 h-px bg-primary-300 flex-shrink-0" />
+              <span className="font-sans text-xs font-semibold uppercase tracking-widest text-primary-500">Usage</span>
+            </div>
+            <h2 className="font-display font-semibold text-neutral-900 mb-6" style={{ fontSize: "clamp(1.4rem, 2.5vw, 1.875rem)" }}>
+              How We Use Your Data
+            </h2>
+            <ul className="space-y-4">
+              {useItems.map((item, i) => (
+                <li key={i} className="flex items-start gap-3">
+                  <ProseDot />
+                  <div>
+                    <span className="font-sans font-semibold text-neutral-800 text-sm">{item.label}: </span>
+                    <span className="font-sans text-neutral-500 text-sm leading-relaxed">{item.detail}</span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+          >
+            <div className="flex items-center gap-3 mb-5">
+              <span className="w-8 h-px bg-primary-300 flex-shrink-0" />
+              <span className="font-sans text-xs font-semibold uppercase tracking-widest text-primary-500">Sharing</span>
+            </div>
+            <h2 className="font-display font-semibold text-neutral-900 mb-4" style={{ fontSize: "clamp(1.4rem, 2.5vw, 1.875rem)" }}>
+              Data Sharing
+            </h2>
+            <p className="font-sans text-neutral-500 text-sm leading-relaxed mb-5">
+              We do not sell, trade, or rent your personal information to third parties. We may share your
+              data only in the following circumstances:
+            </p>
+            <ul className="space-y-4">
+              {sharingItems.map((item, i) => (
+                <li key={i} className="flex items-start gap-3">
+                  <ProseDot />
+                  <div>
+                    <span className="font-sans font-semibold text-neutral-800 text-sm">{item.label}: </span>
+                    <span className="font-sans text-neutral-500 text-sm leading-relaxed">{item.detail}</span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+
+    {/* Data Security */}
+    <section className="py-16 sm:py-24" style={{ background: "#faf8f4" }}>
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <div className="flex items-center gap-3 mb-5">
+            <span className="w-8 h-px bg-primary-300 flex-shrink-0" />
+            <span className="font-sans text-xs font-semibold uppercase tracking-widest text-primary-500">Security</span>
           </div>
-        </div>
-      </section>
-
-      {/* Introduction */}
-      <section className="py-16 sm:py-24 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }} 
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="prose prose-lg max-w-content mx-auto"
-          >
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">Introduction</h2>
-            <p className="text-gray-600 mb-6">
-              Little Haven Nursery is committed to protecting your privacy and ensuring the security of your personal information. 
-              This privacy policy explains how we collect, use, store, and protect your data in accordance with the General Data 
-              Protection Regulation (GDPR) and other applicable data protection laws.
-            </p>
-            <p className="text-gray-600 mb-6">
-              We are the data controller for the personal information we collect about you and your child. This means we are 
-              responsible for deciding how we use your personal information and ensuring it is handled lawfully and securely.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Data We Collect */}
-      <section className="py-16 sm:py-24 bg-gray-50">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }} 
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">Data We Collect</h2>
-            <p className="text-lg text-gray-600 max-w-content mx-auto">
-              We collect and process various types of personal information to provide safe and effective childcare services.
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            {dataCategories.map((category, index) => (
-              <motion.div
-                key={category.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-white rounded-lg2 p-8 sm:p-12 shadow-lg"
-              >
-                <h3 className="text-xl font-bold text-gray-900 mb-4">{category.title}</h3>
-                <p className="text-gray-600 mb-4">{category.description}</p>
-                <ul className="space-y-2">
-                  {category.examples.map((example, idx) => (
-                    <li key={idx} className="text-gray-600 flex items-start">
-                      <span className="w-2 h-2 bg-primary-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                      {example}
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-            ))}
+          <h2 className="font-display font-semibold text-neutral-900 mb-4" style={{ fontSize: "clamp(1.5rem, 2.5vw, 2rem)" }}>
+            Data Security
+          </h2>
+          <p className="font-sans text-neutral-600 leading-relaxed mb-8">
+            We implement appropriate technical and organisational measures to protect your personal
+            information against unauthorised access, alteration, disclosure, or destruction.
+          </p>
+          <div className="bg-white rounded-2xl shadow-soft border border-neutral-100 p-6 sm:p-8">
+            <ul className="space-y-3">
+              {securityItems.map((item, i) => (
+                <li key={i} className="flex items-center gap-3">
+                  <span className="w-5 h-5 rounded-full bg-primary-50 flex items-center justify-center flex-shrink-0">
+                    <span className="w-1.5 h-1.5 rounded-full bg-primary-500" />
+                  </span>
+                  <span className="font-sans text-neutral-700 text-sm leading-relaxed">{item}</span>
+                </li>
+              ))}
+            </ul>
           </div>
-        </div>
-      </section>
+        </motion.div>
+      </div>
+    </section>
 
-      {/* How We Use Your Data */}
-      <section className="py-16 sm:py-24 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }} 
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="prose prose-lg max-w-content mx-auto"
-          >
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">How We Use Your Data</h2>
-            <p className="text-gray-600 mb-6">
-              We use your personal information for the following purposes:
-            </p>
-            <ul className="space-y-4 text-gray-600">
-              <li className="flex items-start">
-                <span className="w-2 h-2 bg-primary-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                <span><strong>Providing childcare services:</strong> To ensure your child receives appropriate care and education</span>
-              </li>
-              <li className="flex items-start">
-                <span className="w-2 h-2 bg-primary-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                <span><strong>Health and safety:</strong> To maintain a safe environment and respond to medical needs</span>
-              </li>
-              <li className="flex items-start">
-                <span className="w-2 h-2 bg-primary-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                <span><strong>Communication:</strong> To keep you informed about your child's progress and nursery activities</span>
-              </li>
-              <li className="flex items-start">
-                <span className="w-2 h-2 bg-primary-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                <span><strong>Legal obligations:</strong> To comply with Ofsted requirements and other regulatory obligations</span>
-              </li>
-              <li className="flex items-start">
-                <span className="w-2 h-2 bg-primary-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                <span><strong>Emergency situations:</strong> To contact you or emergency services when necessary</span>
-              </li>
-            </ul>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Data Sharing */}
-      <section className="py-16 sm:py-24 bg-gray-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }} 
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="prose prose-lg max-w-content mx-auto"
-          >
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">Data Sharing</h2>
-            <p className="text-gray-600 mb-6">
-              We do not sell, trade, or rent your personal information to third parties. We may share your data only in 
-              the following circumstances:
-            </p>
-            <ul className="space-y-4 text-gray-600">
-              <li className="flex items-start">
-                <span className="w-2 h-2 bg-primary-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                <span><strong>With your consent:</strong> When you have given us explicit permission to share specific information</span>
-              </li>
-              <li className="flex items-start">
-                <span className="w-2 h-2 bg-primary-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                <span><strong>Legal requirements:</strong> When required by law or regulatory bodies (e.g., Ofsted, local authorities)</span>
-              </li>
-              <li className="flex items-start">
-                <span className="w-2 h-2 bg-primary-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                <span><strong>Emergency situations:</strong> When necessary to protect your child's health and safety</span>
-              </li>
-              <li className="flex items-start">
-                <span className="w-2 h-2 bg-primary-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                <span><strong>Service providers:</strong> With trusted third parties who help us provide our services (e.g., IT support, insurance)</span>
-              </li>
-            </ul>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Data Security */}
-      <section className="py-16 sm:py-24 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }} 
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="prose prose-lg max-w-content mx-auto"
-          >
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">Data Security</h2>
-            <p className="text-gray-600 mb-6">
-              We implement appropriate technical and organizational measures to protect your personal information against 
-              unauthorized access, alteration, disclosure, or destruction. These measures include:
-            </p>
-            <ul className="space-y-4 text-gray-600">
-              <li className="flex items-start">
-                <span className="w-2 h-2 bg-primary-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                <span>Secure storage systems with encryption</span>
-              </li>
-              <li className="flex items-start">
-                <span className="w-2 h-2 bg-primary-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                <span>Access controls and authentication procedures</span>
-              </li>
-              <li className="flex items-start">
-                <span className="w-2 h-2 bg-primary-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                <span>Regular security assessments and updates</span>
-              </li>
-              <li className="flex items-start">
-                <span className="w-2 h-2 bg-primary-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                <span>Staff training on data protection and security</span>
-              </li>
-              <li className="flex items-start">
-                <span className="w-2 h-2 bg-primary-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                <span>Incident response procedures</span>
-              </li>
-            </ul>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Your Rights */}
-      <section className="py-16 sm:py-24 bg-gray-50">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }} 
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">Your Rights</h2>
-            <p className="text-lg text-gray-600 max-w-content mx-auto">
-              Under data protection law, you have several rights regarding your personal information.
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            {dataRights.map((right, index) => (
-              <motion.div
-                key={right.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-white rounded-lg2 p-8 sm:p-12 shadow-lg text-center"
-              >
-                <right.icon className="w-12 h-12 text-primary-600 mx-auto mb-4" />
-                <h3 className="text-xl font-bold text-gray-900 mb-4">{right.title}</h3>
-                <p className="text-gray-600">{right.description}</p>
-              </motion.div>
-            ))}
+    {/* Your Rights */}
+    <section className="py-16 sm:py-24 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-2xl mb-14"
+        >
+          <div className="flex items-center gap-3 mb-4">
+            <span className="w-8 h-px bg-primary-300 flex-shrink-0" />
+            <span className="font-sans text-xs font-semibold uppercase tracking-widest text-primary-500">GDPR Rights</span>
           </div>
-        </div>
-      </section>
+          <h2 className="font-display font-semibold text-neutral-900 leading-tight" style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)" }}>
+            Your Rights
+          </h2>
+          <p className="font-sans text-neutral-500 text-lg leading-relaxed mt-3">
+            Under data protection law, you have several rights regarding your personal information.
+          </p>
+        </motion.div>
 
-      {/* Data Retention */}
-      <section className="py-16 sm:py-24 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }} 
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {dataRights.map((right, i) => (
+            <motion.div
+              key={right.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.08 }}
+              className="bg-white rounded-2xl shadow-soft border border-neutral-100 p-6"
+            >
+              <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-5 ${right.color}`}>
+                <right.icon className="w-6 h-6" />
+              </div>
+              <h3 className="font-display font-semibold text-neutral-900 text-lg mb-2">{right.title}</h3>
+              <p className="font-sans text-neutral-500 text-sm leading-relaxed">{right.description}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* Data Retention + Contact */}
+    <section className="py-16 sm:py-24" style={{ background: "#faf8f4" }}>
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid md:grid-cols-2 gap-12 md:gap-16">
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="prose prose-lg max-w-content mx-auto"
           >
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">Data Retention</h2>
-            <p className="text-gray-600 mb-6">
-              We retain your personal information only for as long as necessary to fulfill the purposes for which it was 
-              collected, including for the purposes of satisfying any legal, regulatory, tax, accounting, or reporting requirements.
+            <div className="flex items-center gap-3 mb-5">
+              <span className="w-8 h-px bg-primary-300 flex-shrink-0" />
+              <span className="font-sans text-xs font-semibold uppercase tracking-widest text-primary-500">Retention</span>
+            </div>
+            <h2 className="font-display font-semibold text-neutral-900 mb-4" style={{ fontSize: "clamp(1.4rem, 2.5vw, 1.875rem)" }}>
+              Data Retention
+            </h2>
+            <p className="font-sans text-neutral-500 text-sm leading-relaxed mb-6">
+              We retain your personal information only for as long as necessary to fulfil the purposes
+              for which it was collected, including any legal or regulatory requirements.
             </p>
-            <p className="text-gray-600 mb-6">
-              Generally, we retain:
-            </p>
-            <ul className="space-y-4 text-gray-600">
-              <li className="flex items-start">
-                <span className="w-2 h-2 bg-primary-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                <span><strong>Child records:</strong> Until the child reaches 25 years of age (Ofsted requirement)</span>
-              </li>
-              <li className="flex items-start">
-                <span className="w-2 h-2 bg-primary-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                <span><strong>Financial records:</strong> For 7 years (tax and accounting requirements)</span>
-              </li>
-              <li className="flex items-start">
-                <span className="w-2 h-2 bg-primary-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                <span><strong>Incident reports:</strong> For 3 years after the incident</span>
-              </li>
-              <li className="flex items-start">
-                <span className="w-2 h-2 bg-primary-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                <span><strong>Marketing communications:</strong> Until you unsubscribe or withdraw consent</span>
-              </li>
+            <ul className="space-y-4">
+              {retentionItems.map((item, i) => (
+                <li key={i} className="flex items-start gap-3">
+                  <ProseDot />
+                  <div>
+                    <span className="font-sans font-semibold text-neutral-800 text-sm">{item.label}: </span>
+                    <span className="font-sans text-neutral-500 text-sm leading-relaxed">{item.detail}</span>
+                  </div>
+                </li>
+              ))}
             </ul>
           </motion.div>
-        </div>
-      </section>
 
-      {/* Contact Information */}
-      <section className="py-16 sm:py-24 bg-gray-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }} 
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center"
+            transition={{ delay: 0.1 }}
           >
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">Contact Us</h2>
-            <p className="text-lg text-gray-600 mb-8 max-w-content mx-auto">
-              If you have any questions about this privacy policy or how we handle your personal information, 
+            <div className="flex items-center gap-3 mb-5">
+              <span className="w-8 h-px bg-primary-300 flex-shrink-0" />
+              <span className="font-sans text-xs font-semibold uppercase tracking-widest text-primary-500">Contact</span>
+            </div>
+            <h2 className="font-display font-semibold text-neutral-900 mb-4" style={{ fontSize: "clamp(1.4rem, 2.5vw, 1.875rem)" }}>
+              Contact Us
+            </h2>
+            <p className="font-sans text-neutral-500 text-sm leading-relaxed mb-6">
+              If you have questions about this privacy policy or how we handle your personal information,
               please contact our Data Protection Officer:
             </p>
-            
-            <div className="bg-white rounded-lg2 p-8 sm:p-12 shadow-lg max-w-2xl mx-auto">
-              <div className="space-y-4">
-                <div className="flex items-center justify-center gap-3">
-                  <FaEnvelope className="text-primary-600" />
-                  <span className="text-gray-700">learn@littlehavennursery.co.uk</span>
-                </div>
-                <div className="flex items-center justify-center gap-3">
-                  <FaPhone className="text-primary-600" />
-                  <span className="text-gray-700">02920891825</span>
-                </div>
-                <p className="text-sm text-gray-500 mt-4">
-                  We aim to respond to all privacy-related inquiries within 30 days on working days.
-                </p>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Updates to Policy */}
-      <section className="py-16 sm:py-24 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }} 
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="prose prose-lg max-w-content mx-auto"
-          >
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">Updates to This Policy</h2>
-            <p className="text-gray-600 mb-6">
-              We may update this privacy policy from time to time to reflect changes in our practices or for other 
-              operational, legal, or regulatory reasons. When we make changes, we will:
-            </p>
-            <ul className="space-y-4 text-gray-600">
-              <li className="flex items-start">
-                <span className="w-2 h-2 bg-primary-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                <span>Update the "Last updated" date at the top of this policy</span>
-              </li>
-              <li className="flex items-start">
-                <span className="w-2 h-2 bg-primary-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                <span>Notify you of significant changes via email or through our website</span>
-              </li>
-              <li className="flex items-start">
-                <span className="w-2 h-2 bg-primary-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                <span>Provide you with an opportunity to review the changes before they take effect</span>
-              </li>
-            </ul>
-            <p className="text-gray-600 mt-6">
-              We encourage you to review this privacy policy periodically to stay informed about how we protect your information.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-16 sm:py-24 bg-primary-600 text-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }} 
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl font-bold mb-6">Have Questions?</h2>
-            <p className="text-xl text-primary-100 mb-8 max-w-content mx-auto">
-              If you need clarification on any aspect of our privacy policy or have concerns about how we handle your data, 
-              please don't hesitate to get in touch.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a 
+            <div className="bg-white rounded-2xl shadow-soft border border-neutral-100 p-6 space-y-4">
+              <a
                 href="mailto:learn@littlehavennursery.co.uk"
-                className="inline-flex items-center px-6 py-3 bg-white text-primary-600 font-semibold rounded-lg2 shadow-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-600 transition-all duration-200"
+                className="flex items-center gap-3 group"
               >
-                <FaEnvelope className="mr-2" />
-                Contact Privacy Officer
+                <EnvelopeIcon className="w-4 h-4 text-neutral-400 flex-shrink-0 group-hover:text-primary-500 transition-colors" />
+                <span className="font-sans text-sm text-neutral-600 group-hover:text-primary-600 transition-colors">
+                  learn@littlehavennursery.co.uk
+                </span>
               </a>
-              <Link 
-                to="/contact"
-                className="inline-flex items-center px-6 py-3 bg-primary-700 text-white font-semibold rounded-lg2 shadow-lg hover:bg-primary-800 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-primary-600 transition-all duration-200"
+              <a
+                href="tel:02920891825"
+                className="flex items-center gap-3 group"
               >
-                General Contact
-              </Link>
+                <PhoneIcon className="w-4 h-4 text-neutral-400 flex-shrink-0 group-hover:text-primary-500 transition-colors" />
+                <span className="font-sans text-sm text-neutral-600 group-hover:text-primary-600 transition-colors">
+                  02920 891825
+                </span>
+              </a>
+              <p className="font-sans text-xs text-neutral-400 pt-2 border-t border-neutral-100">
+                We aim to respond to all privacy-related enquiries within 30 days on working days.
+              </p>
             </div>
           </motion.div>
-        </div>
-      </section>
-    </>
-  );
-};
 
+        </div>
+      </div>
+    </section>
+
+    {/* Policy Updates */}
+    <section className="py-16 sm:py-20 bg-white">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <div className="flex items-center gap-3 mb-5">
+            <span className="w-8 h-px bg-primary-300 flex-shrink-0" />
+            <span className="font-sans text-xs font-semibold uppercase tracking-widest text-primary-500">Updates</span>
+          </div>
+          <h2 className="font-display font-semibold text-neutral-900 mb-4" style={{ fontSize: "clamp(1.5rem, 2.5vw, 2rem)" }}>
+            Updates to This Policy
+          </h2>
+          <p className="font-sans text-neutral-600 leading-relaxed mb-5">
+            We may update this privacy policy from time to time to reflect changes in our practices or for
+            other operational, legal, or regulatory reasons. When we make changes, we will:
+          </p>
+          <ul className="space-y-3">
+            {[
+              "Update the \"Last updated\" date at the top of this policy",
+              "Notify you of significant changes via email or through our website",
+              "Provide you with an opportunity to review the changes before they take effect"
+            ].map((item, i) => (
+              <li key={i} className="flex items-start gap-3">
+                <ProseDot />
+                <span className="font-sans text-neutral-600 text-sm leading-relaxed">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </motion.div>
+      </div>
+    </section>
+
+    {/* CTA */}
+    <section
+      className="relative overflow-hidden text-white py-20"
+      style={{ background: "linear-gradient(135deg, #0c2b5e 0%, #0a2248 60%, #0e2d58 100%)" }}
+    >
+      <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: DOT_BG, backgroundSize: "32px 32px", opacity: 0.04 }} />
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <h2 className="font-display font-semibold text-3xl sm:text-4xl mb-4">
+            Have Questions?
+          </h2>
+          <p className="font-sans text-white/70 text-lg mb-8 max-w-2xl mx-auto leading-relaxed">
+            If you need clarification on any aspect of our privacy policy or have concerns about how we
+            handle your data, please don&apos;t hesitate to get in touch.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="mailto:learn@littlehavennursery.co.uk"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-primary-700 font-semibold font-sans rounded-full shadow-medium hover:bg-primary-50 transition-all duration-200"
+            >
+              <EnvelopeIcon className="w-4 h-4" />
+              Email Privacy Officer
+            </a>
+            <Link
+              to="/contact"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-white/20 text-white font-semibold font-sans rounded-full hover:bg-white/10 transition-all duration-200"
+            >
+              General Contact
+            </Link>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  </>
+));
+
+PrivacyPolicy.displayName = 'PrivacyPolicy';
 export default PrivacyPolicy;
