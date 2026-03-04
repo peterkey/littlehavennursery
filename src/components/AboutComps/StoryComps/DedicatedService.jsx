@@ -1,103 +1,155 @@
+import { memo } from "react";
 import { motion } from "framer-motion";
-import { FaUsers, FaBook, FaHeart } from "react-icons/fa";
 
-const ServiceCard = ({ icon: Icon, title, description, delay }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5, delay }}
-    viewport={{ once: true }}
-    className="relative group"
-  >
-    <div className="bg-white/90 backdrop-blur-sm p-8 rounded-2xl shadow-lg border border-primary-100 
-                    transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-      <div className="absolute inset-0 bg-gradient-to-br from-primary-50 to-blue-50 opacity-0 
-                    group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
-      <div className="relative z-10">
-        <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-br from-primary-400 to-blue-500 
-                      rounded-xl flex items-center justify-center shadow-lg transform 
-                      group-hover:scale-110 transition-transform duration-300">
-          <Icon className="text-white text-2xl" />
-        </div>
-        <h4 className="text-xl font-bold text-primary-900 mb-3">{title}</h4>
-        <p className="text-gray-600 leading-relaxed">{description}</p>
-      </div>
-    </div>
-  </motion.div>
-);
+const ease = [0.22, 1, 0.36, 1];
 
-const DedicatedService = () => {
-  const services = [
-    {
-      icon: FaUsers,
-      title: "Supporting Families",
-      description: "We have worked with thousands of families, providing accessible early education and fostering strong parent-child relationships."
-    },
-    {
-      icon: FaBook,
-      title: "Early Years Education",
-      description: "Our focus has always been on quality learning experiences that build confidence, creativity, and curiosity in young children."
-    },
-    {
-      icon: FaHeart,
-      title: "Community Impact",
-      description: "Through our involvement in public initiatives, we have helped create supportive environments that nurture every child's potential."
-    }
-  ];
-
-  return (
-    <section className="relative py-24 overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary-900 to-blue-900" />
-
-      {/* Decorative Elements */}
-      <div className="absolute top-0 right-0 w-64 h-64 bg-primary-400 rounded-full mix-blend-multiply 
-                    filter blur-3xl opacity-10 animate-blob" />
-      <div className="absolute -bottom-8 left-0 w-64 h-64 bg-blue-400 rounded-full mix-blend-multiply 
-                    filter blur-3xl opacity-10 animate-blob animation-delay-2000" />
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-        className="container mx-auto px-6 relative z-10"
-      >
-        {/* Header Content */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="text-4xl font-bold text-white mb-6"
-          >
-            Dedicated to Public Service
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            viewport={{ once: true }}
-            className="text-lg text-blue-100 leading-relaxed"
-          >
-            Our commitment to early childhood education goes beyond private nurseries. We have been an integral part of
-            community-led initiatives, shaping young minds and ensuring every child has access to quality learning
-            experiences.
-          </motion.p>
-        </div>
-
-        {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {services.map((service, index) => (
-            <ServiceCard key={index} {...service} delay={index * 0.1} />
-          ))}
-        </div>
-
-
-      </motion.div>
-    </section>
-  );
+const sp = {
+  fill: "none",
+  stroke: "currentColor",
+  strokeWidth: "1.75",
+  strokeLinecap: "round",
+  strokeLinejoin: "round",
 };
 
-export default DedicatedService;
+const SERVICES = [
+  {
+    title: "Supporting Families",
+    body: "We have worked with thousands of families across Cardiff, providing accessible early education and fostering strong parent-practitioner relationships built on trust and open communication.",
+    icon: (
+      <svg viewBox="0 0 24 24" {...sp}>
+        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+        <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+      </svg>
+    ),
+  },
+  {
+    title: "Early Years Education",
+    body: "Quality learning experiences are our foundation. We focus on building confidence, creativity, and curiosity — the qualities that make children lifelong learners from the very start.",
+    icon: (
+      <svg viewBox="0 0 24 24" {...sp}>
+        <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+      </svg>
+    ),
+  },
+  {
+    title: "Community Impact",
+    body: "Through years of involvement in Flying Start and public early years initiatives, we have helped build supportive communities where every child has the opportunity to thrive.",
+    icon: (
+      <svg viewBox="0 0 24 24" {...sp}>
+        <path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    ),
+  },
+];
+
+const IMPACT_STATS = [
+  { value: "20+", label: "Years serving Cardiff families" },
+  { value: "3", label: "Nursery settings" },
+  { value: "100s", label: "Of children each year" },
+];
+
+/* ── DedicatedService ────────────────────────────────────────────── */
+const DedicatedService = () => (
+  <section
+    className="py-20 sm:py-28 relative overflow-hidden"
+    style={{
+      background: "linear-gradient(135deg, #0c2b5e 0%, #0a2248 60%, #0e2d58 100%)",
+    }}
+  >
+    {/* Dot texture */}
+    <div
+      aria-hidden="true"
+      className="absolute inset-0 opacity-[0.04]"
+      style={{
+        backgroundImage: "radial-gradient(circle at 2px 2px, white 1px, transparent 0)",
+        backgroundSize: "28px 28px",
+      }}
+    />
+    {/* Ambient glow */}
+    <div
+      aria-hidden="true"
+      className="absolute left-0 bottom-0 w-[500px] h-[500px] pointer-events-none"
+      style={{
+        background: "radial-gradient(circle, rgba(94,234,212,0.07) 0%, transparent 70%)",
+      }}
+    />
+
+    <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      {/* Header */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, ease }}
+        className="max-w-2xl mb-14"
+      >
+        <div className="flex items-center gap-2.5 mb-4">
+          <span className="w-7 h-px bg-white/35 flex-shrink-0" />
+          <span className="font-sans text-xs font-semibold uppercase tracking-widest text-white/45">
+            Dedicated Service
+          </span>
+        </div>
+        <h2
+          className="font-display font-semibold text-white leading-tight mb-4"
+          style={{ fontSize: "clamp(2rem, 3.5vw, 2.8rem)" }}
+        >
+          More than a nursery —<br />
+          <span className="text-primary-200 italic">a community commitment.</span>
+        </h2>
+        <p className="font-sans text-white/60 text-lg leading-relaxed">
+          Our roots are in public service. That community spirit continues to shape how we run
+          every nursery today.
+        </p>
+      </motion.div>
+
+      {/* Service cards */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-14">
+        {SERVICES.map((service, i) => (
+          <motion.div
+            key={service.title}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.55, delay: i * 0.1, ease }}
+            className="bg-white/[0.06] border border-white/10 rounded-2xl p-7 backdrop-blur-sm"
+          >
+            <div className="w-11 h-11 rounded-xl bg-white/10 flex items-center justify-center mb-5 text-white/75">
+              <div className="w-5 h-5">{service.icon}</div>
+            </div>
+            <h3 className="font-display text-lg font-semibold text-white mb-3 leading-snug">
+              {service.title}
+            </h3>
+            <p className="font-sans text-sm text-white/60 leading-relaxed">{service.body}</p>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Impact stats strip */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.2, ease }}
+        className="grid grid-cols-3 gap-px bg-white/10 rounded-2xl overflow-hidden"
+      >
+        {IMPACT_STATS.map((stat) => (
+          <div key={stat.label} className="bg-white/[0.04] px-6 py-7 text-center">
+            <p
+              className="font-display font-semibold text-primary-200 leading-none mb-2"
+              style={{ fontSize: "2.25rem" }}
+            >
+              {stat.value}
+            </p>
+            <p className="font-sans text-white/50 text-sm">{stat.label}</p>
+          </div>
+        ))}
+      </motion.div>
+
+    </div>
+  </section>
+);
+
+DedicatedService.displayName = "DedicatedService";
+export default memo(DedicatedService);

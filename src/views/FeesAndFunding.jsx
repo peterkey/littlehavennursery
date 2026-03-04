@@ -60,7 +60,14 @@ const SECTIONS = [
 const FUNDING_STATS = [
   { value: "10", label: "Free hours", sub: "for all 3–4 year olds" },
   { value: "30", label: "Total hours", sub: "for eligible working families" },
-  { value: "39", label: "Weeks p/yr", sub: "of funded provision" },
+  { value: "39", label: "Weeks / year", sub: "of funded provision" },
+];
+
+const SAVINGS_STATS = [
+  { value: "30hrs", label: "Free childcare / week", detail: "for eligible 3–4 year olds in Wales", accent: "text-teal-300" },
+  { value: "£2k", label: "Saved / year", detail: "via Tax-Free Childcare scheme", accent: "text-primary-200" },
+  { value: "85%", label: "Costs covered", detail: "through Universal Credit support", accent: "text-teal-300" },
+  { value: "3", label: "Funding routes", detail: "you can combine together", accent: "text-primary-200" },
 ];
 
 /* ── FeesAndFunding ──────────────────────────────────────────────── */
@@ -71,7 +78,7 @@ const FeesAndFunding = () => (
     <section
       className="relative overflow-hidden"
       style={{
-        minHeight: "380px",
+        minHeight: "440px",
         background: "linear-gradient(135deg, #0c2b5e 0%, #0a2248 60%, #0e2d58 100%)",
       }}
     >
@@ -87,15 +94,15 @@ const FeesAndFunding = () => (
       {/* Ambient glow */}
       <div
         aria-hidden="true"
-        className="absolute right-0 top-0 w-[500px] h-[500px] pointer-events-none"
+        className="absolute right-0 top-0 w-[600px] h-[600px] pointer-events-none"
         style={{
           background: "radial-gradient(circle, rgba(125,178,255,0.12) 0%, transparent 70%)",
         }}
       />
 
       <div
-        className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-end pb-14"
-        style={{ minHeight: "380px", paddingTop: "7rem" }}
+        className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-end pb-16"
+        style={{ minHeight: "440px", paddingTop: "8rem" }}
       >
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -123,8 +130,37 @@ const FeesAndFunding = () => (
       </div>
     </section>
 
+    {/* ── Savings stats bar ─────────────────────────────────── */}
+    <div
+      className="border-b border-white/5"
+      style={{ background: "linear-gradient(135deg, #0a2248 0%, #0c2b5e 100%)" }}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-2 lg:grid-cols-4">
+          {SAVINGS_STATS.map((stat, i) => (
+            <motion.div
+              key={stat.label}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.15 + i * 0.08, ease }}
+              className={`py-6 px-5 flex flex-col gap-1 ${i > 0 ? "border-l border-white/[0.07]" : ""}`}
+            >
+              <span
+                className={`font-display font-semibold leading-none ${stat.accent}`}
+                style={{ fontSize: "1.75rem" }}
+              >
+                {stat.value}
+              </span>
+              <span className="font-sans text-white/70 text-sm font-semibold">{stat.label}</span>
+              <span className="font-sans text-white/35 text-xs leading-relaxed">{stat.detail}</span>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </div>
+
     {/* ── Section cards ─────────────────────────────────────── */}
-    <section className="py-16 sm:py-24">
+    <section className="py-20 sm:py-28">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Header */}
@@ -133,7 +169,7 @@ const FeesAndFunding = () => (
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease }}
-          className="max-w-2xl mb-12"
+          className="max-w-2xl mb-14"
         >
           <div className="flex items-center gap-3 mb-4">
             <span className="w-8 h-px bg-primary-300 flex-shrink-0" />
@@ -142,13 +178,15 @@ const FeesAndFunding = () => (
             </span>
           </div>
           <h2
-            className="font-display font-semibold text-neutral-900 leading-tight mb-3"
-            style={{ fontSize: "clamp(1.8rem, 3vw, 2.5rem)" }}
+            className="font-display font-semibold text-neutral-900 leading-tight mb-4"
+            style={{ fontSize: "clamp(2rem, 3.5vw, 2.8rem)" }}
           >
-            Everything you need<br />to know about fees.
+            Everything you need<br />
+            <span className="text-primary-600 italic">to know about fees.</span>
           </h2>
           <p className="font-sans text-neutral-500 text-lg leading-relaxed">
-            We believe every family should be able to make an informed choice. Explore our transparent pricing and all the funding routes available to you.
+            We believe every family should make an informed choice. Explore our transparent pricing and
+            all the funding routes available to you.
           </p>
         </motion.div>
 
@@ -160,12 +198,12 @@ const FeesAndFunding = () => (
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.07, ease }}
+              transition={{ duration: 0.5, delay: index * 0.08, ease }}
             >
               <Link to={section.path} className="block h-full group">
                 <div className="bg-white rounded-2xl p-6 shadow-soft hover:shadow-medium transition-all duration-300 h-full flex flex-col">
                   <div
-                    className={`inline-flex w-10 h-10 rounded-xl items-center justify-center mb-5 flex-shrink-0 ${section.iconBg} ${section.iconColor}`}
+                    className={`inline-flex w-11 h-11 rounded-xl items-center justify-center mb-5 flex-shrink-0 ${section.iconBg} ${section.iconColor}`}
                   >
                     <div className="w-5 h-5">{section.icon}</div>
                   </div>
@@ -177,7 +215,13 @@ const FeesAndFunding = () => (
                   </p>
                   <div className="flex items-center gap-1.5 font-sans text-xs font-semibold text-primary-500 group-hover:text-primary-600 transition-colors duration-200">
                     <span>Learn more</span>
-                    <svg className="w-3 h-3 group-hover:translate-x-0.5 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                    <svg
+                      className="w-3 h-3 group-hover:translate-x-0.5 transition-transform duration-200"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2.5}
+                    >
                       <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                     </svg>
                   </div>
@@ -193,11 +237,11 @@ const FeesAndFunding = () => (
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.65, ease }}
-          className="bg-white rounded-2xl shadow-soft overflow-hidden"
+          className="rounded-2xl overflow-hidden shadow-medium"
         >
           <div className="grid grid-cols-1 lg:grid-cols-2">
             {/* Left: copy */}
-            <div className="p-8 sm:p-12">
+            <div className="bg-white p-8 sm:p-12">
               <div className="flex items-center gap-3 mb-5">
                 <span className="w-7 h-px bg-teal-300 flex-shrink-0" />
                 <span className="font-sans text-xs font-semibold uppercase tracking-widest text-teal-600">
@@ -206,13 +250,15 @@ const FeesAndFunding = () => (
               </div>
               <h2
                 className="font-display font-semibold text-neutral-900 leading-tight mb-4"
-                style={{ fontSize: "clamp(1.6rem, 2.5vw, 2.1rem)" }}
+                style={{ fontSize: "clamp(1.7rem, 2.5vw, 2.2rem)" }}
               >
                 Up to 30 hours of funded<br />
                 <span className="text-teal-600">childcare, free of charge.</span>
               </h2>
               <p className="font-sans text-neutral-600 leading-relaxed text-base mb-8">
-                Wales offers some of the most generous childcare funding in the UK. All 3–4 year olds receive 10 free hours per week, and eligible working families can access an additional 20 hours through the Childcare Offer for Wales.
+                Wales offers some of the most generous childcare funding in the UK. All 3–4 year olds receive
+                10 free hours per week, and eligible working families can access an additional 20 hours through
+                the Childcare Offer for Wales.
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
                 <Link
@@ -233,16 +279,19 @@ const FeesAndFunding = () => (
             {/* Right: stats */}
             <div
               className="p-8 sm:p-12 flex items-center"
-              style={{ background: "linear-gradient(135deg, #0c4a9e 0%, #083d87 100%)" }}
+              style={{ background: "linear-gradient(135deg, #0c4a9e 0%, #083d87 60%, #0b4496 100%)" }}
             >
               <div className="w-full">
-                <p className="font-sans text-xs font-semibold uppercase tracking-widest text-white/40 mb-8">
-                  Funding at a glance
-                </p>
-                <div className="space-y-6">
+                <div className="flex items-center gap-2.5 mb-8">
+                  <span className="w-5 h-px bg-white/30 flex-shrink-0" />
+                  <p className="font-sans text-xs font-semibold uppercase tracking-widest text-white/40">
+                    Funding at a glance
+                  </p>
+                </div>
+                <div className="space-y-7">
                   {FUNDING_STATS.map((stat, i) => (
                     <motion.div
-                      key={i}
+                      key={stat.label}
                       initial={{ opacity: 0, x: 16 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
@@ -257,7 +306,7 @@ const FeesAndFunding = () => (
                       </span>
                       <div>
                         <p className="font-sans text-white/85 font-semibold text-sm">{stat.label}</p>
-                        <p className="font-sans text-white/45 text-xs mt-0.5">{stat.sub}</p>
+                        <p className="font-sans text-white/40 text-xs mt-0.5">{stat.sub}</p>
                       </div>
                     </motion.div>
                   ))}

@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { memo } from "react";
 import ApproachIntro from "../../../components/AboutComps/ApproachComps/ApproachIntro";
 import ChildhoodMatters from "../../../components/AboutComps/ApproachComps/ChildhoodMatters";
 import HolisticDevelopment from "../../../components/AboutComps/ApproachComps/HolisticDevelopment";
@@ -7,53 +7,27 @@ import RelationshipsMatter from "../../../components/AboutComps/ApproachComps/Re
 import SafeEnvironment from "../../../components/AboutComps/ApproachComps/SafeEnvironment";
 import UniqueChildren from "../../../components/AboutComps/ApproachComps/UniqueChildren";
 
-const sectionVariants = {
-  initial: {
-    opacity: 0,
-    y: 20
-  },
-  enter: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-      ease: [0.61, 1, 0.88, 1]
-    }
-  }
-};
+/* Section order and background rhythm:
+   ApproachIntro   — dark navy (hero)
+   ChildhoodMatters — white
+   RelationshipsMatter — #faf8f4 warm
+   UniqueChildren  — dark navy
+   HolisticDevelopment — white
+   PlayCreativity  — #faf8f4 warm
+   SafeEnvironment — dark navy (closing CTA)
+*/
 
-const Approach = () => {
-  return (
-    <>
-      <motion.section variants={sectionVariants}>
-        <ApproachIntro />
-      </motion.section>
-      
-      <motion.section variants={sectionVariants}>
-        <ChildhoodMatters />
-      </motion.section>
-      
-      <motion.section variants={sectionVariants}>
-        <RelationshipsMatter />
-      </motion.section>
-      
-      <motion.section variants={sectionVariants}>
-        <UniqueChildren />
-      </motion.section>
-      
-      <motion.section variants={sectionVariants}>
-        <HolisticDevelopment />
-      </motion.section>
-      
-      <motion.section variants={sectionVariants}>
-        <PlayCreativity />
-      </motion.section>
-      
-      <motion.section variants={sectionVariants}>
-        <SafeEnvironment />
-      </motion.section>
-    </>
-  );
-};
+const Approach = () => (
+  <div className="min-h-screen" style={{ background: "#faf8f4" }}>
+    <ApproachIntro />
+    <ChildhoodMatters />
+    <RelationshipsMatter />
+    <UniqueChildren />
+    <HolisticDevelopment />
+    <PlayCreativity />
+    <SafeEnvironment />
+  </div>
+);
 
-export default Approach;
+Approach.displayName = "Approach";
+export default memo(Approach);

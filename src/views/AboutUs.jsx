@@ -1,149 +1,222 @@
+import { memo } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import RoomPanorama from "../assets/RoomPanorama.jpg";
 
-const AboutUs = () => {
-  const sections = [
-    {
-      title: "Our Mission",
-      path: "/about/mission",
-      description: "Learn about our core values and commitment to providing exceptional childcare.",
-      icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-        </svg>
-      )
-    },
-    {
-      title: "Our Story",
-      path: "/about/story",
-      description: "Discover how Little Haven Nursery began and our journey to becoming a trusted childcare provider.",
-      icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-        </svg>
-      )
-    },
-    {
-      title: "Our Community",
-      path: "/about/community",
-      description: "See how we engage with and support our local community.",
-      icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-        </svg>
-      )
-    },
-    {
-      title: "Our Approach",
-      path: "/about/approach",
-      description: "Explore our unique approach to early years education and care.",
-      icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-        </svg>
-      )
-    },
-    {
-      title: "Food & Nutrition",
-      path: "/about/foodandnutrition",
-      description: "Learn about our healthy meal plans and dietary accommodations.",
-      icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
-        </svg>
-      )
-    },
-    {
-      title: "Age Groups",
-      path: "/about/agegroups",
-      description: "Find out about our age-specific rooms and activities.",
-      icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-        </svg>
-      )
-    },
-    {
-      title: "Our Team",
-      path: "/about/staff",
-      description: "Meet our experienced and dedicated team of early years professionals.",
-      icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-        </svg>
-      )
-    },
-    {
-      title: "Parent Resources",
-      path: "/about/parentresources",
-      description: "Access FAQs, policies, and important information for parents.",
-      icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-        </svg>
-      )
-    }
-  ];
+const ease = [0.22, 1, 0.36, 1];
 
-  return (
-    <div className="min-h-screen bg-neutral-50">
-      {/* Hero Section */}
-      <div className="relative h-[500px] bg-primary-600 overflow-hidden">
-        <div className="absolute inset-0">
-          <img 
-            src={RoomPanorama} 
-            alt="Little Haven Nursery Room" 
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-primary-600/60" />
-        </div>
-        
-        <div className="relative h-full flex items-center justify-center">
-          <div className="text-center text-white px-4 sm:px-6 lg:px-8">
-            <h1 className="text-display-sm md:text-display-md lg:text-display-lg font-bold mb-6">
-              About Little Haven Nursery
-            </h1>
-            <p className="text-body-lg md:text-body-xl text-primary-100 max-w-content mx-auto">
-              Discover our story, mission, and the values that make us the trusted choice for early years education.
-            </p>
-          </div>
-        </div>
+/* ── Icon components ─────────────────────────────────────────────── */
+const sp = { fill: "none", stroke: "currentColor", strokeWidth: "1.75", strokeLinecap: "round", strokeLinejoin: "round" };
+
+const SECTIONS = [
+  {
+    title: "Our Mission",
+    path: "/about/mission",
+    description: "Our core values and commitment to providing exceptional, Froebelian-inspired childcare.",
+    iconBg: "bg-primary-50",
+    iconColor: "text-primary-500",
+    icon: <svg viewBox="0 0 24 24" {...sp}><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>,
+  },
+  {
+    title: "Our Story",
+    path: "/about/story",
+    description: "How Little Haven began and our journey to becoming a trusted childcare provider across Cardiff.",
+    iconBg: "bg-teal-50",
+    iconColor: "text-teal-600",
+    icon: <svg viewBox="0 0 24 24" {...sp}><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>,
+  },
+  {
+    title: "Our Approach",
+    path: "/about/approach",
+    description: "Our unique Curiosity Approach to early years education — play-led, child-centred, and holistic.",
+    iconBg: "bg-primary-50",
+    iconColor: "text-primary-500",
+    icon: <svg viewBox="0 0 24 24" {...sp}><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>,
+  },
+  {
+    title: "Age Groups",
+    path: "/about/agegroups",
+    description: "Age-appropriate rooms and activities for babies, toddlers, and kindergarten children.",
+    iconBg: "bg-teal-50",
+    iconColor: "text-teal-600",
+    icon: <svg viewBox="0 0 24 24" {...sp}><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>,
+  },
+  {
+    title: "Our Team",
+    path: "/about/staff",
+    description: "Meet our experienced, 100% qualified practitioners dedicated to every child in our care.",
+    iconBg: "bg-primary-50",
+    iconColor: "text-primary-500",
+    icon: <svg viewBox="0 0 24 24" {...sp}><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>,
+  },
+  {
+    title: "Food & Nutrition",
+    path: "/about/foodandnutrition",
+    description: "Fresh, nutritious meals and snacks prepared daily — including award-winning healthy eating.",
+    iconBg: "bg-teal-50",
+    iconColor: "text-teal-600",
+    icon: <svg viewBox="0 0 24 24" {...sp}><path d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" /></svg>,
+  },
+  {
+    title: "Parent Resources",
+    path: "/about/parentresources",
+    description: "FAQs, policies, and all the information you need as a parent — open, honest, and accessible.",
+    iconBg: "bg-primary-50",
+    iconColor: "text-primary-500",
+    icon: <svg viewBox="0 0 24 24" {...sp}><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>,
+  },
+  {
+    title: "Our Community",
+    path: "/about/community",
+    description: "The partners, organisations, and local connections that shape Little Haven's unique community.",
+    iconBg: "bg-teal-50",
+    iconColor: "text-teal-600",
+    icon: <svg viewBox="0 0 24 24" {...sp}><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>,
+  },
+];
+
+/* ── AboutUs ─────────────────────────────────────────────────────── */
+const AboutUs = () => (
+  <div className="min-h-screen" style={{ background: "#faf8f4" }}>
+
+    {/* ── Hero ─────────────────────────────────────────────── */}
+    <section className="relative overflow-hidden" style={{ minHeight: "420px" }}>
+      <div className="absolute inset-0">
+        <img
+          src={RoomPanorama}
+          alt="Little Haven nursery room"
+          className="w-full h-full object-cover"
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(to right, rgba(12,35,70,0.88) 0%, rgba(12,35,70,0.55) 55%, rgba(12,35,70,0.2) 100%)",
+          }}
+        />
+        {/* Subtle dot texture */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 opacity-[0.035]"
+          style={{
+            backgroundImage: "radial-gradient(circle at 2px 2px, white 1px, transparent 0)",
+            backgroundSize: "28px 28px",
+          }}
+        />
       </div>
 
-      {/* Content Sections */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {sections.map((section, index) => (
+      <div
+        className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-end pb-14"
+        style={{ minHeight: "420px", paddingTop: "7rem" }}
+      >
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease }}
+          className="max-w-xl"
+        >
+          <div className="flex items-center gap-2.5 mb-4">
+            <span className="w-7 h-px bg-white/35 flex-shrink-0" />
+            <span className="font-sans text-xs font-semibold uppercase tracking-widest text-white/45">
+              About Little Haven
+            </span>
+          </div>
+          <h1
+            className="font-display font-semibold text-white leading-tight mb-4"
+            style={{ fontSize: "clamp(2.2rem, 4vw, 3.5rem)" }}
+          >
+            The story, values &amp; people<br />
+            <span className="text-primary-200">behind Little Haven.</span>
+          </h1>
+          <p className="font-sans text-white/65 text-lg leading-relaxed">
+            Discover our Froebelian approach, our history, and the passionate practitioners dedicated to your child&apos;s development.
+          </p>
+        </motion.div>
+      </div>
+    </section>
+
+    {/* ── Section grid ────────────────────────────────────── */}
+    <section className="py-20 sm:py-28">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease }}
+          className="max-w-2xl mb-14"
+        >
+          <div className="flex items-center gap-3 mb-4">
+            <span className="w-8 h-px bg-primary-300 flex-shrink-0" />
+            <span className="font-sans text-xs font-semibold uppercase tracking-widest text-primary-500">
+              Explore
+            </span>
+          </div>
+          <h2
+            className="font-display font-semibold text-neutral-900 leading-tight mb-4"
+            style={{ fontSize: "clamp(2rem, 3.5vw, 2.8rem)" }}
+          >
+            Everything you need<br />to know about us.
+          </h2>
+          <p className="font-sans text-neutral-500 text-lg leading-relaxed">
+            From our founding story to our educational philosophy — explore every aspect of what makes Little Haven special.
+          </p>
+        </motion.div>
+
+        {/* Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {SECTIONS.map((section, index) => (
             <motion.div
-              key={index}
+              key={section.path}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="card group"
+              transition={{ duration: 0.5, delay: index * 0.07, ease }}
             >
-              <Link to={section.path} className="block h-full">
-                <div className="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary-200 transition-colors">
-                  <div className="text-primary-600 group-hover:text-primary-700 transition-colors">
-                    {section.icon}
+              <Link to={section.path} className="block h-full group">
+                <div className="bg-white rounded-2xl p-6 shadow-soft hover:shadow-medium transition-all duration-300 h-full flex flex-col">
+                  {/* Icon */}
+                  <div
+                    className={`inline-flex w-10 h-10 rounded-xl items-center justify-center mb-5 flex-shrink-0 ${section.iconBg} ${section.iconColor}`}
+                  >
+                    <div className="w-5 h-5">{section.icon}</div>
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="font-display text-lg font-semibold text-neutral-900 mb-2 group-hover:text-primary-600 transition-colors duration-200 leading-tight">
+                    {section.title}
+                  </h3>
+
+                  {/* Description */}
+                  <p className="font-sans text-sm text-neutral-600 leading-relaxed flex-1 mb-5">
+                    {section.description}
+                  </p>
+
+                  {/* Arrow link */}
+                  <div className="flex items-center gap-1.5 font-sans text-xs font-semibold text-primary-500 group-hover:text-primary-600 transition-colors duration-200">
+                    <span>Learn more</span>
+                    <svg
+                      className="w-3 h-3 group-hover:translate-x-0.5 transition-transform duration-200"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2.5}
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
                   </div>
                 </div>
-                
-                <h3 className="text-xl font-semibold text-neutral-900 mb-4 group-hover:text-primary-600 transition-colors">
-                  {section.title}
-                </h3>
-                
-                <p className="text-neutral-600 leading-relaxed">
-                  {section.description}
-                </p>
               </Link>
             </motion.div>
           ))}
         </div>
-      </div>
-    </div>
-  );
-};
 
-export default AboutUs; 
+      </div>
+    </section>
+
+  </div>
+);
+
+AboutUs.displayName = "AboutUs";
+export default memo(AboutUs);

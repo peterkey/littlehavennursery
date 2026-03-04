@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { IoLocationOutline, IoCallOutline } from "react-icons/io5";
+
+const sp = { fill: "none", stroke: "currentColor", strokeWidth: "1.75", strokeLinecap: "round", strokeLinejoin: "round" };
 
 const containerVariants = {
   hidden: {},
@@ -20,7 +21,6 @@ const locations = [
     path: "/nurseries/rhydlafar",
     address: "Rhydlafar Dr, Rhydlafar, Cardiff CF5 6HU",
     phone: "029 2089 1825",
-    accent: "primary",
     badgeBg: "bg-primary-100",
     badgeText: "text-primary-700",
     cardBg: "hover:bg-primary-50/50",
@@ -35,7 +35,6 @@ const locations = [
     path: "/nurseries/pentyrch",
     address: "Pentyrch Primary School, Bronllwyn, Cardiff CF15 9QL",
     phone: "029 2278 1919",
-    accent: "teal",
     badgeBg: "bg-teal-100",
     badgeText: "text-teal-700",
     cardBg: "hover:bg-teal-50/50",
@@ -50,7 +49,6 @@ const locations = [
     path: "/nurseries/radyr",
     address: "Old Church Rooms, Radyr, Cardiff CF15 8DF",
     phone: "07361 214 326",
-    accent: "teal",
     badgeBg: "bg-teal-100",
     badgeText: "text-teal-700",
     cardBg: "hover:bg-teal-50/50",
@@ -75,8 +73,8 @@ const OurNurseriesContent = () => (
         className="text-xs font-semibold text-primary-600 hover:text-primary-800 flex items-center gap-1 transition-colors"
       >
         All locations
-        <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+        <svg className="w-3 h-3" viewBox="0 0 24 24" {...sp}>
+          <path d="M9 5l7 7-7 7" />
         </svg>
       </Link>
     </div>
@@ -108,11 +106,16 @@ const OurNurseriesContent = () => (
             {/* Contact details */}
             <div className="space-y-1.5">
               <div className="flex items-start gap-1.5">
-                <IoLocationOutline className={`${loc.iconColor} flex-shrink-0 w-3.5 h-3.5 mt-0.5`} />
+                <svg className={`${loc.iconColor} flex-shrink-0 w-3.5 h-3.5 mt-0.5`} viewBox="0 0 24 24" {...sp} aria-hidden="true">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
                 <p className="text-xs text-neutral-500 leading-relaxed">{loc.address}</p>
               </div>
               <div className="flex items-center gap-1.5">
-                <IoCallOutline className={`${loc.iconColor} flex-shrink-0 w-3.5 h-3.5`} />
+                <svg className={`${loc.iconColor} flex-shrink-0 w-3.5 h-3.5`} viewBox="0 0 24 24" {...sp} aria-hidden="true">
+                  <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.34 12 19.79 19.79 0 011.27 3.45 2 2 0 013.27 1.27h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L7.09 9.4a16 16 0 006.54 6.54l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
+                </svg>
                 <p className="text-xs text-neutral-500">{loc.phone}</p>
               </div>
             </div>
@@ -122,9 +125,9 @@ const OurNurseriesContent = () => (
               <span>Visit</span>
               <svg
                 className="w-3 h-3 group-hover:translate-x-0.5 transition-transform duration-200"
-                fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}
+                viewBox="0 0 24 24" {...sp}
               >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                <path d="M9 5l7 7-7 7" />
               </svg>
             </div>
           </Link>

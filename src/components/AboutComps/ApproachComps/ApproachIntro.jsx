@@ -1,5 +1,6 @@
 import { memo } from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const ease = [0.22, 1, 0.36, 1];
 
@@ -35,7 +36,7 @@ const PRINCIPLES = [
     iconColor: "text-primary-500",
     icon: (
       <svg viewBox="0 0 24 24" {...sp}>
-        <path d="M4 20l4-4m0 0l8-8a2.828 2.828 0 00-4-4l-8 8 4 4zm0 0l4 4M8 16l-4-4m12-8l4 4" />
+        <path d="M12 22V12m0 0C12 7 7 4 2 4c0 5 3 9 10 8m0 0c0-5 5-8 10-8-1 5-5 9-10 8" />
       </svg>
     ),
   },
@@ -46,7 +47,7 @@ const ApproachIntro = () => (
   <section
     className="relative overflow-hidden"
     style={{
-      minHeight: "380px",
+      minHeight: "440px",
       background: "linear-gradient(135deg, #0c2b5e 0%, #0a2248 60%, #0e2d58 100%)",
     }}
   >
@@ -68,53 +69,71 @@ const ApproachIntro = () => (
       }}
     />
 
-    <div
-      className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28"
+    <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-end pb-16"
+      style={{ minHeight: "440px", paddingTop: "8rem" }}
     >
-      {/* Hero copy */}
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, ease }}
-        className="max-w-2xl mb-16"
-      >
-        <div className="flex items-center gap-2.5 mb-4">
-          <span className="w-7 h-px bg-white/35 flex-shrink-0" />
-          <span className="font-sans text-xs font-semibold uppercase tracking-widest text-white/45">
-            Our Approach
-          </span>
-        </div>
-        <h1
-          className="font-display font-semibold text-white leading-tight mb-4"
-          style={{ fontSize: "clamp(2.2rem, 4vw, 3.5rem)" }}
+      <div className="w-full">
+        {/* Hero copy */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease }}
+          className="max-w-2xl mb-14"
         >
-          Froebelian principles.<br />
-          <span className="text-primary-200">Curious by nature.</span>
-        </h1>
-        <p className="font-sans text-white/60 text-lg leading-relaxed">
-          Choosing the right nursery is about finding a place that aligns with your values. At Little Haven, we base our approach on Froebelian principles and the Curiosity Approach — fostering independent, confident, and happy learners.
-        </p>
-      </motion.div>
+          {/* Breadcrumb */}
+          <nav className="flex items-center gap-2 mb-6" aria-label="Breadcrumb">
+            <Link
+              to="/about"
+              className="font-sans text-xs font-semibold text-white/45 hover:text-white/70 transition-colors duration-200 uppercase tracking-widest"
+            >
+              About Us
+            </Link>
+            <span className="text-white/25 text-xs">/</span>
+            <span className="font-sans text-xs font-semibold text-white/70 uppercase tracking-widest">
+              Our Approach
+            </span>
+          </nav>
 
-      {/* Principle cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-        {PRINCIPLES.map((principle, index) => (
-          <motion.div
-            key={principle.title}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 + index * 0.1, ease }}
-            className="bg-white/10 backdrop-blur-sm border border-white/15 rounded-2xl p-6 hover:bg-white/15 transition-colors duration-300"
+          <div className="flex items-center gap-2.5 mb-4">
+            <span className="w-7 h-px bg-white/35 flex-shrink-0" />
+            <span className="font-sans text-xs font-semibold uppercase tracking-widest text-white/45">
+              Our Approach
+            </span>
+          </div>
+          <h1
+            className="font-display font-semibold text-white leading-tight mb-4"
+            style={{ fontSize: "clamp(2.2rem, 4vw, 3.5rem)" }}
           >
-            <div className={`inline-flex w-9 h-9 rounded-xl items-center justify-center mb-4 ${principle.iconBg} ${principle.iconColor}`}>
-              <div className="w-4.5 h-4.5">{principle.icon}</div>
-            </div>
-            <h3 className="font-display text-base font-semibold text-white mb-2 leading-tight">
-              {principle.title}
-            </h3>
-            <p className="font-sans text-xs text-white/55 leading-relaxed">{principle.description}</p>
-          </motion.div>
-        ))}
+            Froebelian principles.<br />
+            <span className="text-primary-200">Curious by nature.</span>
+          </h1>
+          <p className="font-sans text-white/60 text-lg leading-relaxed max-w-xl">
+            Choosing the right nursery is about finding a place that aligns with your values. At Little Haven,
+            we base our approach on Froebelian principles and the Curiosity Approach — fostering independent,
+            confident, and happy learners.
+          </p>
+        </motion.div>
+
+        {/* Principle cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {PRINCIPLES.map((principle, index) => (
+            <motion.div
+              key={principle.title}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.25 + index * 0.1, ease }}
+              className="bg-white/10 backdrop-blur-sm border border-white/15 rounded-2xl p-6 hover:bg-white/15 transition-colors duration-300"
+            >
+              <div className={`inline-flex w-9 h-9 rounded-xl items-center justify-center mb-4 ${principle.iconBg} ${principle.iconColor}`}>
+                <div className="w-4 h-4">{principle.icon}</div>
+              </div>
+              <h3 className="font-display text-base font-semibold text-white mb-2 leading-tight">
+                {principle.title}
+              </h3>
+              <p className="font-sans text-xs text-white/55 leading-relaxed">{principle.description}</p>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </div>
   </section>
